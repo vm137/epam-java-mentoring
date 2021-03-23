@@ -1,7 +1,7 @@
 package com.epam.tickets.model;
 
-public interface Ticket {
-    enum Category {STANDARD, PREMIUM, BAR}
+public interface TicketInterface {
+    enum Category { STANDARD, PREMIUM, BAR }
 
     /**
      * Ticket Id. UNIQUE.

@@ -1,12 +1,13 @@
 package com.epam.tickets.model;
 
-public interface User {
+public interface UserInterface {
     /**
      * User Id. UNIQUE.
      * @return User Id.
      */
     long getId();
-    void setId(long id);
+//    void setId(long id); - not needed as userId is created in CommonStorage
+
     String getName();
     void setName(String name);
 

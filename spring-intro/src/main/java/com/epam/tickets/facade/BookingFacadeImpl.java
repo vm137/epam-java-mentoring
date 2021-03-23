@@ -1,0 +1,109 @@
+package com.epam.tickets.facade;
+
+import com.epam.tickets.model.EventInterface;
+import com.epam.tickets.model.TicketInterface;
+import com.epam.tickets.model.TicketInterface.Category;
+import com.epam.tickets.model.dao.UserDao;
+import com.epam.tickets.model.dto.User;
+import com.epam.tickets.services.UserService;
+import java.util.Date;
+import java.util.List;
+
+public class BookingFacadeImpl implements BookingFacade {
+
+  UserDao userDao;
+  UserService userService;
+
+  public BookingFacadeImpl () {}
+
+  public BookingFacadeImpl (UserDao userDao, UserService userService) {
+    this.userDao = userDao;
+    this.userService = userService;
+  }
+
+  // Users
+
+  @Override
+  public User createUser(User user) {
+    return userDao.create(user);
+  }
+
+  @Override
+  public User getUserById(long userId) {
+    return userDao.read(userId);
+  }
+
+  @Override
+  public User getUserByEmail(String email) {
+    return null;
+  }
+
+  @Override
+  public List<User> getUsersByName(String name, int pageSize, int pageNum) {
+    return null;
+  }
+
+  @Override
+  public User updateUser(User user) {
+    return userDao.update(user);
+  }
+
+  @Override
+  public boolean deleteUser(long userId) {
+    return userDao.delete(userId);
+  }
+
+  // Events
+
+  @Override
+  public EventInterface getEventById(long eventId) {
+    return null;
+  }
+
+  @Override
+  public List<EventInterface> getEventsByTitle(String title, int pageSize, int pageNum) {
+    return null;
+  }
+
+  @Override
+  public List<EventInterface> getEventsForDay(Date day, int pageSize, int pageNum) {
+    return null;
+  }
+
+  @Override
+  public EventInterface createEvent(EventInterface event) {
+    return null;
+  }
+
+  @Override
+  public EventInterface updateEvent(EventInterface event) {
+    return null;
+  }
+
+  @Override
+  public boolean deleteEvent(long eventId) {
+    return false;
+  }
+
+  // Tickets
+
+  @Override
+  public TicketInterface bookTicket(long userId, long eventId, int place, Category category) {
+    return null;
+  }
+
+  @Override
+  public List<TicketInterface> getBookedTickets(User user, int pageSize, int pageNum) {
+    return null;
+  }
+
+  @Override
+  public List<TicketInterface> getBookedTickets(EventInterface event, int pageSize, int pageNum) {
+    return null;
+  }
+
+  @Override
+  public boolean cancelTicket(long ticketId) {
+    return false;
+  }
+}

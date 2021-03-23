@@ -2,14 +2,9 @@
 Based on attached source code model:
 
 1. Implement three service classes:  
-UserService  
-EventService  
-TicketService
-
-which should contain user, event and booking related functionality accordingly.  
+UserService, EventService, TicketService which should contain user, event and booking related functionality accordingly.  
 Create implementation of "BookingFacade" interface which should delegate method calls to com.epam.tickets.services 
-mentioned above.
-(0.5 point)
+mentioned above. (0.5 point)
 
 2. Configure spring application context based on xml config file. (0.5 point)
 

@@ -2,7 +2,7 @@ package com.epam.tickets.model;
 
 import java.util.Date;
 
-public interface Event {
+public interface EventInterface {
     /**
      * Event id. UNIQUE.
      * @return Event Id

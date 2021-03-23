@@ -1,8 +1,8 @@
 package com.epam.tickets.facade;
 
-import com.epam.tickets.model.Event;
-import com.epam.tickets.model.Ticket;
-import com.epam.tickets.model.User;
+import com.epam.tickets.model.EventInterface;
+import com.epam.tickets.model.TicketInterface;
+import com.epam.tickets.model.dto.User;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ public interface BookingFacade {
      * Gets event by its id.
      * @return Event.
      */
-    Event getEventById(long eventId);
+    EventInterface getEventById(long eventId);
 
     /**
      * Get list of events by matching title. Title is matched using 'contains' approach.
@@ -22,7 +22,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
+    List<EventInterface> getEventsByTitle(String title, int pageSize, int pageNum);
 
     /**
      * Get list of events for specified day.
@@ -32,21 +32,21 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
+    List<EventInterface> getEventsForDay(Date day, int pageSize, int pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
      * @param event Event data.
      * @return Created Event object.
      */
-    Event createEvent(Event event);
+    EventInterface createEvent(EventInterface event);
 
     /**
      * Updates event using given data.
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    Event updateEvent(Event event);
+    EventInterface updateEvent(EventInterface event);
 
     /**
      * Deletes event by its id.
@@ -107,7 +107,7 @@ public interface BookingFacade {
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
-    Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category);
+    TicketInterface bookTicket(long userId, long eventId, int place, TicketInterface.Category category);
 
     /**
      * Get all booked tickets for specified user. Tickets should be sorted by event date in descending order.
@@ -116,7 +116,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
+    List<TicketInterface> getBookedTickets(User user, int pageSize, int pageNum);
 
     /**
      * Get all booked tickets for specified event. Tickets should be sorted in by user email in ascending order.
@@ -125,7 +125,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
+    List<TicketInterface> getBookedTickets(EventInterface event, int pageSize, int pageNum);
 
     /**
      * Cancel ticket with a specified id.
