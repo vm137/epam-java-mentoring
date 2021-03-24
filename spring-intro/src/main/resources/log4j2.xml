@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <RollingFile name="FileAppender" fileName="logs/logfile.log"
+      filePattern="logs/logfile-%d{yyyy-MM-dd}.log.%i">
+      <PatternLayout>
+        <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+      </Policies>
+    </RollingFile>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="com.epam.tickets.facade" level="TRACE" additivity="true">
+      <appender-ref ref="FileAppender" level="TRACE"/>
+    </Logger>
+    <Root level="WARN">
+      <appender-ref ref="ConsoleAppender"/>
+    </Root>
+  </Loggers>
+</Configuration>
