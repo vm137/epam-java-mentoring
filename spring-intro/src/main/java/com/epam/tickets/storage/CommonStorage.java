@@ -13,7 +13,7 @@ public class CommonStorage {
   AtomicLong userCounter = new AtomicLong(10);
 
   public User addUser(User user) throws InvalidUserException {
-    long id = userCounter.incrementAndGet();
+    Long id = userCounter.incrementAndGet();
     user.setId(id);
     String userKey = "user:" + id;
 
@@ -30,16 +30,16 @@ public class CommonStorage {
   }
 
   public User update(User user) {
-    long id = user.getId();
+    Long id = user.getId();
     // TODO: check if user exists, else throw exception
     return (User) storage.put("user:" + id, user);
   }
 
-  public User getUserById(long id) {
+  public User getUserById(Long id) {
     return (User) storage.get("user:" + id);
   }
 
-  public boolean removeUser(long id) {
+  public boolean removeUser(Long id) {
     User removedUser = (User) storage.remove("user:" + id);
     return removedUser != null;
   }

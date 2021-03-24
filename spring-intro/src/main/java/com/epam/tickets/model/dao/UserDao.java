@@ -22,7 +22,7 @@ public class UserDao {
     return null;
   }
 
-  public User read(long id) {
+  public User read(Long id) {
     return storage.getUserById(id);
   }
 
@@ -31,7 +31,7 @@ public class UserDao {
     return null;
   }
 
-  public boolean delete(long id) {
+  public boolean delete(Long id) {
     return storage.removeUser(id);
   }
 }

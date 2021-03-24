@@ -7,12 +7,12 @@ public interface TicketInterface {
      * Ticket Id. UNIQUE.
      * @return Ticket Id.
      */
-    long getId();
-    void setId(long id);
-    long getEventId();
-    void setEventId(long eventId);
-    long getUserId();
-    void setUserId(long userId);
+    Long getId();
+    void setId(Long id);
+    Long getEventId();
+    Long setEventId(Long eventId);
+    Long getUserId();
+    void setUserId(Long userId);
     Category getCategory();
     void setCategory(Category category);
     int getPlace();

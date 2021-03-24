@@ -29,7 +29,7 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public User getUserById(long userId) {
+  public User getUserById(Long userId) {
     return userDao.read(userId);
   }
 
@@ -49,14 +49,14 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public boolean deleteUser(long userId) {
+  public boolean deleteUser(Long userId) {
     return userDao.delete(userId);
   }
 
   // Events
 
   @Override
-  public EventInterface getEventById(long eventId) {
+  public EventInterface getEventById(Long eventId) {
     return null;
   }
 
@@ -81,14 +81,14 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public boolean deleteEvent(long eventId) {
+  public boolean deleteEvent(Long eventId) {
     return false;
   }
 
   // Tickets
 
   @Override
-  public TicketInterface bookTicket(long userId, long eventId, int place, Category category) {
+  public TicketInterface bookTicket(Long userId, Long eventId, int place, Category category) {
     return null;
   }
 
@@ -103,7 +103,7 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public boolean cancelTicket(long ticketId) {
+  public boolean cancelTicket(Long ticketId) {
     return false;
   }
 }

@@ -5,8 +5,8 @@ public interface UserInterface {
      * User Id. UNIQUE.
      * @return User Id.
      */
-    long getId();
-//    void setId(long id); - not needed as userId is created in CommonStorage
+    Long getId();
+    void setId(Long id);
 
     String getName();
     void setName(String name);

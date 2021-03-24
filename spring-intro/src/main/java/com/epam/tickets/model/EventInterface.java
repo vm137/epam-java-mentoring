@@ -7,8 +7,8 @@ public interface EventInterface {
      * Event id. UNIQUE.
      * @return Event Id
      */
-    long getId();
-    void setId(long id);
+    Long getId();
+    void setId(Long id);
     String getTitle();
     void setTitle(String title);
     Date getDate();
