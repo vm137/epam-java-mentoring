@@ -19,6 +19,7 @@ public class CommonStorage {
   static final long START_INDEX = 100;
   private static final Logger logger = LogManager.getLogger(CommonStorage.class);
   private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
+  private final AtomicLong eventCounter = new AtomicLong(START_INDEX - 1);
   private String initialStorageFilePath;
 
   private Map<String, Object> storage = new HashMap<>();
