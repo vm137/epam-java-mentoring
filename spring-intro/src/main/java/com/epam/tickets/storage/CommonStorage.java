@@ -24,6 +24,9 @@ public class CommonStorage {
 
   private Map<String, Object> storage = new HashMap<>();
 
+  // Event
+
+  // User
 
   public User addUser(User user) throws InvalidUserException {
     Long id = userCounter.incrementAndGet();

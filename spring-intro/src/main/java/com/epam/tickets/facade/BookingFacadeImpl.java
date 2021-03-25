@@ -4,8 +4,10 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.EventInterface;
 import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.TicketInterface.Category;
+import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.UserService;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,10 @@ import org.apache.logging.log4j.Logger;
 public class BookingFacadeImpl implements BookingFacade {
 
   UserDao userDao;
+  EventDao eventDao;
+
   UserService userService;
+  EventService eventService;
 
   private static final Logger logger = LogManager.getLogger(BookingFacadeImpl.class);
 
