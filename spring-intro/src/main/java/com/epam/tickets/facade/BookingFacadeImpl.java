@@ -1,11 +1,11 @@
 package com.epam.tickets.facade;
 
 import com.epam.tickets.exceptions.InvalidUserException;
-import com.epam.tickets.model.EventInterface;
 import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dao.UserDao;
+import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.UserService;
@@ -76,27 +76,27 @@ public class BookingFacadeImpl implements BookingFacade {
   // Events
 
   @Override
-  public EventInterface getEventById(Long eventId) {
+  public Event getEventById(Long eventId) {
     return null;
   }
 
   @Override
-  public List<EventInterface> getEventsByTitle(String title, int pageSize, int pageNum) {
+  public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
     return null;
   }
 
   @Override
-  public List<EventInterface> getEventsForDay(Date day, int pageSize, int pageNum) {
+  public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
     return null;
   }
 
   @Override
-  public EventInterface createEvent(EventInterface event) {
+  public Event createEvent(Event event) {
     return null;
   }
 
   @Override
-  public EventInterface updateEvent(EventInterface event) {
+  public Event updateEvent(Event event) {
     return null;
   }
 
@@ -118,7 +118,7 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public List<TicketInterface> getBookedTickets(EventInterface event, int pageSize, int pageNum) {
+  public List<TicketInterface> getBookedTickets(Event event, int pageSize, int pageNum) {
     return null;
   }
 

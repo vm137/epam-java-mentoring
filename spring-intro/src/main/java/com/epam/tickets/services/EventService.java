@@ -9,6 +9,7 @@ public class EventService {
   private EventDao eventDao;
 
 
+
   public void setCommonStorage(CommonStorage commonStorage) {
     this.commonStorage = commonStorage;
   }

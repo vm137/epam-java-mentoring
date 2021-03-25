@@ -1,6 +1,7 @@
 package com.epam.tickets.storage;
 
 import com.epam.tickets.exceptions.InvalidUserException;
+import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,11 @@ public class CommonStorage {
   private Map<String, Object> storage = new HashMap<>();
 
   // Event
+
+  public Event getEventById(Long eventId) {
+
+    return null;
+  }
 
   // User
 

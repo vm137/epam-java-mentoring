@@ -1,9 +1,8 @@
 package com.epam.tickets.facade;
 
-import com.epam.tickets.model.EventInterface;
 import com.epam.tickets.model.TicketInterface;
+import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
-
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public interface BookingFacade {
      * Gets event by its id.
      * @return Event.
      */
-    EventInterface getEventById(Long eventId);
+    Event getEventById(Long eventId);
 
     /**
      * Get list of events by matching title. Title is matched using 'contains' approach.
@@ -22,7 +21,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<EventInterface> getEventsByTitle(String title, int pageSize, int pageNum);
+    List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
 
     /**
      * Get list of events for specified day.
@@ -32,21 +31,21 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<EventInterface> getEventsForDay(Date day, int pageSize, int pageNum);
+    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.
      * @param event Event data.
      * @return Created Event object.
      */
-    EventInterface createEvent(EventInterface event);
+    Event createEvent(Event event);
 
     /**
      * Updates event using given data.
      * @param event Event data for update. Should have id set.
      * @return Updated Event object.
      */
-    EventInterface updateEvent(EventInterface event);
+    Event updateEvent(Event event);
 
     /**
      * Deletes event by its id.
@@ -125,7 +124,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<TicketInterface> getBookedTickets(EventInterface event, int pageSize, int pageNum);
+    List<TicketInterface> getBookedTickets(Event event, int pageSize, int pageNum);
 
     /**
      * Cancel ticket with a specified id.
