@@ -18,7 +18,7 @@ public class App {
 
     logger.warn("== Ticket service started ==");
 
-    User user = new User("Alex", "al@gmail.com");
+    User user = new User("Alex", "alex@gmail.com");
     User createdUser = facade.createUser(user);
     String userString = createdUser.toString();
     logger.info(userString);
