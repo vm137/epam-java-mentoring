@@ -6,13 +6,14 @@ import com.epam.tickets.storage.CommonStorage;
 
 public class UserDao {
 
+  private final CommonStorage storage;
+
   public UserDao(CommonStorage storage) {
     this.storage = storage;
   }
 
-  CommonStorage storage;
-
   // CRUD methods
+
   public User create(User user) {
     try {
       return storage.addUser(user);
