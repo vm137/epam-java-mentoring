@@ -6,9 +6,7 @@ import com.epam.tickets.model.dto.User;
 import com.epam.tickets.storage.CommonStorage;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
-@Service
 public class UserService {
 
   private CommonStorage commonStorage;
