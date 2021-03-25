@@ -3,20 +3,21 @@ package com.epam.tickets.model.dao;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.storage.CommonStorage;
+import java.util.List;
 
 public class UserDao {
 
-  private final CommonStorage storage;
+  private final CommonStorage commonStorage;
 
-  public UserDao(CommonStorage storage) {
-    this.storage = storage;
+  public UserDao(CommonStorage commonStorage) {
+    this.commonStorage = commonStorage;
   }
 
   // CRUD methods
 
   public User create(User user) {
     try {
-      return storage.addUser(user);
+      return commonStorage.addUser(user);
     } catch (InvalidUserException e) {
       e.printStackTrace();
     }
@@ -25,16 +26,20 @@ public class UserDao {
 
   public User read(Long id) {
     try {
-      return storage.getUserById(id);
+      return commonStorage.getUserById(id);
     } catch (InvalidUserException e) {
       e.printStackTrace();
     }
     return null;
   }
 
+  public List<User> getAllUsers() {
+    return commonStorage.getAllUsers();
+  }
+
   public User update(User user) {
     try {
-      return storage.update(user);
+      return commonStorage.update(user);
     } catch (InvalidUserException e) {
       e.printStackTrace();
     }
@@ -43,7 +48,7 @@ public class UserDao {
 
   public boolean delete(Long id) {
     try {
-      return storage.removeUser(id);
+      return commonStorage.removeUser(id);
     } catch (InvalidUserException e) {
       e.printStackTrace();
     }

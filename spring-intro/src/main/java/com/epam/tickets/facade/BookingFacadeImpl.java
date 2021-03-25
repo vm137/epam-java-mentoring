@@ -1,5 +1,6 @@
 package com.epam.tickets.facade;
 
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.EventInterface;
 import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.TicketInterface.Category;
@@ -8,15 +9,20 @@ import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.UserService;
 import java.util.Date;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BookingFacadeImpl implements BookingFacade {
 
   UserDao userDao;
   UserService userService;
 
-  public BookingFacadeImpl () {}
+  private static final Logger logger = LogManager.getLogger(BookingFacadeImpl.class);
 
-  public BookingFacadeImpl (UserDao userDao, UserService userService) {
+  public BookingFacadeImpl() {
+  }
+
+  public BookingFacadeImpl(UserDao userDao, UserService userService) {
     this.userDao = userDao;
     this.userService = userService;
   }
@@ -25,6 +31,8 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public User createUser(User user) {
+    String msg = String.format("Create user: %s", user.getName());
+    logger.debug(msg);
     return userDao.create(user);
   }
 
@@ -35,12 +43,19 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public User getUserByEmail(String email) {
+    try {
+      return userService.getUserByEmail(email);
+    } catch (InvalidUserException e) {
+      String msg = "User with email: " + email + " is not found.";
+      logger.warn(msg);
+      e.printStackTrace();
+    }
     return null;
   }
 
   @Override
   public List<User> getUsersByName(String name, int pageSize, int pageNum) {
-    return null;
+    return userService.getUsersByName(name, pageSize, pageNum);
   }
 
   @Override

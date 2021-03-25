@@ -3,9 +3,11 @@ package com.epam.tickets.storage;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.User;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,8 +19,10 @@ public class CommonStorage {
   static final long START_INDEX = 100;
   private static final Logger logger = LogManager.getLogger(CommonStorage.class);
   private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
-  private Map<String, Object> storage = new HashMap<>();
   private String initialStorageFilePath;
+
+  private Map<String, Object> storage = new HashMap<>();
+
 
   public User addUser(User user) throws InvalidUserException {
     Long id = userCounter.incrementAndGet();
@@ -59,6 +63,13 @@ public class CommonStorage {
       throw new InvalidUserException(msg);
     }
     return (User) storage.get(USER_KEY + id);
+  }
+
+  public List<User> getAllUsers() {
+    return storage.entrySet().stream()
+        .filter(entry -> entry.getKey().startsWith(USER_KEY))
+        .map(entry -> (User) entry.getValue())
+        .collect(Collectors.toList());
   }
 
   public boolean removeUser(Long id) throws InvalidUserException {
