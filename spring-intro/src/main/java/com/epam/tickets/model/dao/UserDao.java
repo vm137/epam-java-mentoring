@@ -23,15 +23,29 @@ public class UserDao {
   }
 
   public User read(Long id) {
-    return storage.getUserById(id);
+    try {
+      return storage.getUserById(id);
+    } catch (InvalidUserException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public User update(User user) {
-    storage.update(user);
+    try {
+      return storage.update(user);
+    } catch (InvalidUserException e) {
+      e.printStackTrace();
+    }
     return null;
   }
 
   public boolean delete(Long id) {
-    return storage.removeUser(id);
+    try {
+      return storage.removeUser(id);
+    } catch (InvalidUserException e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 }
