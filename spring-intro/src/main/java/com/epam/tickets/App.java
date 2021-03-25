@@ -20,7 +20,9 @@ public class App {
 
     User user = new User("Alex", "alex@gmail.com");
     User createdUser = facade.createUser(user);
-    String userString = createdUser.toString();
-    logger.info(userString);
+
+    User userByEmail = facade.getUserByEmail("alex@gmail.com");
+    String userEmail = userByEmail.toString();
+    logger.info(userEmail);
   }
 }
