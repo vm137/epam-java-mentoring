@@ -12,13 +12,6 @@ public class UserService {
   private CommonStorage commonStorage;
   private UserDao userDao;
 
-  UserService() {
-  }
-
-  public UserService(UserDao userDao) {
-    this.userDao = userDao;
-  }
-
   public User getUserByEmail(String email) throws InvalidUserException {
     List<User> allUsers = userDao.getAllUsers();
     return allUsers.stream()
