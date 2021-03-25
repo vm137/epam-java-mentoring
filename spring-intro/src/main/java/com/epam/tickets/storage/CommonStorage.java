@@ -4,43 +4,83 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.User;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CommonStorage {
 
-  Map<String, Object> storage = new HashMap<>();
-
-  AtomicLong userCounter = new AtomicLong(10);
+  static final String USER_KEY = "user:";
+  static final String EVENT_KEY = "event:";
+  static final String TICKET_KEY = "ticket:";
+  static final long START_INDEX = 100;
+  private static final Logger logger = LogManager.getLogger(CommonStorage.class);
+  private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
+  private Map<String, Object> storage = new HashMap<>();
+  private String initialStorageFilePath;
 
   public User addUser(User user) throws InvalidUserException {
     Long id = userCounter.incrementAndGet();
     user.setId(id);
-    String userKey = "user:" + id;
 
-    // check for unique email
     boolean emailExists = storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith("user:"))
-        .anyMatch(entry -> "s".equalsIgnoreCase(((User) entry.getValue()).getEmail()));
+        .filter(entry -> entry.getKey().startsWith(USER_KEY))
+        .anyMatch(
+            entry -> (user.getEmail()).equalsIgnoreCase(((User) entry.getValue()).getEmail()));
+
     if (emailExists) {
-      // log error
-      throw new InvalidUserException("User with the same email already exists.");
+      String msg = "User with the same email already exists.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
     }
-    storage.put(userKey, user);
-    return (User) storage.get(userKey);
+
+    String key = getKey(USER_KEY, id);
+    storage.put(key, user);
+    return (User) storage.get(key);
   }
 
-  public User update(User user) {
+  public User update(User user) throws InvalidUserException {
     Long id = user.getId();
-    // TODO: check if user exists, else throw exception
-    return (User) storage.put("user:" + id, user);
+    String key = getKey(USER_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot update user with id: %d, user doesn't exist.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
+    }
+    return (User) storage.put(USER_KEY + id, user);
   }
 
-  public User getUserById(Long id) {
-    return (User) storage.get("user:" + id);
+  public User getUserById(Long id) throws InvalidUserException {
+    String key = getKey(USER_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot retrieve the  user with id: %d, user doesn't exist.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
+    }
+    return (User) storage.get(USER_KEY + id);
   }
 
-  public boolean removeUser(Long id) {
-    User removedUser = (User) storage.remove("user:" + id);
-    return removedUser != null;
+  public boolean removeUser(Long id) throws InvalidUserException {
+    String key = getKey(USER_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot delete user with id: %d, user doesn't exist.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
+    }
+    User removedUser = (User) storage.remove(USER_KEY + id);
+    return Objects.nonNull(removedUser);
+  }
+
+  private String getKey(String prefix, Long id) {
+    return prefix + id;
+  }
+
+  public void setInitialStorageFilePath(String initialStorageFilePath) {
+    this.initialStorageFilePath = initialStorageFilePath;
+  }
+
+  public void init() {
+    storage = StorageHelper.readInitialStorage(initialStorageFilePath);
   }
 }
