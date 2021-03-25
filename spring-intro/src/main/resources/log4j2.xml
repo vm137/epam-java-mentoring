@@ -15,10 +15,10 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="com.epam.tickets.facade" level="TRACE" additivity="true">
-      <appender-ref ref="FileAppender" level="TRACE"/>
+    <Logger additivity="true" level="INFO" name="com.epam.tickets">
+      <appender-ref level="INFO" ref="FileAppender"/>
     </Logger>
-    <Root level="WARN">
+    <Root level="DEBUG">
       <appender-ref ref="ConsoleAppender"/>
     </Root>
   </Loggers>
