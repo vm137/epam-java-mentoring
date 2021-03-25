@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns="http://www.springframework.org/schema/beans"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context/
-    http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="facade" class="com.epam.tickets.facade.BookingFacadeImpl">
+  <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    <property name="locations" value="classpath:application.properties"/>
+  </bean>
+
+  <bean class="com.epam.tickets.storage.CommonStorage" id="commonStorage" init-method="init">
+    <property name="initialStorageFilePath" value="${storage.path}"/>
+  </bean>
+
+  <bean class="com.epam.tickets.facade.BookingFacadeImpl" id="facade">
     <constructor-arg ref="userDao"/>
     <constructor-arg ref="userService"/>
   </bean>
 
-  <bean id="userDao" class="com.epam.tickets.model.dao.UserDao" >
+  <bean class="com.epam.tickets.model.dao.UserDao" id="userDao">
     <constructor-arg ref="commonStorage"/>
   </bean>
 
-  <bean id="userService" class="com.epam.tickets.services.UserService">
+  <bean class="com.epam.tickets.services.UserService" id="userService">
     <constructor-arg ref="userDao"/>
   </bean>
-
-  <bean id="commonStorage" class="com.epam.tickets.storage.CommonStorage" />
 
 </beans>
