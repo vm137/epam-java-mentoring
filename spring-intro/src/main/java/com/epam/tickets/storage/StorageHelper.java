@@ -28,12 +28,15 @@ public class StorageHelper {
       while (line != null) {
 
         String[] dataLine = line.split(";");
-        if (dataLine.length >= 4) {
+        if (dataLine.length >= 3) {
           String key = dataLine[0];
-          switch (key) {
+          String[] split = key.split(":");
+          String prefix = split[0] + ":";
+          String txtId = split[1];
+          switch (prefix) {
             case USER_KEY:
-              Long id = Long.parseLong(dataLine[1], 10);
-              User user = new User(id, dataLine[2], dataLine[3]);
+              Long id = Long.parseLong(txtId, 10);
+              User user = new User(id, dataLine[1], dataLine[2]);
               initialStorage.put(key, user);
               break;
 
