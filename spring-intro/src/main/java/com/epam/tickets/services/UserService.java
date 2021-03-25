@@ -3,6 +3,7 @@ package com.epam.tickets.services;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.storage.CommonStorage;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-  UserDao userDao;
+  private CommonStorage commonStorage;
+  private UserDao userDao;
+
+  UserService() {
+  }
 
   public UserService(UserDao userDao) {
     this.userDao = userDao;
@@ -30,5 +35,13 @@ public class UserService {
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
+  }
+
+  public void setCommonStorage(CommonStorage commonStorage) {
+    this.commonStorage = commonStorage;
+  }
+
+  public void setUserDao(UserDao userDao) {
+    this.userDao = userDao;
   }
 }

@@ -24,7 +24,8 @@
   </bean>
 
   <bean class="com.epam.tickets.services.UserService" id="userService">
-    <constructor-arg ref="userDao"/>
+    <property name="commonStorage" ref="commonStorage"/>
+    <property name="userDao" ref="userDao"/>
   </bean>
 
 </beans>
