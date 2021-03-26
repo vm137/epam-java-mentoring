@@ -1,6 +1,7 @@
 package com.epam.tickets.model.dto;
 
 import com.epam.tickets.model.EventInterface;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event implements EventInterface {
@@ -8,6 +9,11 @@ public class Event implements EventInterface {
   private Long id;
   private String title;
   private Date date;
+
+  public Event(String title, Date date) {
+    this.title = title;
+    this.date = date;
+  }
 
   @Override
   public Long getId() {
@@ -37,5 +43,14 @@ public class Event implements EventInterface {
   @Override
   public void setDate(Date date) {
     this.date = date;
+  }
+
+  @Override
+  public String toString() {
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    return "Event : { " +
+        "title='" + title + '\'' +
+        ", date='" + formatter.format(date) +
+        "' }";
   }
 }

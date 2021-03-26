@@ -27,9 +27,12 @@ public class CommonStorage {
 
   // Event
 
-  public Event getEventById(Long eventId) {
-
-    return null;
+  public Event addEvent(Event event) {
+    Long id = eventCounter.incrementAndGet();
+    event.setId(id);
+    String key = getKey(EVENT_KEY, id);
+    storage.put(key, event);
+    return (Event) storage.get(key);
   }
 
   // User
@@ -101,7 +104,7 @@ public class CommonStorage {
     this.initialStorageFilePath = initialStorageFilePath;
   }
 
-  public void init() {
+  public void initStorage() {
     storage = StorageHelper.readInitialStorage(initialStorageFilePath);
   }
 }

@@ -4,10 +4,15 @@ import static com.epam.tickets.storage.CommonStorage.EVENT_KEY;
 import static com.epam.tickets.storage.CommonStorage.TICKET_KEY;
 import static com.epam.tickets.storage.CommonStorage.USER_KEY;
 
+import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
@@ -33,14 +38,19 @@ public class StorageHelper {
           String[] split = key.split(":");
           String prefix = split[0] + ":";
           String txtId = split[1];
+          Long id = Long.parseLong(txtId, 10);
+
           switch (prefix) {
             case USER_KEY:
-              Long id = Long.parseLong(txtId, 10);
               User user = new User(id, dataLine[1], dataLine[2]);
               initialStorage.put(key, user);
               break;
 
             case EVENT_KEY:
+              DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+              Date date = format.parse(dataLine[2]);
+              Event event = new Event(dataLine[1], date);
+              initialStorage.put(key, event);
               break;
 
             case TICKET_KEY:
@@ -54,8 +64,8 @@ public class StorageHelper {
         line = reader.readLine();
       }
       reader.close();
-    } catch (IOException i) {
-      logger.error("Initial data file could not be read.");
+    } catch (IOException | ParseException i) {
+      logger.error("Initial data file could not be read. " + i);
       i.printStackTrace();
     }
 

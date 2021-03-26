@@ -1,7 +1,9 @@
 package com.epam.tickets;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
+import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
+import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -25,5 +27,8 @@ public class App {
     User userByEmail = facade.getUserByEmail("jhon@gmail.com");
     String userEmail = userByEmail.toString();
     logger.info(userEmail);
+
+    Event event = new Event("Event 11", new Date());
+    logger.info(event);
   }
 }
