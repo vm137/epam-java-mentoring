@@ -3,6 +3,9 @@ package com.epam.tickets;
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,8 +31,16 @@ public class App {
     String userEmail = userByEmail.toString();
     logger.info(userEmail);
 
-    Event event = new Event("Event 11", new Date());
-    Event createdEvent = facade.createEvent(event);
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    Date date1 = null;
+    try {
+      date1 = formatter.parse("12/02/2020 12:00");
+    } catch (ParseException e) { e.printStackTrace(); }
+    Event event1 = new Event("Poetry Week", date1);
+    Event createdEvent = facade.createEvent(event1);
     logger.info(createdEvent);
+
+    Event event2 = facade.getEventById(1L);
+    logger.info(event2);
   }
 }
