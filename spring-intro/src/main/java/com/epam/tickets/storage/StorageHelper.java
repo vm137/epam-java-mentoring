@@ -49,7 +49,7 @@ public class StorageHelper {
             case EVENT_KEY:
               DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
               Date date = format.parse(dataLine[2]);
-              Event event = new Event(dataLine[1], date);
+              Event event = new Event(id, dataLine[1], date);
               initialStorage.put(key, event);
               break;
 

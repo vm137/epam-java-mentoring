@@ -16,6 +16,10 @@ public class EventDao {
     return commonStorage.addEvent(event);
   }
 
+  public Event getEvent(Long id) {
+    return commonStorage.getEvent(id);
+  }
+
   public Event updateEvent(Event event) {
     try {
       return commonStorage.updateEvent(event);

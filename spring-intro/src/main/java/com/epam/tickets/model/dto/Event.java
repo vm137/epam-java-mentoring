@@ -15,6 +15,12 @@ public class Event implements EventInterface {
     this.date = date;
   }
 
+  public Event(Long id, String title, Date date) {
+    this.id = id;
+    this.title = title;
+    this.date = date;
+  }
+
   @Override
   public Long getId() {
     return id;
@@ -49,7 +55,8 @@ public class Event implements EventInterface {
   public String toString() {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     return "Event : { " +
-        "title='" + title + '\'' +
+        "id='" + id + '\'' +
+        ", title='" + title + '\'' +
         ", date='" + formatter.format(date) +
         "' }";
   }

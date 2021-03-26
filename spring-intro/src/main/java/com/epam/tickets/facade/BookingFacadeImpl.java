@@ -80,7 +80,7 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Event getEventById(Long eventId) {
-    return null;
+    return eventDao.getEvent(eventId);
   }
 
   @Override

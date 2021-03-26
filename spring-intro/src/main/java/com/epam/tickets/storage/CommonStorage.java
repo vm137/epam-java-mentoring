@@ -28,6 +28,11 @@ public class CommonStorage {
 
   // Event
 
+  public Event getEvent(Long id) {
+    String key = getKey(EVENT_KEY, id);
+    return (Event) storage.get(key);
+  }
+
   public Event addEvent(Event event) {
     Long id = eventCounter.incrementAndGet();
     event.setId(id);
