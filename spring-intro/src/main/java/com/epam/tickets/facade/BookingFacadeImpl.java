@@ -1,12 +1,12 @@
 package com.epam.tickets.facade;
 
 import com.epam.tickets.exceptions.InvalidUserException;
-import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dao.TicketDao;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
@@ -114,17 +114,17 @@ public class BookingFacadeImpl implements BookingFacade {
   // Tickets
 
   @Override
-  public TicketInterface bookTicket(Long userId, Long eventId, int place, Category category) {
+  public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
     return null;
   }
 
   @Override
-  public List<TicketInterface> getBookedTickets(User user, int pageSize, int pageNum) {
+  public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
     return null;
   }
 
   @Override
-  public List<TicketInterface> getBookedTickets(Event event, int pageSize, int pageNum) {
+  public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
     return null;
   }
 

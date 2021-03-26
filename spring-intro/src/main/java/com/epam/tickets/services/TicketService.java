@@ -1,6 +1,8 @@
 package com.epam.tickets.services;
 
+import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dao.UserDao;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.storage.CommonStorage;
 
 public class TicketService {
@@ -9,7 +11,9 @@ public class TicketService {
   private UserDao userDao;
 
 
-
+  public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
+    return null;
+  }
 
   public void setCommonStorage(CommonStorage commonStorage) {
     this.commonStorage = commonStorage;

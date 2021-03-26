@@ -2,6 +2,7 @@ package com.epam.tickets.facade;
 
 import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import java.util.Date;
 import java.util.List;
@@ -99,14 +100,15 @@ public interface BookingFacade {
 
     /**
      * Book ticket for a specified event on behalf of specified user.
-     * @param userId User Id.
-     * @param eventId Event Id.
-     * @param place Place number.
+     *
+     * @param userId   User Id.
+     * @param eventId  Event Id.
+     * @param place    Place number.
      * @param category Service category.
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
-    TicketInterface bookTicket(Long userId, Long eventId, int place, TicketInterface.Category category);
+    Ticket bookTicket(Long userId, Long eventId, int place, TicketInterface.Category category);
 
     /**
      * Get all booked tickets for specified user. Tickets should be sorted by event date in descending order.
@@ -115,7 +117,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<TicketInterface> getBookedTickets(User user, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
 
     /**
      * Get all booked tickets for specified event. Tickets should be sorted in by user email in ascending order.
@@ -124,7 +126,7 @@ public interface BookingFacade {
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of Ticket objects.
      */
-    List<TicketInterface> getBookedTickets(Event event, int pageSize, int pageNum);
+    List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
 
     /**
      * Cancel ticket with a specified id.
