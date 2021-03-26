@@ -51,6 +51,13 @@ public class CommonStorage {
     return true;
   }
 
+  public List<Ticket> getAllTickets() {
+    return storage.entrySet().stream()
+        .filter(entry -> entry.getKey().startsWith(TICKET_KEY))
+        .map(entry -> (Ticket) entry.getValue())
+        .collect(Collectors.toList());
+  }
+
   // Event
 
   public Event getEvent(Long id) {

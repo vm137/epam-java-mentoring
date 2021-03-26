@@ -122,12 +122,12 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
-    return null;
+    return ticketService.getBookedTickets(user, pageSize, pageNum);
   }
 
   @Override
   public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
-    return null;
+    return ticketService.getBookedTickets(event, pageSize, pageNum);
   }
 
   @Override
