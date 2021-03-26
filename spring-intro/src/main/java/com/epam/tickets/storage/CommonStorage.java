@@ -33,6 +33,13 @@ public class CommonStorage {
     return (Event) storage.get(key);
   }
 
+  public List<Event> getAllEvents() {
+    return storage.entrySet().stream()
+        .filter(entry -> entry.getKey().startsWith(EVENT_KEY))
+        .map(entry -> (Event) entry.getValue())
+        .collect(Collectors.toList());
+  }
+
   public Event addEvent(Event event) {
     Long id = eventCounter.incrementAndGet();
     event.setId(id);

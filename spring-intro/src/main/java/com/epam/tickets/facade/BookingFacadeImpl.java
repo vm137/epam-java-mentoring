@@ -85,12 +85,12 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
-    return null;
+    return eventService.getEventsByTitle(title, pageSize, pageNum);
   }
 
   @Override
   public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
-    return null;
+    return eventService.getEventsForDay(day, pageSize, pageNum);
   }
 
   @Override
