@@ -4,7 +4,9 @@ import static com.epam.tickets.storage.CommonStorage.EVENT_KEY;
 import static com.epam.tickets.storage.CommonStorage.TICKET_KEY;
 import static com.epam.tickets.storage.CommonStorage.USER_KEY;
 
+import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -54,6 +56,12 @@ public class StorageHelper {
               break;
 
             case TICKET_KEY:
+              Long eventId = Long.parseLong(dataLine[1]);
+              Long userId = Long.parseLong(dataLine[2]);
+              int place = Integer.parseInt(dataLine[3]);
+              Category category = Category.valueOf(dataLine[4]);
+              Ticket ticket = new Ticket(id, eventId, userId, place, category);
+              initialStorage.put(key, ticket);
               break;
 
             default:
