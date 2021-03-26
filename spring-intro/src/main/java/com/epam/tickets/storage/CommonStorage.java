@@ -1,5 +1,6 @@
 package com.epam.tickets.storage;
 
+import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
@@ -35,13 +36,13 @@ public class CommonStorage {
     return (Event) storage.get(key);
   }
 
-  public Event updateEvent(Event event) throws InvalidUserException {
+  public Event updateEvent(Event event) throws InvalidEventException {
     Long id = event.getId();
     String key = getKey(EVENT_KEY, id);
     if (!storage.containsKey(key)) {
       String msg = "Cannot update event with id: %d, event doesn't exist.";
       logger.error(msg);
-      throw new InvalidUserException(msg);
+      throw new InvalidEventException(msg);
     }
     storage.put(key, event);
     return (Event) storage.get(key);

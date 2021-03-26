@@ -1,6 +1,6 @@
 package com.epam.tickets.model.dao;
 
-import com.epam.tickets.exceptions.InvalidUserException;
+import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.storage.CommonStorage;
 
@@ -19,7 +19,7 @@ public class EventDao {
   public Event updateEvent(Event event) {
     try {
       return commonStorage.updateEvent(event);
-    } catch (InvalidUserException e) {
+    } catch (InvalidEventException e) {
       e.printStackTrace();
     }
     return null;
