@@ -29,6 +29,7 @@ public class App {
     logger.info(userEmail);
 
     Event event = new Event("Event 11", new Date());
-    logger.info(event);
+    Event createdEvent = facade.createEvent(event);
+    logger.info(createdEvent);
   }
 }

@@ -16,7 +16,9 @@
 
   <bean class="com.epam.tickets.facade.BookingFacadeImpl" id="facade">
     <constructor-arg ref="userDao"/>
+    <constructor-arg ref="eventDao"/>
     <constructor-arg ref="userService"/>
+    <constructor-arg ref="eventService"/>
   </bean>
 
   <bean class="com.epam.tickets.model.dao.UserDao" id="userDao">

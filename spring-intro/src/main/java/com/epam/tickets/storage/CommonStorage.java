@@ -35,6 +35,30 @@ public class CommonStorage {
     return (Event) storage.get(key);
   }
 
+  public Event updateEvent(Event event) throws InvalidUserException {
+    Long id = event.getId();
+    String key = getKey(EVENT_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot update event with id: %d, event doesn't exist.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
+    }
+    storage.put(key, event);
+    return (Event) storage.get(key);
+  }
+
+  public boolean deleteEvent(Long id) {
+    String key = getKey(EVENT_KEY, id);
+    if (storage.containsKey(key)) {
+      storage.remove(key);
+      return true;
+    } else {
+      String msg = "Can't remove event with id:" + id + " because it doesn't exist.";
+      logger.error(msg);
+      return false;
+    }
+  }
+
   // User
 
   public User addUser(User user) throws InvalidUserException {
@@ -95,6 +119,8 @@ public class CommonStorage {
     User removedUser = (User) storage.remove(USER_KEY + id);
     return Objects.nonNull(removedUser);
   }
+
+  // Service methods
 
   private String getKey(String prefix, Long id) {
     return prefix + id;

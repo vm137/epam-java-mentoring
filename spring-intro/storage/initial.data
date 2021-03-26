@@ -3,4 +3,7 @@ user:2;Mary Jane;mary-jane@gmail.com
 user:3;John Foo;jhon@gmail.com
 user:4;Frank Sinatra;frank@mail.ru
 user:5;Garry Moor;gm@com.ru
-event:1;Songs by Night;01/04/2021 19:00
+event:1;Fashion week;01/04/2021 19:00
+event:2;International Comedy Festival;04/06/2021 6:00
+event:3;Jazz Songs;31/12/2022 19:00
+event:4;Aqua Discotheque;31/12/2022 19:00

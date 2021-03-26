@@ -64,9 +64,9 @@ public class StorageHelper {
         line = reader.readLine();
       }
       reader.close();
-    } catch (IOException | ParseException i) {
-      logger.error("Initial data file could not be read. " + i);
-      i.printStackTrace();
+    } catch (IOException | ParseException e) {
+      logger.error("Initial data file could not be read. " + e);
+      e.printStackTrace();
     }
 
     return initialStorage;

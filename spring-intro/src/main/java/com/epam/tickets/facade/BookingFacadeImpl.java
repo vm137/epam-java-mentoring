@@ -27,9 +27,12 @@ public class BookingFacadeImpl implements BookingFacade {
   public BookingFacadeImpl() {
   }
 
-  public BookingFacadeImpl(UserDao userDao, UserService userService) {
+  public BookingFacadeImpl(UserDao userDao, EventDao eventDao,
+      UserService userService, EventService eventService) {
     this.userDao = userDao;
+    this.eventDao = eventDao;
     this.userService = userService;
+    this.eventService = eventService;
   }
 
   // Users
@@ -92,17 +95,17 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Event createEvent(Event event) {
-    return null;
+    return eventDao.createEvent(event);
   }
 
   @Override
   public Event updateEvent(Event event) {
-    return null;
+    return eventDao.updateEvent(event);
   }
 
   @Override
   public boolean deleteEvent(Long eventId) {
-    return false;
+    return eventDao.deleteEvent(eventId);
   }
 
   // Tickets
