@@ -26,6 +26,10 @@ public class CommonStorage {
 
   private Map<String, Object> storage = new HashMap<>();
 
+  // Ticket
+
+
+
   // Event
 
   public Event getEvent(Long id) {

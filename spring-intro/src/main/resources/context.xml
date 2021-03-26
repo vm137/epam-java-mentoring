@@ -29,8 +29,14 @@
     <constructor-arg ref="commonStorage"/>
   </bean>
 
+  <bean class="com.epam.tickets.model.dao.TicketDao" id="ticketDao">
+    <constructor-arg ref="commonStorage"/>
+  </bean>
+
   <bean autowire="byType" class="com.epam.tickets.services.UserService" id="userService"/>
 
   <bean autowire="byType" class="com.epam.tickets.services.EventService" id="eventService"/>
+
+  <bean autowire="byType" class="com.epam.tickets.services.TicketService" id="ticketService"/>
 
 </beans>
