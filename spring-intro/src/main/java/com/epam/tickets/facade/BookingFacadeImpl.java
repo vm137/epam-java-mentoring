@@ -4,10 +4,12 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dao.EventDao;
+import com.epam.tickets.model.dao.TicketDao;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.EventService;
+import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;
 import java.util.Date;
 import java.util.List;
@@ -18,17 +20,18 @@ public class BookingFacadeImpl implements BookingFacade {
 
   UserDao userDao;
   EventDao eventDao;
-
+  TicketDao ticketDao;
   UserService userService;
   EventService eventService;
+  TicketService ticketService;
 
   private static final Logger logger = LogManager.getLogger(BookingFacadeImpl.class);
 
   public BookingFacadeImpl() {
   }
 
-  public BookingFacadeImpl(UserDao userDao, EventDao eventDao,
-      UserService userService, EventService eventService) {
+  public BookingFacadeImpl(UserDao userDao, EventDao eventDao, TicketDao ticketDao,
+      UserService userService, EventService eventService, TicketService ticketService) {
     this.userDao = userDao;
     this.eventDao = eventDao;
     this.userService = userService;
