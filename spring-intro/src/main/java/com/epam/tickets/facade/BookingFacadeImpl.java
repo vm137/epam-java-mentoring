@@ -130,6 +130,6 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public boolean cancelTicket(Long ticketId) {
-    return false;
+    return ticketDao.deleteTicket(ticketId);
   }
 }

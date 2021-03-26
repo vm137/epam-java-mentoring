@@ -1,8 +1,10 @@
 package com.epam.tickets.storage;
 
 import com.epam.tickets.exceptions.InvalidEventException;
+import com.epam.tickets.exceptions.InvalidTicketException;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import java.util.HashMap;
 import java.util.List;
@@ -15,20 +17,39 @@ import org.apache.logging.log4j.Logger;
 
 public class CommonStorage {
 
+  static final long START_INDEX = 100;
   static final String USER_KEY = "user:";
   static final String EVENT_KEY = "event:";
   static final String TICKET_KEY = "ticket:";
-  static final long START_INDEX = 100;
-  private static final Logger logger = LogManager.getLogger(CommonStorage.class);
   private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
   private final AtomicLong eventCounter = new AtomicLong(START_INDEX - 1);
+  private final AtomicLong ticketCounter = new AtomicLong(START_INDEX - 1);
   private String initialStorageFilePath;
+
+  private static final Logger logger = LogManager.getLogger(CommonStorage.class);
 
   private Map<String, Object> storage = new HashMap<>();
 
   // Ticket
 
+  public Ticket addTicket(Ticket ticket) {
+    Long id = ticketCounter.incrementAndGet();
+    ticket.setId(id);
+    String key = getKey(EVENT_KEY, id);
+    storage.put(key, ticket);
+    return (Ticket) storage.get(key);
+  }
 
+  public boolean deleteTicket(Long id) throws InvalidTicketException {
+    String key = getKey(EVENT_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Can't cancel (delete) ticket with id:" + id + " because it doesn't exist";
+      logger.error(msg);
+      throw new InvalidTicketException(msg);
+    }
+    storage.remove(key);
+    return true;
+  }
 
   // Event
 
