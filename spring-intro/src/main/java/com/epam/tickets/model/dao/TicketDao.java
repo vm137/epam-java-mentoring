@@ -11,6 +11,7 @@ public class TicketDao {
     this.commonStorage = commonStorage;
   }
 
+
   public boolean deleteTicket(Long id) {
     try {
       return commonStorage.deleteTicket(id);

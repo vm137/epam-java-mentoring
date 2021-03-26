@@ -3,21 +3,29 @@ package com.epam.tickets.model.dto;
 import com.epam.tickets.model.TicketInterface;
 
 public class Ticket implements TicketInterface {
+
   private Long id;
   private Long eventId;
   private Long userId;
-  private Category category;
   private int place;
+  private Category category;
 
   public Ticket() {
   }
 
-  public Ticket(Long id, Long eventId, Long userId, Category category, int place) {
+  public Ticket(Long eventId, Long userId, int place, Category category) {
+    this.eventId = eventId;
+    this.userId = userId;
+    this.place = place;
+    this.category = category;
+  }
+
+  public Ticket(Long id, Long eventId, Long userId, int place, Category category) {
     this.id = id;
     this.eventId = eventId;
     this.userId = userId;
-    this.category = category;
     this.place = place;
+    this.category = category;
   }
 
   @Override
@@ -76,8 +84,8 @@ public class Ticket implements TicketInterface {
         "id=" + id +
         ", eventId='" + eventId + '\'' +
         ", userId='" + userId + '\'' +
-        ", category='" + category + '\'' +
         ", place='" + place + '\'' +
+        ", category='" + category + '\'' +
         " }";
   }
 }

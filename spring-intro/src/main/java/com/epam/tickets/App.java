@@ -1,7 +1,8 @@
 package com.epam.tickets;
 
+import static com.epam.tickets.model.TicketInterface.Category.PREMIUM;
+
 import com.epam.tickets.facade.BookingFacadeImpl;
-import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
@@ -49,7 +50,7 @@ public class App {
     List<Event> events3 = facade.getEventsByTitle("week", 10, 0);
     logger.info(events3);
 
-    Ticket ticket1 = new Ticket(1L, 2L, 3L, Category.PREMIUM, 10);
+    Ticket ticket1 = facade.bookTicket(2L, 3L, 10, PREMIUM);
     logger.info(ticket1);
   }
 }

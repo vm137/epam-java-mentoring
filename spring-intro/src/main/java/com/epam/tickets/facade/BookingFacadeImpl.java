@@ -34,8 +34,10 @@ public class BookingFacadeImpl implements BookingFacade {
       UserService userService, EventService eventService, TicketService ticketService) {
     this.userDao = userDao;
     this.eventDao = eventDao;
+    this.ticketDao = ticketDao;
     this.userService = userService;
     this.eventService = eventService;
+    this.ticketService = ticketService;
   }
 
   // Users
@@ -115,7 +117,7 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
-    return null;
+    return ticketService.createTicket(userId, eventId, place, category);
   }
 
   @Override
