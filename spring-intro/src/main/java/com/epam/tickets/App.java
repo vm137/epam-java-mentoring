@@ -1,7 +1,9 @@
 package com.epam.tickets;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
+import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -46,5 +48,8 @@ public class App {
 
     List<Event> events3 = facade.getEventsByTitle("week", 10, 0);
     logger.info(events3);
+
+    Ticket ticket1 = new Ticket(1L, 2L, 3L, Category.PREMIUM, 10);
+    logger.info(ticket1);
   }
 }

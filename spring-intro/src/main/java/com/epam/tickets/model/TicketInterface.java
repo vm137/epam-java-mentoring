@@ -10,7 +10,7 @@ public interface TicketInterface {
     Long getId();
     void setId(Long id);
     Long getEventId();
-    Long setEventId(Long eventId);
+    void setEventId(Long eventId);
     Long getUserId();
     void setUserId(Long userId);
     Category getCategory();
