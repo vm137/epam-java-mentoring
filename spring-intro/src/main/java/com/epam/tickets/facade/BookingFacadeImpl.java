@@ -20,20 +20,25 @@ import org.apache.logging.log4j.Logger;
 
 public class BookingFacadeImpl implements BookingFacade {
 
-  UserDao userDao;
-  EventDao eventDao;
-  TicketDao ticketDao;
-  UserService userService;
-  EventService eventService;
-  TicketService ticketService;
+  private UserDao userDao;
+  private EventDao eventDao;
+  private TicketDao ticketDao;
+  private UserService userService;
+  private EventService eventService;
+  private TicketService ticketService;
 
   private static final Logger logger = LogManager.getLogger(BookingFacadeImpl.class);
 
   public BookingFacadeImpl() {
   }
 
-  public BookingFacadeImpl(UserDao userDao, EventDao eventDao, TicketDao ticketDao,
-      UserService userService, EventService eventService, TicketService ticketService) {
+  public BookingFacadeImpl(
+      UserDao userDao,
+      EventDao eventDao,
+      TicketDao ticketDao,
+      UserService userService,
+      EventService eventService,
+      TicketService ticketService) {
     this.userDao = userDao;
     this.eventDao = eventDao;
     this.ticketDao = ticketDao;
