@@ -13,7 +13,8 @@ public class UserServiceImpl implements UserService {
     List<User> allUsers = userDao.getAllUsers();
     return allUsers.stream()
         .filter(user -> email.equalsIgnoreCase(user.getEmail()))
-        .findFirst().orElseThrow(() -> new InvalidUserException("User not found"));
+        .findFirst()
+        .orElseThrow(() -> new InvalidUserException("User not found"));
   }
 
   public List<User> getUsersByName(String name, int pageSize, int pageNum) {

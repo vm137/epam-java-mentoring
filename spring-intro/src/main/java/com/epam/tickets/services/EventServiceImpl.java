@@ -5,7 +5,6 @@ import com.epam.tickets.model.dto.Event;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.StringUtils;
 
 public class EventServiceImpl implements EventService {
   private EventDao eventDao;
@@ -13,7 +12,7 @@ public class EventServiceImpl implements EventService {
   public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
     List<Event> allEvents = eventDao.getAllEvents();
     return allEvents.stream()
-        .filter(event -> StringUtils.containsIgnoreCase(event.getTitle(), title))
+        .filter(event -> title.equalsIgnoreCase(event.getTitle()))
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
