@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.dto.UserImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +22,7 @@ public class AppTest {
 
     @Test
     public void createNewUserTest() {
-        User user = new User("Alex", "al@gmail.com");
+        User user = new UserImpl("Alex", "al@gmail.com");
         User savedUser = facade.createUser(user);
 
         assertEquals("Alex", savedUser.getName());

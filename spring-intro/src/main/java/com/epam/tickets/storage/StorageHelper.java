@@ -4,10 +4,13 @@ import static com.epam.tickets.storage.CommonStorage.EVENT_KEY;
 import static com.epam.tickets.storage.CommonStorage.TICKET_KEY;
 import static com.epam.tickets.storage.CommonStorage.USER_KEY;
 
-import com.epam.tickets.model.TicketInterface.Category;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.EventImpl;
 import com.epam.tickets.model.dto.Ticket;
+import com.epam.tickets.model.dto.Ticket.Category;
+import com.epam.tickets.model.dto.TicketImpl;
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.dto.UserImpl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -44,14 +47,14 @@ public class StorageHelper {
 
           switch (prefix) {
             case USER_KEY:
-              User user = new User(id, dataLine[1], dataLine[2]);
+              User user = new UserImpl(id, dataLine[1], dataLine[2]);
               initialStorage.put(key, user);
               break;
 
             case EVENT_KEY:
               DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
               Date date = format.parse(dataLine[2]);
-              Event event = new Event(id, dataLine[1], date);
+              Event event = new EventImpl(id, dataLine[1], date);
               initialStorage.put(key, event);
               break;
 
@@ -60,7 +63,7 @@ public class StorageHelper {
               Long userId = Long.parseLong(dataLine[2]);
               int place = Integer.parseInt(dataLine[3]);
               Category category = Category.valueOf(dataLine[4]);
-              Ticket ticket = new Ticket(id, eventId, userId, place, category);
+              Ticket ticket = new TicketImpl(id, eventId, userId, place, category);
               initialStorage.put(key, ticket);
               break;
 

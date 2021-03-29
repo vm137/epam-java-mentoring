@@ -1,8 +1,8 @@
 package com.epam.tickets.facade;
 
-import com.epam.tickets.model.TicketInterface;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
+import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
 import java.util.Date;
 import java.util.List;
@@ -108,7 +108,7 @@ public interface BookingFacade {
      * @return Booked ticket object.
      * @throws IllegalStateException if this place has already been booked.
      */
-    Ticket bookTicket(Long userId, Long eventId, int place, TicketInterface.Category category);
+    Ticket bookTicket(Long userId, Long eventId, int place, Category category);
 
     /**
      * Get all booked tickets for specified user. Tickets should be sorted by event date in descending order.

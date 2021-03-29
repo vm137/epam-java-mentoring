@@ -1,11 +1,13 @@
 package com.epam.tickets;
 
-import static com.epam.tickets.model.TicketInterface.Category.PREMIUM;
+import static com.epam.tickets.model.dto.Ticket.Category.PREMIUM;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.dto.EventImpl;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.dto.UserImpl;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +29,7 @@ public class App {
 
     logger.warn("== Ticket service started ==");
 
-    User user = new User("Alex", "alex@gmail.com");
+    User user = new UserImpl("Alex", "alex@gmail.com");
     User createdUser = facade.createUser(user);
     logger.info(createdUser);
 
@@ -40,7 +42,7 @@ public class App {
     try {
       date1 = formatter.parse("12/02/2020 12:00");
     } catch (ParseException e) { e.printStackTrace(); }
-    Event event1 = new Event("Poetry Week", date1);
+    Event event1 = new EventImpl("Poetry Week", date1);
     Event createdEvent = facade.createEvent(event1);
     logger.info(createdEvent);
 
