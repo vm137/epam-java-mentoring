@@ -8,9 +8,9 @@ import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
-import com.epam.tickets.services.EventService;
-import com.epam.tickets.services.TicketService;
-import com.epam.tickets.services.UserService;
+import com.epam.tickets.services.EventServiceImpl;
+import com.epam.tickets.services.TicketServiceImpl;
+import com.epam.tickets.services.UserServiceImpl;
 import java.util.Date;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -21,9 +21,9 @@ public class BookingFacadeImpl implements BookingFacade {
   UserDao userDao;
   EventDao eventDao;
   TicketDao ticketDao;
-  UserService userService;
-  EventService eventService;
-  TicketService ticketService;
+  UserServiceImpl userServiceImpl;
+  EventServiceImpl eventServiceImpl;
+  TicketServiceImpl ticketServiceImpl;
 
   private static final Logger logger = LogManager.getLogger(BookingFacadeImpl.class);
 
@@ -31,13 +31,13 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   public BookingFacadeImpl(UserDao userDao, EventDao eventDao, TicketDao ticketDao,
-      UserService userService, EventService eventService, TicketService ticketService) {
+      UserServiceImpl userServiceImpl, EventServiceImpl eventServiceImpl, TicketServiceImpl ticketServiceImpl) {
     this.userDao = userDao;
     this.eventDao = eventDao;
     this.ticketDao = ticketDao;
-    this.userService = userService;
-    this.eventService = eventService;
-    this.ticketService = ticketService;
+    this.userServiceImpl = userServiceImpl;
+    this.eventServiceImpl = eventServiceImpl;
+    this.ticketServiceImpl = ticketServiceImpl;
   }
 
   // Users
@@ -57,7 +57,7 @@ public class BookingFacadeImpl implements BookingFacade {
   @Override
   public User getUserByEmail(String email) {
     try {
-      return userService.getUserByEmail(email);
+      return userServiceImpl.getUserByEmail(email);
     } catch (InvalidUserException e) {
       String msg = "User with email: " + email + " is not found.";
       logger.warn(msg);
@@ -68,7 +68,7 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public List<User> getUsersByName(String name, int pageSize, int pageNum) {
-    return userService.getUsersByName(name, pageSize, pageNum);
+    return userServiceImpl.getUsersByName(name, pageSize, pageNum);
   }
 
   @Override
@@ -90,12 +90,12 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
-    return eventService.getEventsByTitle(title, pageSize, pageNum);
+    return eventServiceImpl.getEventsByTitle(title, pageSize, pageNum);
   }
 
   @Override
   public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
-    return eventService.getEventsForDay(day, pageSize, pageNum);
+    return eventServiceImpl.getEventsForDay(day, pageSize, pageNum);
   }
 
   @Override
@@ -117,17 +117,17 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
-    return ticketService.createTicket(userId, eventId, place, category);
+    return ticketServiceImpl.createTicket(userId, eventId, place, category);
   }
 
   @Override
   public List<Ticket> getBookedTickets(User user, int pageSize, int pageNum) {
-    return ticketService.getBookedTickets(user, pageSize, pageNum);
+    return ticketServiceImpl.getBookedTickets(user, pageSize, pageNum);
   }
 
   @Override
   public List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum) {
-    return ticketService.getBookedTickets(event, pageSize, pageNum);
+    return ticketServiceImpl.getBookedTickets(event, pageSize, pageNum);
   }
 
   @Override

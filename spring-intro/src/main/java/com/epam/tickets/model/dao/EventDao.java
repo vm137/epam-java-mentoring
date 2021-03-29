@@ -3,6 +3,7 @@ package com.epam.tickets.model.dao;
 import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.storage.CommonStorage;
+import java.util.List;
 
 public class EventDao {
 
@@ -27,6 +28,10 @@ public class EventDao {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public List<Event> getAllEvents() {
+    return commonStorage.getAllEvents();
   }
 
   public boolean deleteEvent(Long id) {
