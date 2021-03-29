@@ -30,7 +30,6 @@ public class StorageHelper {
 
     BufferedReader reader;
     try {
-      // file: spring-intro/storage/initial.data
       reader = new BufferedReader(new FileReader(fileName));
       String line = reader.readLine();
       while (line != null) {
@@ -52,9 +51,6 @@ public class StorageHelper {
             case EVENT_KEY:
               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
               LocalDateTime date = LocalDateTime.parse(dataLine[2], formatter);
-
-//              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//              LocalDateTime date = LocalDateTime.parse(dataLine[2], formatter);
               Event event = new EventImpl(id, dataLine[1], date);
               initialStorage.put(key, event);
               break;
@@ -69,7 +65,7 @@ public class StorageHelper {
               break;
 
             default:
-              logger.warn("Unknown record key in initial data file: " + key);
+              logger.error("Unknown record key in initial data file: " + key);
               break;
           }
         }
