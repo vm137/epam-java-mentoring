@@ -14,10 +14,8 @@ import com.epam.tickets.model.dto.UserImpl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
@@ -52,8 +50,11 @@ public class StorageHelper {
               break;
 
             case EVENT_KEY:
-              DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-              Date date = format.parse(dataLine[2]);
+              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+              LocalDateTime date = LocalDateTime.parse(dataLine[2], formatter);
+
+//              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//              LocalDateTime date = LocalDateTime.parse(dataLine[2], formatter);
               Event event = new EventImpl(id, dataLine[1], date);
               initialStorage.put(key, event);
               break;
@@ -75,7 +76,7 @@ public class StorageHelper {
         line = reader.readLine();
       }
       reader.close();
-    } catch (IOException | ParseException e) {
+    } catch (IOException e) {
       logger.error("Initial data file could not be read. " + e);
       e.printStackTrace();
     }

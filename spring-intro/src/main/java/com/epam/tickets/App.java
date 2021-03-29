@@ -8,10 +8,8 @@ import com.epam.tickets.model.dto.EventImpl;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.model.dto.UserImpl;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,11 +35,8 @@ public class App {
     String userEmail = userByEmail.toString();
     logger.info(userEmail);
 
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    Date date1 = null;
-    try {
-      date1 = formatter.parse("12/02/2020 12:00");
-    } catch (ParseException e) { e.printStackTrace(); }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    LocalDateTime date1 = LocalDateTime.parse("12/02/2020 12:00", formatter);
     Event event1 = new EventImpl("Poetry Week", date1);
     Event createdEvent = facade.createEvent(event1);
     logger.info(createdEvent);

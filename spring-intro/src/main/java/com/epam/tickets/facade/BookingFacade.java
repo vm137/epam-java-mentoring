@@ -7,7 +7,7 @@ import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingFacade {
@@ -30,12 +30,12 @@ public interface BookingFacade {
     /**
      * Get list of events for specified day.
      * In case nothing was found, empty list is returned.
-     * @param day Date object from which day information is extracted.
+     * @param day LocalDateTime object from which day information is extracted.
      * @param pageSize Pagination param. Number of events to return on a page.
      * @param pageNum Pagination param. Number of the page to return. Starts from 1.
      * @return List of events.
      */
-    List<Event> getEventsForDay(Date day, int pageSize, int pageNum);
+    List<Event> getEventsForDay(LocalDateTime day, int pageSize, int pageNum);
 
     /**
      * Creates new event. Event id should be auto-generated.

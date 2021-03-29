@@ -13,7 +13,7 @@ import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -96,7 +96,7 @@ public class BookingFacadeImpl implements BookingFacade {
   }
 
   @Override
-  public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
+  public List<Event> getEventsForDay(LocalDateTime day, int pageSize, int pageNum) {
     return eventService.getEventsForDay(day, pageSize, pageNum);
   }
 

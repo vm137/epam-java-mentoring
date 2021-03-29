@@ -1,6 +1,6 @@
 package com.epam.tickets.model.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public interface Event {
 
@@ -12,9 +12,9 @@ public interface Event {
 
   void setTitle(String title);
 
-  Date getDate();
+  LocalDateTime getDate();
 
-  void setDate(Date date);
+  void setDate(LocalDateTime date);
 
   String toString();
 }

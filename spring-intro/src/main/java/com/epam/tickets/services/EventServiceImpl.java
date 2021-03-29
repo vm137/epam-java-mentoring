@@ -2,7 +2,7 @@ package com.epam.tickets.services;
 
 import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dto.Event;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
@@ -19,10 +19,10 @@ public class EventServiceImpl implements EventService {
         .collect(Collectors.toList());
   }
 
-  public List<Event> getEventsForDay(Date day, int pageSize, int pageNum) {
+  public List<Event> getEventsForDay(LocalDateTime day, int pageSize, int pageNum) {
     List<Event> allEvents = eventDao.getAllEvents();
     return allEvents.stream()
-        .filter(event -> day.compareTo(event.getDate()) == 0)
+        .filter(event -> day.equals(event.getDate()))
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
