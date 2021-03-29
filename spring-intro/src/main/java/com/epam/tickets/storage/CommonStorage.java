@@ -9,7 +9,6 @@ import com.epam.tickets.model.dto.User;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
@@ -29,80 +28,6 @@ public class CommonStorage {
   private static final Logger logger = LogManager.getLogger(CommonStorage.class);
 
   private Map<String, Object> storage = new HashMap<>();
-
-  // Ticket
-
-  public Ticket addTicket(Ticket ticket) {
-    Long id = ticketCounter.incrementAndGet();
-    ticket.setId(id);
-    String key = getKey(EVENT_KEY, id);
-    storage.put(key, ticket);
-    return (Ticket) storage.get(key);
-  }
-
-  public boolean deleteTicket(Long id) throws InvalidTicketException {
-    String key = getKey(EVENT_KEY, id);
-    if (!storage.containsKey(key)) {
-      String msg = "Can't cancel (delete) ticket with id:" + id + " because it doesn't exist";
-      logger.error(msg);
-      throw new InvalidTicketException(msg);
-    }
-    storage.remove(key);
-    return true;
-  }
-
-  public List<Ticket> getAllTickets() {
-    return storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(TICKET_KEY))
-        .map(entry -> (Ticket) entry.getValue())
-        .collect(Collectors.toList());
-  }
-
-  // Event
-
-  public Event getEvent(Long id) {
-    String key = getKey(EVENT_KEY, id);
-    return (Event) storage.get(key);
-  }
-
-  public List<Event> getAllEvents() {
-    return storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(EVENT_KEY))
-        .map(entry -> (Event) entry.getValue())
-        .collect(Collectors.toList());
-  }
-
-  public Event addEvent(Event event) {
-    Long id = eventCounter.incrementAndGet();
-    event.setId(id);
-    String key = getKey(EVENT_KEY, id);
-    storage.put(key, event);
-    return (Event) storage.get(key);
-  }
-
-  public Event updateEvent(Event event) throws InvalidEventException {
-    Long id = event.getId();
-    String key = getKey(EVENT_KEY, id);
-    if (!storage.containsKey(key)) {
-      String msg = "Cannot update event with id: %d, event doesn't exist.";
-      logger.error(msg);
-      throw new InvalidEventException(msg);
-    }
-    storage.put(key, event);
-    return (Event) storage.get(key);
-  }
-
-  public boolean deleteEvent(Long id) {
-    String key = getKey(EVENT_KEY, id);
-    if (storage.containsKey(key)) {
-      storage.remove(key);
-      return true;
-    } else {
-      String msg = "Can't remove event with id:" + id + " because it doesn't exist.";
-      logger.error(msg);
-      return false;
-    }
-  }
 
   // User
 
@@ -126,17 +51,6 @@ public class CommonStorage {
     return (User) storage.get(key);
   }
 
-  public User update(User user) throws InvalidUserException {
-    Long id = user.getId();
-    String key = getKey(USER_KEY, id);
-    if (!storage.containsKey(key)) {
-      String msg = "Cannot update user with id: %d, user doesn't exist.";
-      logger.error(msg);
-      throw new InvalidUserException(msg);
-    }
-    return (User) storage.put(USER_KEY + id, user);
-  }
-
   public User getUserById(Long id) throws InvalidUserException {
     String key = getKey(USER_KEY, id);
     if (!storage.containsKey(key)) {
@@ -154,15 +68,95 @@ public class CommonStorage {
         .collect(Collectors.toList());
   }
 
-  public boolean removeUser(Long id) throws InvalidUserException {
+  public void update(User user) throws InvalidUserException {
+    Long id = user.getId();
+    String key = getKey(USER_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot update user with id: %d, user doesn't exist.";
+      logger.error(msg);
+      throw new InvalidUserException(msg);
+    }
+    storage.put(USER_KEY + id, user);
+  }
+
+  public void removeUser(Long id) throws InvalidUserException {
     String key = getKey(USER_KEY, id);
     if (!storage.containsKey(key)) {
       String msg = "Cannot delete user with id: %d, user doesn't exist.";
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
-    User removedUser = (User) storage.remove(USER_KEY + id);
-    return Objects.nonNull(removedUser);
+    storage.remove(USER_KEY + id);
+  }
+
+  // Event
+
+  public Event addEvent(Event event) {
+    Long id = eventCounter.incrementAndGet();
+    event.setId(id);
+    String key = getKey(EVENT_KEY, id);
+    storage.put(key, event);
+    return (Event) storage.get(key);
+  }
+
+  public Event getEvent(Long id) {
+    String key = getKey(EVENT_KEY, id);
+    return (Event) storage.get(key);
+  }
+
+  public List<Event> getAllEvents() {
+    return storage.entrySet().stream()
+        .filter(entry -> entry.getKey().startsWith(EVENT_KEY))
+        .map(entry -> (Event) entry.getValue())
+        .collect(Collectors.toList());
+  }
+
+  public void updateEvent(Event event) throws InvalidEventException {
+    Long id = event.getId();
+    String key = getKey(EVENT_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Cannot update event with id: %d, event doesn't exist.";
+      logger.error(msg);
+      throw new InvalidEventException(msg);
+    }
+    storage.put(key, event);
+  }
+
+  public void deleteEvent(Long id) {
+    String key = getKey(EVENT_KEY, id);
+    if (storage.containsKey(key)) {
+      storage.remove(key);
+    } else {
+      String msg = "Can't remove event with id:" + id + " because it doesn't exist.";
+      logger.error(msg);
+    }
+  }
+
+  // Ticket
+
+  public Ticket addTicket(Ticket ticket) {
+    Long id = ticketCounter.incrementAndGet();
+    ticket.setId(id);
+    String key = getKey(EVENT_KEY, id);
+    storage.put(key, ticket);
+    return (Ticket) storage.get(key);
+  }
+
+  public List<Ticket> getAllTickets() {
+    return storage.entrySet().stream()
+        .filter(entry -> entry.getKey().startsWith(TICKET_KEY))
+        .map(entry -> (Ticket) entry.getValue())
+        .collect(Collectors.toList());
+  }
+
+  public void deleteTicket(Long id) throws InvalidTicketException {
+    String key = getKey(EVENT_KEY, id);
+    if (!storage.containsKey(key)) {
+      String msg = "Can't cancel (delete) ticket with id:" + id + " because it doesn't exist";
+      logger.error(msg);
+      throw new InvalidTicketException(msg);
+    }
+    storage.remove(key);
   }
 
   // Service methods
