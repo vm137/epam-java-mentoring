@@ -16,23 +16,13 @@ public class UserDaoImpl implements UserDao {
   // CRUD methods
 
   @Override
-  public User createUser(User user) {
-    try {
-      return commonStorage.addUser(user);
-    } catch (InvalidUserException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public User createUser(User user) throws InvalidUserException {
+    return commonStorage.addUser(user);
   }
 
   @Override
-  public User getUserById(Long id) {
-    try {
-      return commonStorage.getUserById(id);
-    } catch (InvalidUserException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public User getUserById(Long id) throws InvalidUserException {
+    return commonStorage.getUserById(id);
   }
 
   @Override

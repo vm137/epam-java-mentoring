@@ -2,6 +2,7 @@ package com.epam.tickets.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.model.dto.UserImpl;
@@ -21,7 +22,7 @@ public class UsersTest {
   }
 
   @Test
-  public void createNewUserTest() {
+  public void createNewUserTest() throws InvalidUserException {
     User user = new UserImpl("Alex", "alex@gmail.com");
     User createdUser = facade.createUser(user);
 
@@ -30,7 +31,7 @@ public class UsersTest {
   }
 
   @Test
-  public void getUserByEmailTest() {
+  public void getUserByEmailTest() throws InvalidUserException {
     User userByEmail = facade.getUserByEmail("john@gmail.com");
 
     assertEquals(userByEmail.getEmail(), "john@gmail.com");

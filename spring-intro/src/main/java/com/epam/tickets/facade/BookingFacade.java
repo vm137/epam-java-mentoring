@@ -58,15 +58,16 @@ public interface BookingFacade {
 
     /**
      * Gets user by its id.
+     *
      * @return User.
      */
-    User getUserById(Long userId);
+    User getUserById(Long userId) throws InvalidUserException;
 
     /**
      * Gets user by its email. Email is strictly matched.
      * @return User.
      */
-    User getUserByEmail(String email);
+    User getUserByEmail(String email) throws InvalidUserException;
 
     /**
      * Get list of users by matching name. Name is matched using 'contains' approach.
@@ -83,7 +84,7 @@ public interface BookingFacade {
      * @param user User data.
      * @return Created User object.
      */
-    User createUser(User user);
+    User createUser(User user) throws InvalidUserException;
 
     /**
      * Updates user using given data.

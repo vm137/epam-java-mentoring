@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface UserDao {
 
-  User createUser(User user);
+  User createUser(User user) throws InvalidUserException;
 
-  User getUserById(Long id);
+  User getUserById(Long id) throws InvalidUserException;
 
   List<User> getAllUsers();
 

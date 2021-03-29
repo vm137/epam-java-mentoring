@@ -45,27 +45,20 @@ public class BookingFacadeImpl implements BookingFacade {
   // Users
 
   @Override
-  public User createUser(User user) {
+  public User createUser(User user) throws InvalidUserException {
     String msg = String.format("Create user: %s", user.getName());
     logger.debug(msg);
     return userDao.createUser(user);
   }
 
   @Override
-  public User getUserById(Long userId) {
+  public User getUserById(Long userId) throws InvalidUserException {
     return userDao.getUserById(userId);
   }
 
   @Override
-  public User getUserByEmail(String email) {
-    try {
-      return userService.getUserByEmail(email);
-    } catch (InvalidUserException e) {
-      String msg = "User with email: " + email + " is not found.";
-      logger.warn(msg);
-      e.printStackTrace();
-    }
-    return null;
+  public User getUserByEmail(String email) throws InvalidUserException {
+    return userService.getUserByEmail(email);
   }
 
   @Override

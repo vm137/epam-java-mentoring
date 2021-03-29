@@ -2,6 +2,7 @@ package com.epam.tickets;
 
 import static com.epam.tickets.model.dto.Ticket.Category.PREMIUM;
 
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.EventImpl;
@@ -20,7 +21,7 @@ public class App {
 
   private static final Logger logger = LogManager.getLogger(App.class);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InvalidUserException {
 
     ApplicationContext ctx = new ClassPathXmlApplicationContext("context.xml");
     BookingFacadeImpl facade = (BookingFacadeImpl) ctx.getBean("facade");
