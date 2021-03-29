@@ -18,9 +18,9 @@
     <constructor-arg ref="userDao"/>
     <constructor-arg ref="eventDao"/>
     <constructor-arg ref="ticketDao"/>
-    <constructor-arg ref="userServiceImpl"/>
-    <constructor-arg ref="eventServiceImpl"/>
-    <constructor-arg ref="ticketServiceImpl"/>
+    <constructor-arg ref="userService"/>
+    <constructor-arg ref="eventService"/>
+    <constructor-arg ref="ticketService"/>
   </bean>
 
   <bean class="com.epam.tickets.model.dao.UserDaoImpl" id="userDao">
@@ -35,10 +35,10 @@
     <constructor-arg ref="commonStorage"/>
   </bean>
 
-  <bean autowire="byType" class="com.epam.tickets.services.UserServiceImpl" id="userServiceImpl"/>
+  <bean autowire="byType" class="com.epam.tickets.services.UserServiceImpl" id="userService"/>
 
-  <bean autowire="byType" class="com.epam.tickets.services.EventServiceImpl" id="eventServiceImpl"/>
+  <bean autowire="byType" class="com.epam.tickets.services.EventServiceImpl" id="eventService"/>
 
-  <bean autowire="byType" class="com.epam.tickets.services.TicketServiceImpl" id="ticketServiceImpl"/>
+  <bean autowire="byType" class="com.epam.tickets.services.TicketServiceImpl" id="ticketService"/>
 
 </beans>

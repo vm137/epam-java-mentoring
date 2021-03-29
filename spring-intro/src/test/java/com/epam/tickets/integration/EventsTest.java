@@ -20,6 +20,7 @@ public class EventsTest {
 
   @Test
   public void createNewEventTest() {
+
     assertEquals(true, true);
   }
 }
