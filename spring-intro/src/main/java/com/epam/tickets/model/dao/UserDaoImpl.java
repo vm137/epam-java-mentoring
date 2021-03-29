@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
   // CRUD methods
 
   @Override
-  public User create(User user) {
+  public User createUser(User user) {
     try {
       return commonStorage.addUser(user);
     } catch (InvalidUserException e) {
@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public User read(Long id) {
+  public User getUserById(Long id) {
     try {
       return commonStorage.getUserById(id);
     } catch (InvalidUserException e) {
@@ -41,22 +41,12 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public User update(User user) {
-    try {
-      return commonStorage.update(user);
-    } catch (InvalidUserException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public void update(User user) throws InvalidUserException {
+    commonStorage.update(user);
   }
 
   @Override
-  public boolean delete(Long id) {
-    try {
-      return commonStorage.removeUser(id);
-    } catch (InvalidUserException e) {
-      e.printStackTrace();
-    }
-    return false;
+  public void delete(Long id) throws InvalidUserException {
+    commonStorage.removeUser(id);
   }
 }

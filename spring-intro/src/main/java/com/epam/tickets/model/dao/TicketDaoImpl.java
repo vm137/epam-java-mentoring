@@ -24,12 +24,7 @@ public class TicketDaoImpl implements TicketDao {
   }
 
   @Override
-  public boolean deleteTicket(Long id) {
-    try {
-      return commonStorage.deleteTicket(id);
-    } catch (InvalidTicketException e) {
-      e.printStackTrace();
-    }
-    return false;
+  public void deleteTicketById(Long id) throws InvalidTicketException {
+     commonStorage.deleteTicket(id);
   }
 }

@@ -1,17 +1,18 @@
 package com.epam.tickets.model.dao;
 
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.User;
 import java.util.List;
 
 public interface UserDao {
 
-  User create(User user);
+  User createUser(User user);
 
-  User read(Long id);
+  User getUserById(Long id);
 
   List<User> getAllUsers();
 
-  User update(User user);
+  void update(User user) throws InvalidUserException;
 
-  boolean delete(Long id);
+  void delete(Long id) throws InvalidUserException;
 }

@@ -1,5 +1,8 @@
 package com.epam.tickets.facade;
 
+import com.epam.tickets.exceptions.InvalidEventException;
+import com.epam.tickets.exceptions.InvalidTicketException;
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.Ticket.Category;
@@ -44,16 +47,14 @@ public interface BookingFacade {
     /**
      * Updates event using given data.
      * @param event Event data for update. Should have id set.
-     * @return Updated Event object.
      */
-    Event updateEvent(Event event);
+    void updateEvent(Event event) throws InvalidEventException;
 
     /**
      * Deletes event by its id.
      * @param eventId Event id.
-     * @return Flag that shows whether event has been deleted.
      */
-    boolean deleteEvent(Long eventId);
+    void deleteEventById(Long eventId);
 
     /**
      * Gets user by its id.
@@ -87,16 +88,14 @@ public interface BookingFacade {
     /**
      * Updates user using given data.
      * @param user User data for update. Should have id set.
-     * @return Updated User object.
      */
-    User updateUser(User user);
+    void updateUser(User user) throws InvalidUserException;
 
     /**
      * Deletes user by its id.
      * @param userId User id.
-     * @return Flag that shows whether user has been deleted.
      */
-    boolean deleteUser(Long userId);
+    void deleteUserById(Long userId) throws InvalidUserException;
 
     /**
      * Book ticket for a specified event on behalf of specified user.
@@ -131,7 +130,6 @@ public interface BookingFacade {
     /**
      * Cancel ticket with a specified id.
      * @param ticketId Ticket id.
-     * @return Flag whether anything has been canceled.
      */
-    boolean cancelTicket(Long ticketId);
+    void cancelTicket(Long ticketId) throws InvalidTicketException;
 }

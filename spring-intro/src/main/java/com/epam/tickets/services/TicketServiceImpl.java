@@ -1,5 +1,6 @@
 package com.epam.tickets.services;
 
+import com.epam.tickets.exceptions.InvalidTicketException;
 import com.epam.tickets.model.dao.TicketDao;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
@@ -13,7 +14,7 @@ public class TicketServiceImpl implements TicketService {
 
   private TicketDao ticketDao;
 
-  public Ticket createTicket(Long userId, Long eventId, int place, Category category) {
+  public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
     Ticket ticket = new TicketImpl(userId, eventId, place, category);
     return ticketDao.addTicket(ticket);
   }
@@ -22,7 +23,7 @@ public class TicketServiceImpl implements TicketService {
     List<Ticket> allTickets = ticketDao.getAllTickets();
     Long lookedUserId = user.getId();
     return allTickets.stream()
-        .filter(ticket -> ticket.getUserId() == lookedUserId)
+        .filter(ticket -> ticket.getUserId().equals(lookedUserId))
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
@@ -36,6 +37,11 @@ public class TicketServiceImpl implements TicketService {
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public void cancelTicket(Long ticketId) throws InvalidTicketException {
+    ticketDao.deleteTicketById(ticketId);
   }
 
   public void setTicketDao(TicketDao ticketDao) {

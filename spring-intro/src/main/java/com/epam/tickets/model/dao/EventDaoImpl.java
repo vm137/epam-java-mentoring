@@ -19,18 +19,13 @@ public class EventDaoImpl implements EventDao {
   }
 
   @Override
-  public Event getEvent(Long id) {
+  public Event getEventById(Long id) {
     return commonStorage.getEvent(id);
   }
 
   @Override
-  public Event updateEvent(Event event) {
-    try {
-      return commonStorage.updateEvent(event);
-    } catch (InvalidEventException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public void updateEvent(Event event) throws InvalidEventException {
+      commonStorage.updateEvent(event);
   }
 
   @Override
@@ -39,7 +34,7 @@ public class EventDaoImpl implements EventDao {
   }
 
   @Override
-  public boolean deleteEvent(Long id) {
-    return commonStorage.deleteEvent(id);
+  public void deleteEventById(Long id) {
+    commonStorage.deleteEvent(id);
   }
 }

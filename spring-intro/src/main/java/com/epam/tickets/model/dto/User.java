@@ -1,8 +1,6 @@
 package com.epam.tickets.model.dto;
 
-import com.epam.tickets.model.UserInterface;
-
-public interface User extends UserInterface {
+public interface User {
 
   Long getId();
 
