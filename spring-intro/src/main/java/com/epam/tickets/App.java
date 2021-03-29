@@ -25,7 +25,7 @@ public class App {
     ApplicationContext ctx = new ClassPathXmlApplicationContext("context.xml");
     BookingFacadeImpl facade = (BookingFacadeImpl) ctx.getBean("facade");
 
-    logger.warn("== Ticket service started ==");
+    logger.info("== Ticket service started ==");
 
     User user = new UserImpl("Alex", "alex@gmail.com");
     User createdUser = facade.createUser(user);

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TicketServiceImpl implements TicketService {
-
   private TicketDao ticketDao;
 
   public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {

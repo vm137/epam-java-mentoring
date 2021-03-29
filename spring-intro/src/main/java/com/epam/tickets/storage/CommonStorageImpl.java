@@ -119,7 +119,7 @@ public class CommonStorageImpl implements CommonStorage {
     Long id = event.getId();
     String key = getKey(EVENT_KEY, id);
     if (!storage.containsKey(key)) {
-      String msg = "Cannot update event with id: %d, event doesn't exist.";
+      String msg = "Cannot update event with id:" + id + ", because it doesn't exist.";
       logger.error(msg);
       throw new InvalidEventException(msg);
     }
@@ -160,7 +160,7 @@ public class CommonStorageImpl implements CommonStorage {
   public void deleteTicket(Long id) throws InvalidTicketException {
     String key = getKey(EVENT_KEY, id);
     if (!storage.containsKey(key)) {
-      String msg = "Can't cancel (delete) ticket with id:" + id + " because it doesn't exist";
+      String msg = "Can not delete ticket with id:" + id + " because it doesn't exist";
       logger.error(msg);
       throw new InvalidTicketException(msg);
     }
