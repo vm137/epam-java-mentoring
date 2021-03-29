@@ -47,7 +47,7 @@ public class EventsTest {
 
   @Test
   public void getEventsByIdTitle() {
-    List<Event> events3 = facade.getEventsByTitle("week", 10, 0);
+    List<Event> events3 = facade.getEventsByTitle("Jazz Songs", 10, 0);
 
     assertEquals(1, events3.size());
   }
