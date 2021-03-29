@@ -23,15 +23,15 @@
     <constructor-arg ref="ticketServiceImpl"/>
   </bean>
 
-  <bean class="com.epam.tickets.model.dao.UserDao" id="userDao">
+  <bean class="com.epam.tickets.model.dao.UserDaoImpl" id="userDao">
     <constructor-arg ref="commonStorage"/>
   </bean>
 
-  <bean class="com.epam.tickets.model.dao.EventDao" id="eventDao">
+  <bean class="com.epam.tickets.model.dao.EventDaoImpl" id="eventDao">
     <constructor-arg ref="commonStorage"/>
   </bean>
 
-  <bean class="com.epam.tickets.model.dao.TicketDao" id="ticketDao">
+  <bean class="com.epam.tickets.model.dao.TicketDaoImpl" id="ticketDao">
     <constructor-arg ref="commonStorage"/>
   </bean>
 

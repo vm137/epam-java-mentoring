@@ -1,40 +1,17 @@
 package com.epam.tickets.model.dao;
 
-import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.model.dto.Event;
-import com.epam.tickets.storage.CommonStorage;
 import java.util.List;
 
-public class EventDao {
+public interface EventDao {
 
-  private final CommonStorage commonStorage;
+  Event createEvent(Event event);
 
-  public EventDao(CommonStorage commonStorage) {
-    this.commonStorage = commonStorage;
-  }
+  Event getEvent(Long id);
 
-  public Event createEvent(Event event) {
-    return commonStorage.addEvent(event);
-  }
+  Event updateEvent(Event event);
 
-  public Event getEvent(Long id) {
-    return commonStorage.getEvent(id);
-  }
+  List<Event> getAllEvents();
 
-  public Event updateEvent(Event event) {
-    try {
-      return commonStorage.updateEvent(event);
-    } catch (InvalidEventException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  public List<Event> getAllEvents() {
-    return commonStorage.getAllEvents();
-  }
-
-  public boolean deleteEvent(Long id) {
-    return commonStorage.deleteEvent(id);
-  }
+  boolean deleteEvent(Long id);
 }
