@@ -10,7 +10,7 @@
     <property name="locations" value="classpath:application.properties"/>
   </bean>
 
-  <bean class="com.epam.tickets.storage.CommonStorage" id="commonStorage" init-method="initStorage">
+  <bean class="com.epam.tickets.storage.CommonStorageImpl" id="commonStorage" init-method="initStorage">
     <property name="initialStorageFilePath" value="${storage.path}"/>
   </bean>
 
