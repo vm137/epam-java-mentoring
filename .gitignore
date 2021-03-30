@@ -2,7 +2,3 @@
 *.iml
 target/
 logs/
-
-
-# temporary debug item
-App.java
