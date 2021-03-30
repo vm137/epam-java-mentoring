@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CommonStorageImpl implements CommonStorage {
 
-  private final long START_INDEX = 100;
+  private final static long START_INDEX = 100;
 
   private String initialStorageFilePath;
   private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
