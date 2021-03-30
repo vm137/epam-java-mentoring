@@ -9,7 +9,7 @@ import com.epam.tickets.model.dto.User;
 import java.util.List;
 
 public interface CommonStorage {
-  long START_INDEX = 100;
+
   String USER_KEY = "user:";
   String EVENT_KEY = "event:";
   String TICKET_KEY = "ticket:";
