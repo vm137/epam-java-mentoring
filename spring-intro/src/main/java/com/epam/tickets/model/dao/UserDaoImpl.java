@@ -31,12 +31,12 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public void update(User user) throws InvalidUserException {
+  public void updateUser(User user) throws InvalidUserException {
     commonStorage.update(user);
   }
 
   @Override
-  public void delete(Long id) throws InvalidUserException {
+  public void deleteUserById(Long id) throws InvalidUserException {
     commonStorage.removeUser(id);
   }
 }

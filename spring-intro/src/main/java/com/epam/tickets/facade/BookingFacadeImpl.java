@@ -73,12 +73,12 @@ public class BookingFacadeImpl implements BookingFacade {
 
   @Override
   public void updateUser(User user) throws InvalidUserException {
-    userDao.update(user);
+    userDao.updateUser(user);
   }
 
   @Override
   public void deleteUserById(Long userId) throws InvalidUserException {
-    userDao.delete(userId);
+    userDao.deleteUserById(userId);
   }
 
   // Events

@@ -12,7 +12,7 @@ public interface UserDao {
 
   List<User> getAllUsers();
 
-  void update(User user) throws InvalidUserException;
+  void updateUser(User user) throws InvalidUserException;
 
-  void delete(Long id) throws InvalidUserException;
+  void deleteUserById(Long id) throws InvalidUserException;
 }
