@@ -8,6 +8,7 @@ import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.TicketImpl;
 import com.epam.tickets.model.dto.User;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TicketServiceImpl implements TicketService {
@@ -22,6 +23,7 @@ public class TicketServiceImpl implements TicketService {
     List<Ticket> allTickets = ticketDao.getAllTickets();
     Long lookedUserId = user.getId();
     return allTickets.stream()
+        .filter(ticket -> Objects.nonNull(ticket.getUserId()))
         .filter(ticket -> ticket.getUserId().equals(lookedUserId))
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
@@ -32,6 +34,7 @@ public class TicketServiceImpl implements TicketService {
     List<Ticket> allTickets = ticketDao.getAllTickets();
     Long lookedEventId = event.getId();
     return allTickets.stream()
+        .filter(ticket -> Objects.nonNull(ticket.getEventId()))
         .filter(ticket -> ticket.getEventId().equals(lookedEventId))
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
