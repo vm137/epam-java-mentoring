@@ -39,8 +39,4 @@ public interface CommonStorage {
   List<Ticket> getAllTickets();
 
   void deleteTicket(Long id) throws InvalidTicketException;
-
-  void setInitialStorageFilePath(String initialStorageFilePath);
-
-  void initStorage();
 }

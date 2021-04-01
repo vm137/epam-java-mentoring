@@ -32,9 +32,11 @@ public class UsersTest {
 
   @Test
   public void getUserByEmailTest() throws InvalidUserException {
-    User userByEmail = facade.getUserByEmail("john@gmail.com");
+    User user = new UserImpl("John Foo", "jf@gmail.com");
+    facade.createUser(user);
+    User userByEmail = facade.getUserByEmail("jf@gmail.com");
 
-    assertEquals(userByEmail.getEmail(), "john@gmail.com");
+    assertEquals(userByEmail.getEmail(), "jf@gmail.com");
     assertEquals(userByEmail.getName(), "John Foo");
   }
 }

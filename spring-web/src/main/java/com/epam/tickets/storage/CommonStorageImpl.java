@@ -21,7 +21,6 @@ public class CommonStorageImpl implements CommonStorage {
   private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
   private final AtomicLong eventCounter = new AtomicLong(START_INDEX - 1);
   private final AtomicLong ticketCounter = new AtomicLong(START_INDEX - 1);
-  private String initialStorageFilePath;
   private Map<String, Object> storage = new HashMap<>();
 
   // User
@@ -171,15 +170,5 @@ public class CommonStorageImpl implements CommonStorage {
 
   private String getKey(String prefix, Long id) {
     return prefix + id;
-  }
-
-  @Override
-  public void setInitialStorageFilePath(String initialStorageFilePath) {
-    this.initialStorageFilePath = initialStorageFilePath;
-  }
-
-  @Override
-  public void initStorage() {
-    storage = StorageHelper.readInitialStorage(initialStorageFilePath);
   }
 }
