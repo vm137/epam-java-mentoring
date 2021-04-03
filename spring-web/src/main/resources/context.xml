@@ -10,14 +10,15 @@
   https://www.springframework.org/schema/context/spring-context.xsd">
 
   <context:annotation-config/>
-
   <import resource="init-context.xml"/>
 
   <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations" value="classpath:application.properties"/>
   </bean>
 
-  <bean class="com.epam.tickets.storage.CommonStorageImpl" id="commonStorage"/>
+  <bean class="com.epam.tickets.storage.CommonStorageImpl" id="commonStorage">
+    <property name="userStorage" ref="userStorage"/>
+  </bean>
 
   <bean class="com.epam.tickets.facade.BookingFacadeImpl" id="facade">
     <constructor-arg ref="userDao"/>

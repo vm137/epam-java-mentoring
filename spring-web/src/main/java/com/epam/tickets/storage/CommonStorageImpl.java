@@ -23,11 +23,15 @@ public class CommonStorageImpl implements CommonStorage {
   private final AtomicLong eventCounter = new AtomicLong(START_INDEX);
   private final AtomicLong ticketCounter = new AtomicLong(START_INDEX);
 
-  private final Map<Long, User> userStorage = new HashMap<>();
+  private Map<Long, User> userStorage = new HashMap<>();
   private final Map<Long, Event> eventStorage = new HashMap<>();
   private final Map<Long, Ticket> ticketStorage = new HashMap<>();
 
-  // User
+  public void setUserStorage(Map<Long, User> userStorage) {
+    this.userStorage = userStorage;
+  }
+
+// User
 
   @Override
   public User addUser(User user) throws InvalidUserException {
