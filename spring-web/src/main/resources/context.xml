@@ -11,6 +11,8 @@
 
   <context:annotation-config/>
 
+  <import resource="init-context.xml"/>
+
   <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations" value="classpath:application.properties"/>
   </bean>
