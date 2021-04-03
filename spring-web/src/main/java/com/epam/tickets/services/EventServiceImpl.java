@@ -2,7 +2,6 @@ package com.epam.tickets.services;
 
 import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dto.Event;
-import com.epam.tickets.model.dto.EventImpl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ public class EventServiceImpl implements EventService {
 
   @Override
   public Event createEvent(String title, LocalDateTime date) {
-    Event event = new EventImpl(title, date);
+    Event event = new Event(title, date);
     return eventDao.createEvent(event);
   }
 

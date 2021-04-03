@@ -3,7 +3,6 @@ package com.epam.tickets.services;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.User;
-import com.epam.tickets.model.dto.UserImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User createUser(String name, String email) throws InvalidUserException {
-    User user = new UserImpl(name, email);
+    User user = new User(name, email);
     return userDao.createUser(user);
   }
 

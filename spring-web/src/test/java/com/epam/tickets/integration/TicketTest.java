@@ -1,6 +1,6 @@
 package com.epam.tickets.integration;
 
-import static com.epam.tickets.model.dto.Ticket.Category.PREMIUM;
+import static com.epam.tickets.model.dto.TicketI.Category.PREMIUM;
 import static org.junit.Assert.assertEquals;
 
 import com.epam.tickets.facade.BookingFacadeImpl;

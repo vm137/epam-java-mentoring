@@ -1,28 +1,89 @@
 package com.epam.tickets.model.dto;
 
-public interface Ticket {
+public class Ticket implements TicketI {
 
-  Long getId();
+  private Long id;
+  private Long eventId;
+  private Long userId;
+  private int place;
+  private Category category;
 
-  void setId(Long id);
+  public Ticket() {
+  }
 
-  Long getEventId();
+  public Ticket(Long eventId, Long userId, int place, Category category) {
+    this.eventId = eventId;
+    this.userId = userId;
+    this.place = place;
+    this.category = category;
+  }
 
-  void setEventId(Long eventId);
+  public Ticket(Long id, Long eventId, Long userId, int place, Category category) {
+    this.id = id;
+    this.eventId = eventId;
+    this.userId = userId;
+    this.place = place;
+    this.category = category;
+  }
 
-  Long getUserId();
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-  void setUserId(Long userId);
+  @Override
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-  Category getCategory();
+  @Override
+  public Long getEventId() {
+    return eventId;
+  }
 
-  void setCategory(Category category);
+  @Override
+  public void setEventId(Long eventId) {
+    this.eventId = eventId;
+  }
 
-  int getPlace();
+  @Override
+  public Long getUserId() {
+    return userId;
+  }
 
-  void setPlace(int place);
+  @Override
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
 
-  String toString();
+  @Override
+  public Category getCategory() {
+    return category;
+  }
 
-  enum Category {STANDARD, PREMIUM, BAR}
+  @Override
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+  @Override
+  public int getPlace() {
+    return place;
+  }
+
+  @Override
+  public void setPlace(int place) {
+    this.place = place;
+  }
+
+  @Override
+  public String toString() {
+    return "Ticket: { " +
+        "id=" + id +
+        ", eventId='" + eventId + '\'' +
+        ", userId='" + userId + '\'' +
+        ", place='" + place + '\'' +
+        ", category='" + category + '\'' +
+        " }";
+  }
 }

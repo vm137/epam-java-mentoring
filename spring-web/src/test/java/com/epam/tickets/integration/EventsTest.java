@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.Event;
-import com.epam.tickets.model.dto.EventImpl;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.junit.Before;
@@ -26,7 +25,7 @@ public class EventsTest {
   public void createNewEventTest() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     LocalDateTime date = LocalDateTime.parse("12/02/2020 12:00", formatter);
-    Event event = new EventImpl("Poetry Week", date);
+    Event event = new Event("Poetry Week", date);
     Event createdEvent = facade.createEvent(event);
 
     assertEquals("Poetry Week", createdEvent.getTitle());
@@ -37,7 +36,7 @@ public class EventsTest {
   public void getEventByIdTest() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     LocalDateTime date = LocalDateTime.parse("01/04/2021 19:00", formatter);
-    Event event = new EventImpl(1L, "Fashion Week", date);
+    Event event = new Event(1L, "Fashion Week", date);
     Event createdEvent = facade.createEvent(event);
     Long createdEventId = createdEvent.getId();
     Event eventById = facade.getEventById(createdEventId);
