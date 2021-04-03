@@ -25,6 +25,6 @@ public class TicketDaoImpl implements TicketDao {
 
   @Override
   public void deleteTicketById(Long id) throws InvalidTicketException {
-    commonStorage.deleteTicket(id);
+    commonStorage.deleteTicketById(id);
   }
 }

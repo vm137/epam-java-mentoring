@@ -20,7 +20,7 @@ public class EventDaoImpl implements EventDao {
 
   @Override
   public Event getEventById(Long id) {
-    return commonStorage.getEvent(id);
+    return commonStorage.getEventById(id);
   }
 
   @Override
@@ -35,6 +35,6 @@ public class EventDaoImpl implements EventDao {
 
   @Override
   public void deleteEventById(Long id) {
-    commonStorage.deleteEvent(id);
+    commonStorage.deleteEventById(id);
   }
 }
