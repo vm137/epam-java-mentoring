@@ -51,6 +51,11 @@
       <groupId>org.thymeleaf</groupId>
       <version>3.0.12.RELEASE</version>
     </dependency>
+    <dependency>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <groupId>org.thymeleaf</groupId>
+      <version>3.0.12.RELEASE</version>
+    </dependency>
 <!--    Servlet-->
     <dependency>
       <artifactId>javax.servlet-api</artifactId>

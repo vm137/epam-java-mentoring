@@ -4,10 +4,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://www.springframework.org/schema/beans"
   xmlns:util="http://www.springframework.org/schema/util"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd
-  http://www.springframework.org/schema/util
-  https://www.springframework.org/schema/util/spring-util.xsd">
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
   <bean id="user1" class="com.epam.tickets.model.dto.User">
     <constructor-arg name="id" value="10" type="java.lang.Long"/>
@@ -23,8 +21,8 @@
 
   <util:map id="userStorage" map-class="java.util.HashMap"
     key-type="java.lang.Long" value-type="com.epam.tickets.model.dto.User">
-    <entry key="20" value-ref="user1"/>
-    <entry key="21" value-ref="user2"/>
+    <entry key="1" value-ref="user1"/>
+    <entry key="2" value-ref="user2"/>
   </util:map>
 
 <!--  events-->
@@ -37,14 +35,14 @@
 
   <bean id="event2" class="com.epam.tickets.model.dto.Event">
     <constructor-arg name="id" value="2" type="java.lang.Long"/>
-    <constructor-arg name="title" value="Comedy Festival" type="java.lang.String"/>
+    <constructor-arg name="title" value="Comedy Week" type="java.lang.String"/>
     <constructor-arg name="dateText" value="10/06/2021 12:00" type="java.lang.String"/>
   </bean>
 
   <util:map id="eventStorage" map-class="java.util.HashMap"
     key-type="java.lang.Long" value-type="com.epam.tickets.model.dto.Event">
-    <entry key="20" value-ref="event1"/>
-    <entry key="21" value-ref="event2"/>
+    <entry key="1" value-ref="event1"/>
+    <entry key="2" value-ref="event2"/>
   </util:map>
 
 <!--  tickets-->
@@ -67,8 +65,8 @@
 
   <util:map id="ticketStorage" map-class="java.util.HashMap"
     key-type="java.lang.Long" value-type="com.epam.tickets.model.dto.Ticket">
-    <entry key="20" value-ref="ticket1"/>
-    <entry key="21" value-ref="ticket2"/>
+    <entry key="1" value-ref="ticket1"/>
+    <entry key="2" value-ref="ticket2"/>
   </util:map>
 
 </beans>
