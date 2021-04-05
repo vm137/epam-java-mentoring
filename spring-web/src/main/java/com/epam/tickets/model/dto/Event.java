@@ -20,6 +20,14 @@ public class Event implements EventI {
     this.date = date;
   }
 
+  public Event(Long id, String title, String dateText) {
+    this.id = id;
+    this.title = title;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    this.date = LocalDateTime.parse(dateText, formatter);
+  }
+
   @Override
   public Long getId() {
     return id;

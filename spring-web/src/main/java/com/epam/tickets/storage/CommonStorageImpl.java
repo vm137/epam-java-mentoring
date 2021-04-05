@@ -24,11 +24,19 @@ public class CommonStorageImpl implements CommonStorage {
   private final AtomicLong ticketCounter = new AtomicLong(START_INDEX);
 
   private Map<Long, User> userStorage = new HashMap<>();
-  private final Map<Long, Event> eventStorage = new HashMap<>();
-  private final Map<Long, Ticket> ticketStorage = new HashMap<>();
+  private Map<Long, Event> eventStorage = new HashMap<>();
+  private Map<Long, Ticket> ticketStorage = new HashMap<>();
 
   public void setUserStorage(Map<Long, User> userStorage) {
     this.userStorage = userStorage;
+  }
+
+  public void setEventStorage(Map<Long, Event> eventStorage) {
+    this.eventStorage = eventStorage;
+  }
+
+  public void setTicketStorage(Map<Long, Ticket> ticketStorage) {
+    this.ticketStorage = ticketStorage;
   }
 
 // User
@@ -53,7 +61,7 @@ public class CommonStorageImpl implements CommonStorage {
   @Override
   public User getUserById(Long id) throws InvalidUserException {
     if (!userStorage.containsKey(id)) {
-      String msg = String.format("Cannot retrieve the  user with id: %d, user doesn't exist.", id);
+      String msg = String.format("Cannot retrieve the user with id: %d, user doesn't exist.", id);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }

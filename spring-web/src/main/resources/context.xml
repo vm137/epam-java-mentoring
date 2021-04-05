@@ -18,6 +18,8 @@
 
   <bean class="com.epam.tickets.storage.CommonStorageImpl" id="commonStorage">
     <property name="userStorage" ref="userStorage"/>
+    <property name="eventStorage" ref="eventStorage"/>
+    <property name="ticketStorage" ref="ticketStorage"/>
   </bean>
 
   <bean class="com.epam.tickets.facade.BookingFacadeImpl" id="facade">
