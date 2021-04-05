@@ -20,33 +20,35 @@ public class UsersController {
 
   @GetMapping("/")
   public String infoPage(ModelMap model) {
-    model.addAttribute("message", "User informatin page");
-    return "users-template";
+    model.addAttribute("message", "User information page");
+    return "users/users-info";
   }
 
   @GetMapping("/add")
   public String addUser(ModelMap model,
       @RequestParam(required = false, defaultValue = "name") String name,
       @RequestParam(required = false, defaultValue = "email") String email) throws InvalidUserException {
-
     User user = new User(name, email);
     User createdUser = facade.createUser(user);
-    model.addAttribute("message", "User created: " + createdUser.toString());
-    return "users-create-template";
+    model.addAttribute("message", "User created");
+    model.addAttribute("user", createdUser);
+    return "users/show-user";
   }
 
   @GetMapping("/getById")
   public String getUserById(ModelMap model, @RequestParam Long id) throws InvalidUserException {
     User user = facade.getUserById(id);
-    model.addAttribute("message", "User found: " + user.toString());
-    return "users-template";
+    model.addAttribute("message", "User found by id: " + id);
+    model.addAttribute("user", user);
+    return "users/show-user";
   }
 
   @GetMapping("/getByEmail")
   public String getUserByEmail(ModelMap model, @RequestParam String email) throws InvalidUserException {
     User user = facade.getUserByEmail(email);
-    model.addAttribute("message", "User found: " + user.toString());
-    return "users-template";
+    model.addAttribute("message", "User found by email: " + email);
+    model.addAttribute("user", user);
+    return "users/users-info";
   }
 
   @GetMapping("/getByName")
@@ -58,7 +60,7 @@ public class UsersController {
     List<User> usersByName = facade.getUsersByName(name, pageSize, pageNum);
     String message = "Users found by name: " + usersByName;
     model.addAttribute("message", message);
-    return "users-template";
+    return "users/users-template";
   }
 
   @GetMapping("/update")
@@ -69,13 +71,13 @@ public class UsersController {
     User user = new User(userId, userName, userEmail);
     facade.updateUser(user);
     model.addAttribute("message", "User is updated");
-    return "users-template";
+    return "users/users-info";
   }
 
   @GetMapping("/delete")
   public String deleteUser(ModelMap model, @RequestParam Long userId) throws InvalidUserException {
     facade.deleteUserById(userId);
     model.addAttribute("message", "User deleted");
-    return "users-template";
+    return "users/users-info";
   }
 }
