@@ -149,4 +149,10 @@ public interface BookingFacade {
    * @param ticketId Ticket id.
    */
   void cancelTicket(Long ticketId) throws InvalidTicketException;
+
+  /**
+   * Get all available events
+   * @return List of events
+   */
+  List<Event> getAllEvents();
 }

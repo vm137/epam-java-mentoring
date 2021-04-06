@@ -112,6 +112,11 @@ public class BookingFacadeImpl implements BookingFacade {
     eventDao.deleteEventById(eventId);
   }
 
+  @Override
+  public List<Event> getAllEvents() {
+    return eventService.getAllEvents();
+  }
+
   // Tickets
 
   @Override
