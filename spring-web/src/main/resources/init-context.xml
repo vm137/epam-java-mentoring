@@ -36,7 +36,7 @@
   <bean id="event2" class="com.epam.tickets.model.dto.Event">
     <constructor-arg name="id" value="2" type="java.lang.Long"/>
     <constructor-arg name="title" value="Comedy Week" type="java.lang.String"/>
-    <constructor-arg name="dateText" value="10/06/2021 12:00" type="java.lang.String"/>
+    <constructor-arg name="dateText" value="12/02/2020 12:00" type="java.lang.String"/>
   </bean>
 
   <util:map id="eventStorage" map-class="java.util.HashMap"
