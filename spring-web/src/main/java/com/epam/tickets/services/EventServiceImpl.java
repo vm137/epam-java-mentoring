@@ -36,6 +36,11 @@ public class EventServiceImpl implements EventService {
         .collect(Collectors.toList());
   }
 
+  @Override
+  public List<Event> getAllEvents() {
+    return eventDao.getAllEvents();
+  }
+
   public void setEventDao(EventDao eventDao) {
     this.eventDao = eventDao;
   }
