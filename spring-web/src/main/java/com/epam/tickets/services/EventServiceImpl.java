@@ -17,6 +17,11 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  public Event getEventById(Long id) {
+    return eventDao.getEventById(id);
+  }
+
+  @Override
   public List<Event> getEventsByTitle(String title, int pageSize, int pageNum) {
     List<Event> allEvents = eventDao.getAllEvents();
     return allEvents.stream()

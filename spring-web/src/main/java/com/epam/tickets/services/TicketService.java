@@ -15,5 +15,7 @@ public interface TicketService {
 
   List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
 
+  List<Ticket> getAllTickets();
+
   void cancelTicket(Long ticketId) throws InvalidTicketException;
 }

@@ -8,6 +8,8 @@ public interface UserService {
 
   User createUser(String name, String email) throws InvalidUserException;
 
+  User getUserById(Long id) throws InvalidUserException;
+
   User getUserByEmail(String email) throws InvalidUserException;
 
   List<User> getUsersByName(String name, int pageSize, int pageNum);

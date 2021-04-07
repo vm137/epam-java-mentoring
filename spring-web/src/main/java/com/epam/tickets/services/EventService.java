@@ -8,6 +8,8 @@ public interface EventService {
 
   Event createEvent(String title, LocalDateTime date);
 
+  Event getEventById(Long id);
+
   List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
 
   List<Event> getEventsForDay(LocalDateTime day, int pageSize, int pageNum);

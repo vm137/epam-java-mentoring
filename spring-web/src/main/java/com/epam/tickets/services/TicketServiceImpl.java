@@ -42,6 +42,11 @@ public class TicketServiceImpl implements TicketService {
   }
 
   @Override
+  public List<Ticket> getAllTickets() {
+    return ticketDao.getAllTickets();
+  }
+
+  @Override
   public void cancelTicket(Long ticketId) throws InvalidTicketException {
     ticketDao.deleteTicketById(ticketId);
   }

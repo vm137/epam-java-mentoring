@@ -16,6 +16,11 @@ public class UserServiceImpl implements UserService {
     return userDao.createUser(user);
   }
 
+  @Override
+  public User getUserById(Long id) throws InvalidUserException {
+    return userDao.getUserById(id);
+  }
+
   public User getUserByEmail(String email) throws InvalidUserException {
     List<User> allUsers = userDao.getAllUsers();
     return allUsers.stream()
