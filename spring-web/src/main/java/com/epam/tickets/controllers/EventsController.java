@@ -1,11 +1,13 @@
 package com.epam.tickets.controllers;
 
 import com.epam.tickets.exceptions.InvalidEventException;
+import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacade;
 import com.epam.tickets.model.dto.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,12 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/events")
@@ -28,6 +32,17 @@ public class EventsController {
   BookingFacade facade;
 
   private static final Logger logger = LogManager.getLogger(EventsController.class);
+
+  @ExceptionHandler({ InvalidEventException.class, InvalidUserException.class })
+  public ModelAndView handleException(HttpServletRequest req, Exception ex) {
+    logger.info("InvalidEventException.class");
+    ModelAndView mav = new ModelAndView();
+    mav.addObject("exception", ex);
+    mav.addObject("message", "Events Controller Error");
+    mav.addObject("url", req.getRequestURL());
+    mav.setViewName("error");
+    return mav;
+  }
 
   @GetMapping("/")
   public String getEvents(ModelMap model,
@@ -51,7 +66,7 @@ public class EventsController {
   }
 
   @GetMapping("/{id}")
-  public String showEvent(ModelMap model, @PathVariable Long id) {
+  public String showEvent(ModelMap model, @PathVariable Long id) throws InvalidEventException {
     model.addAttribute("message", "Event Information");
     Event event = facade.getEventById(id);
     model.addAttribute("event", event);

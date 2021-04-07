@@ -19,7 +19,7 @@ public class EventDaoImpl implements EventDao {
   }
 
   @Override
-  public Event getEventById(Long id) {
+  public Event getEventById(Long id) throws InvalidEventException {
     return commonStorage.getEventById(id);
   }
 

@@ -2,6 +2,7 @@ package com.epam.tickets.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.facade.BookingFacadeImpl;
 import com.epam.tickets.model.dto.Event;
 import java.time.LocalDateTime;
@@ -33,7 +34,7 @@ public class EventsTest {
   }
 
   @Test
-  public void getEventByIdTest() {
+  public void getEventByIdTest() throws InvalidEventException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     LocalDateTime date = LocalDateTime.parse("01/04/2021 19:00", formatter);
     Event event = new Event(1L, "Fashion Week", date);

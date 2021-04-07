@@ -22,7 +22,7 @@ public interface CommonStorage {
 
   Event addEvent(Event event);
 
-  Event getEventById(Long id);
+  Event getEventById(Long id) throws InvalidEventException;
 
   List<Event> getAllEvents();
 

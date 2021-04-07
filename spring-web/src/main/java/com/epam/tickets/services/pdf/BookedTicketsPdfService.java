@@ -1,5 +1,6 @@
 package com.epam.tickets.services.pdf;
 
+import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.services.EventService;
@@ -91,7 +92,7 @@ public class BookedTicketsPdfService {
       document.add(table);
 
       document.close();
-    } catch (DocumentException | InvalidUserException ex) {
+    } catch (DocumentException | InvalidUserException | InvalidEventException ex) {
       logger.error("PDF creation error");
     }
 

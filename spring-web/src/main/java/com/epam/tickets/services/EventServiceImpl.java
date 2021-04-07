@@ -1,5 +1,6 @@
 package com.epam.tickets.services;
 
+import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.model.dao.EventDao;
 import com.epam.tickets.model.dto.Event;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event getEventById(Long id) {
+  public Event getEventById(Long id) throws InvalidEventException {
     return eventDao.getEventById(id);
   }
 

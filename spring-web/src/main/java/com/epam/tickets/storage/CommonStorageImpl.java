@@ -105,7 +105,12 @@ public class CommonStorageImpl implements CommonStorage {
   }
 
   @Override
-  public Event getEventById(Long id) {
+  public Event getEventById(Long id) throws InvalidEventException {
+    if (!eventStorage.containsKey(id)) {
+      String msg = String.format("Cannot find the Event with id: %d.", id);
+      logger.error(msg);
+      throw new InvalidEventException(msg);
+    }
     return eventStorage.get(id);
   }
 

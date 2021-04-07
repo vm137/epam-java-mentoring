@@ -83,7 +83,7 @@ public class BookingFacadeImpl implements BookingFacade {
   // Events
 
   @Override
-  public Event getEventById(Long eventId) {
+  public Event getEventById(Long eventId) throws InvalidEventException {
     return eventDao.getEventById(eventId);
   }
 
