@@ -4,24 +4,48 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacade;
 import com.epam.tickets.model.dto.User;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UsersController {
 
   @Autowired
   BookingFacade facade;
 
   @GetMapping("/")
-  public String infoPage(ModelMap model) {
-    model.addAttribute("message", "User information page");
-    return "users/users-info";
+  public String getUser(ModelMap model,
+      @RequestParam(required = false, defaultValue = "") String name,
+      @RequestParam(required = false, defaultValue = "") String email) throws InvalidUserException {
+    if (StringUtils.isNotEmpty(name)) {
+      List<User> users = facade.getUsersByName(name, 10, 0);
+      model.addAttribute("users", users);
+      return "users/show-users";
+    } else if (StringUtils.isNotEmpty(email)) {
+      User user = facade.getUserByEmail(email);
+      model.addAttribute("user", user);
+      return "users/show-user";
+    } else {
+      model.addAttribute("message", "User not found.");
+      return "info/show-info";
+    }
+  }
+
+  @GetMapping("/{id}")
+  public String getUserById(ModelMap model, @PathVariable Long id) throws InvalidUserException {
+    User user = facade.getUserById(id);
+    model.addAttribute("message", "User found by id: " + id);
+    model.addAttribute("user", user);
+    return "users/show-user";
   }
 
   @GetMapping("/add")
@@ -35,49 +59,21 @@ public class UsersController {
     return "users/show-user";
   }
 
-  @GetMapping("/getById")
-  public String getUserById(ModelMap model, @RequestParam Long id) throws InvalidUserException {
-    User user = facade.getUserById(id);
-    model.addAttribute("message", "User found by id: " + id);
-    model.addAttribute("user", user);
-    return "users/show-user";
-  }
-
-  @GetMapping("/getByEmail")
-  public String getUserByEmail(ModelMap model, @RequestParam String email) throws InvalidUserException {
-    User user = facade.getUserByEmail(email);
-    model.addAttribute("message", "User found by email: " + email);
-    model.addAttribute("user", user);
-    return "users/users-info";
-  }
-
-  @GetMapping("/getByName")
-  public String getUsersByName(ModelMap model,
-      @RequestParam String name,
-      @RequestParam(required = false, defaultValue = "10") int pageSize,
-      @RequestParam(required = false, defaultValue = "0") int pageNum) {
-
-    List<User> usersByName = facade.getUsersByName(name, pageSize, pageNum);
-    String message = "Users found by name: " + usersByName;
-    model.addAttribute("message", message);
-    return "users/users-template";
-  }
-
-  @GetMapping("/update")
-  public String updaetUser(ModelMap model,
-      @RequestParam Long userId,
+  @PatchMapping("/{id}")
+  public String updateUser(ModelMap model,
+      @PathVariable Long id,
       @RequestParam String userName,
       @RequestParam String userEmail) throws InvalidUserException {
-    User user = new User(userId, userName, userEmail);
+    User user = new User(id, userName, userEmail);
     facade.updateUser(user);
     model.addAttribute("message", "User is updated");
-    return "users/users-info";
+    return "users/show-users";
   }
 
-  @GetMapping("/delete")
-  public String deleteUser(ModelMap model, @RequestParam Long userId) throws InvalidUserException {
-    facade.deleteUserById(userId);
+  @DeleteMapping("/{id}")
+  public String deleteUser(ModelMap model, @PathVariable Long id) throws InvalidUserException {
+    facade.deleteUserById(id);
     model.addAttribute("message", "User deleted");
-    return "users/users-info";
+    return "info/show-info";
   }
 }

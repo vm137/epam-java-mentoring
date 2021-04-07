@@ -8,13 +8,13 @@
   http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
   <bean id="user1" class="com.epam.tickets.model.dto.User">
-    <constructor-arg name="id" value="10" type="java.lang.Long"/>
+    <constructor-arg name="id" value="1" type="java.lang.Long"/>
     <constructor-arg name="name" value="David" type="java.lang.String"/>
     <constructor-arg name="email" value="david@mail.ru" type="java.lang.String"/>
   </bean>
 
   <bean id="user2" class="com.epam.tickets.model.dto.User">
-    <constructor-arg name="id" value="11" type="java.lang.Long"/>
+    <constructor-arg name="id" value="2" type="java.lang.Long"/>
     <constructor-arg name="name" value="Mary" type="java.lang.String"/>
     <constructor-arg name="email" value="mary@gmail.ru" type="java.lang.String"/>
   </bean>
