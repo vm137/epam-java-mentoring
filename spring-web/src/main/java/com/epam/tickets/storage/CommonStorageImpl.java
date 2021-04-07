@@ -61,7 +61,7 @@ public class CommonStorageImpl implements CommonStorage {
   @Override
   public User getUserById(Long id) throws InvalidUserException {
     if (!userStorage.containsKey(id)) {
-      String msg = String.format("Cannot retrieve the user with id: %d, user doesn't exist.", id);
+      String msg = String.format("Cannot find user with id: %d.", id);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
