@@ -1,26 +1,25 @@
--- CREATE database IF NOT EXISTS cdp;
--- CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; -- uuid generation module
+-- create database cdp;
 
 drop table if exists students;
 create table students
 (
-    student_id       integer generated always as identity
+    id       integer generated always as identity
         constraint students_pkey
             primary key,
-    first_name       varchar not null,
-    last_name        varchar not null,
+    first       varchar not null,
+    last        varchar not null,
     date_of_birth    date,
     email            varchar,
     phone            varchar,
     primary_skill    varchar,
-    created_datetime timestamp,
-    updated_datetime timestamp
+    created timestamp with time zone default now() not null,
+    updated timestamp with time zone default now() not null
 );
 
 drop table if exists subjects;
 create table subjects
 (
-    subject_id integer generated always as identity
+    id integer generated always as identity
         constraint subjects_pkey
             primary key,
     title      varchar,
@@ -31,7 +30,7 @@ create table subjects
 drop table if exists exam_results;
 create table exam_results
 (
-    exam_id    integer generated always as identity
+    id    integer generated always as identity
         constraint exam_results_pkey
             primary key,
     student_id integer not null
@@ -42,3 +41,32 @@ create table exam_results
             references subjects,
     mark       varchar not null
 );
+
+-- index
+create index name on students using hash (last);
+
+-- update timestamp function
+create or replace function update_modified_column() returns trigger
+    language plpgsql as
+$$
+BEGIN
+    NEW.updated = now();
+RETURN NEW;
+END;
+$$;
+
+create trigger update_customer_modtime
+    before update
+    on students
+    for each row
+    execute procedure update_modified_column();
+
+-- data
+insert into cdp.public.students (first, last, primary_skill)
+values ('John', 'Dow', 'programmer'),
+       ('Sofi', 'Laurent', 'singer'),
+       ('Arthur', 'Conan Doyle', 'writer');
+
+update students set first='Sofi-2', last = 'Loren-2' where id = 2;
+
+-- validation
