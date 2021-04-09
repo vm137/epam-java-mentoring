@@ -34,7 +34,7 @@ public class Application {
       stmt.executeUpdate(sql);
     }
 
-//    c. 1 20K of marks
+//    c. 20K of marks
     Random random = new Random();
     int student_code;
     int subject_code;
@@ -58,7 +58,6 @@ public class Application {
           + "(" + student_code + ", " + subject_code + ", " + mark + ");";
       stmt.executeUpdate(sql);
     }
-
     stmt.close();
     conn.close();
   }
