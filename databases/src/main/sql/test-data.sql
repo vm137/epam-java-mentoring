@@ -14,7 +14,8 @@ insert into cdp.public.subjects (code, title, tutor, hours) values
 (107, 'Compilers', 'Martin Fowler', 75),
 (404, 'Type Theory', 'Alan Turing', 55),
 (132, 'Clean Code', 'Robert Martin', 20),
-(435, 'Algorithms', 'Robert Sedgewick', 60);
+(435, 'Algorithms', 'Robert Sedgewick', 60),
+(206, 'Java 16', 'Simon Ritter', 6);
 
 insert into exam_results (student_code, subject_code, mark) values
 (101, 108, 2), (101, 205, 3), (101, 107, 1),
@@ -22,4 +23,5 @@ insert into exam_results (student_code, subject_code, mark) values
 (103, 205, 3), (103, 108, 5), (103, 404, 2),
 (104, 107, 4), (104, 108, 4), (104, 132, 4),
 (105, 205, 1), (105, 108, 1), (105, 107, 3),
-(106, 404, 2), (106, 205, 2), (106, 435, 5);
+(106, 404, 2), (106, 205, 2), (106, 435, 5),
+(102, 206, 4), (104, 206, 3), (106, 206, 5);
