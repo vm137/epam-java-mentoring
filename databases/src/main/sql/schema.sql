@@ -82,4 +82,17 @@ as $$
 $$ language sql;
 
 
--- snapshot
+-- create snapshot for following data: student_name, student_surname, subject_name, mark
+postgres=# createdb -T cdp cdp_copy
+postgres=# \c cdp_copy;
+
+CREATE TABLE snapshot_table AS (
+    select first, last, title, mark from exam_results
+    inner join students st on student_code = st.code
+    inner join subjects sb on subject_code = sb.code
+    );
+drop table students;
+drop table subjects;
+drop table exam_results;
+
+postgres=# pg_dump cdp_copy > snapshot.sql

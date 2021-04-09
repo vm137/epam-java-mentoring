@@ -35,8 +35,8 @@ public class Application {
   public static String randomString() {
     int leftLimit = 97; // 'a'
     int rightLimit = 122; // 'z'
-    int min = 5;
-    int max = 12;
+    int min = 5; // min symbols
+    int max = 12; // max symbols
 
     Random random = new Random();
     int targetStringLength = random.nextInt(max - min) + min;

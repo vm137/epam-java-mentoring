@@ -20,3 +20,8 @@ public class Configuration {
     return DriverManager.getConnection(url, props);
   }
 }
+
+
+/*
+ * https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
+ */
