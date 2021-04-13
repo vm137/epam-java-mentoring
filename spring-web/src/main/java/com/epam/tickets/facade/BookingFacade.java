@@ -5,7 +5,7 @@ import com.epam.tickets.exceptions.InvalidTicketException;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
-import com.epam.tickets.model.dto.TicketI.Category;
+import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
 import java.time.LocalDateTime;
 import java.util.List;

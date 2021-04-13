@@ -8,7 +8,7 @@ import com.epam.tickets.model.dao.TicketDao;
 import com.epam.tickets.model.dao.UserDao;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
-import com.epam.tickets.model.dto.TicketI.Category;
+import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;

@@ -6,7 +6,7 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacade;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
-import com.epam.tickets.model.dto.TicketI.Category;
+import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -25,22 +25,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TicketsController {
 
   @Autowired
-  BookingFacade facade;
+  private BookingFacade facade;
 
   private static final Logger logger = LogManager.getLogger(TicketsController.class);
 
   @GetMapping("/")
   public String getTickets(ModelMap model,
-      @RequestParam(required = false, defaultValue = "0") Long userId,
-      @RequestParam(required = false, defaultValue = "0") Long eventId)
+      @RequestParam(required = false) Long userId,
+      @RequestParam(required = false) Long eventId)
       throws InvalidUserException, InvalidEventException {
-    if (userId != 0) {
+    if (userId != null) {
       User user = facade.getUserById(userId);
       List<Ticket> bookedTickets = facade.getBookedTickets(user, 10, 0);
       model.addAttribute("message", "Requested tickets:");
       model.addAttribute("tickets", bookedTickets);
       return "tickets/show-tickets";
-    } else if (eventId != 0) {
+    } else if (eventId != null) {
       Event event = facade.getEventById(eventId);
       List<Ticket> bookedTickets = facade.getBookedTickets(event, 10, 0);
       model.addAttribute("message", "Requested tickets:");

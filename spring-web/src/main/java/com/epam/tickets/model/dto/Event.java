@@ -3,7 +3,7 @@ package com.epam.tickets.model.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event implements EventI {
+public class Event {
 
   private Long id;
   private String title;
@@ -28,32 +28,26 @@ public class Event implements EventI {
     this.date = LocalDateTime.parse(dateText, formatter);
   }
 
-  @Override
   public Long getId() {
     return id;
   }
 
-  @Override
   public void setId(Long id) {
     this.id = id;
   }
 
-  @Override
   public String getTitle() {
     return title;
   }
 
-  @Override
   public void setTitle(String title) {
     this.title = title;
   }
 
-  @Override
   public LocalDateTime getDate() {
     return date;
   }
 
-  @Override
   public void setDate(LocalDateTime date) {
     this.date = date;
   }
