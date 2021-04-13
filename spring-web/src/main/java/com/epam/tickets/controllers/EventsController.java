@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class EventsController {
 
   @Autowired
-  BookingFacade facade;
+  private BookingFacade facade;
 
   private static final Logger logger = LogManager.getLogger(EventsController.class);
 

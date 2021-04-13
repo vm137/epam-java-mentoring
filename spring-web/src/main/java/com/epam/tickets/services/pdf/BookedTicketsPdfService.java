@@ -27,13 +27,13 @@ import org.springframework.stereotype.Service;
 public class BookedTicketsPdfService {
 
   @Autowired
-  TicketService ticketService;
+  private TicketService ticketService;
 
   @Autowired
-  EventService eventService;
+  private EventService eventService;
 
   @Autowired
-  UserService userService;
+  private UserService userService;
 
   private static final Logger logger = LogManager.getLogger(BookedTicketsPdfService.class);
 

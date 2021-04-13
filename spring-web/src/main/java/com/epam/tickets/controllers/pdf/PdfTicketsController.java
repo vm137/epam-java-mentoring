@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PdfTicketsController {
 
   @Autowired
-  BookedTicketsPdfService pdfService;
+  private BookedTicketsPdfService pdfService;
 
   @GetMapping("/booked-tickets")
   public ResponseEntity<InputStreamResource> getBookedTicketsPdf() {

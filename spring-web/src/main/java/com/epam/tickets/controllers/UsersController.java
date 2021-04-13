@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UsersController {
 
   @Autowired
-  BookingFacade facade;
+  private BookingFacade facade;
 
   @GetMapping("/")
   public String getUser(ModelMap model,
