@@ -4,6 +4,7 @@ import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacade;
 import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.services.EventService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -31,9 +32,12 @@ public class EventsController {
   @Autowired
   private BookingFacade facade;
 
+  @Autowired
+  private EventService eventService;
+
   private static final Logger logger = LogManager.getLogger(EventsController.class);
 
-  @ExceptionHandler({ InvalidEventException.class, InvalidUserException.class })
+  @ExceptionHandler({InvalidEventException.class, InvalidUserException.class})
   public ModelAndView handleException(HttpServletRequest req, Exception ex) {
     logger.info("InvalidEventException.class");
     ModelAndView mav = new ModelAndView();
@@ -77,7 +81,7 @@ public class EventsController {
   public String createEvent(ModelMap model,
       @RequestParam String title,
       @RequestParam String date) {
-    Event event = new Event(title, parseDate(date));
+    Event event = eventService.createEvent(title, parseDate(date));
     Event eventCreated = facade.createEvent(event);
     String msg = String.format("Event with id:%d, title: '%s', date: %s is created.",
         eventCreated.getId(), eventCreated.getTitle(), eventCreated.getDate().toString());
