@@ -8,7 +8,7 @@ public interface EventDao {
 
   Event createEvent(Event event);
 
-  Event getEventById(Long id);
+  Event getEventById(Long id) throws InvalidEventException;
 
   List<Event> getAllEvents();
 

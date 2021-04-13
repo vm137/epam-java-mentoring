@@ -37,6 +37,6 @@ public class UserDaoImpl implements UserDao {
 
   @Override
   public void deleteUserById(Long id) throws InvalidUserException {
-    commonStorage.removeUser(id);
+    commonStorage.removeUserById(id);
   }
 }

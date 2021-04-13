@@ -5,7 +5,6 @@ import com.epam.tickets.model.dao.TicketDao;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.Ticket.Category;
-import com.epam.tickets.model.dto.TicketImpl;
 import com.epam.tickets.model.dto.User;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +15,7 @@ public class TicketServiceImpl implements TicketService {
   private TicketDao ticketDao;
 
   public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
-    Ticket ticket = new TicketImpl(userId, eventId, place, category);
+    Ticket ticket = new Ticket(userId, eventId, place, category);
     return ticketDao.addTicket(ticket);
   }
 
@@ -40,6 +39,11 @@ public class TicketServiceImpl implements TicketService {
         .skip((long) pageSize * pageNum)
         .limit(pageSize)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<Ticket> getAllTickets() {
+    return ticketDao.getAllTickets();
   }
 
   @Override

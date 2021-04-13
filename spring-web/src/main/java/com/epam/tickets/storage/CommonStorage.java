@@ -10,10 +10,6 @@ import java.util.List;
 
 public interface CommonStorage {
 
-  String USER_KEY = "user:";
-  String EVENT_KEY = "event:";
-  String TICKET_KEY = "ticket:";
-
   User addUser(User user) throws InvalidUserException;
 
   User getUserById(Long id) throws InvalidUserException;
@@ -22,25 +18,21 @@ public interface CommonStorage {
 
   void update(User user) throws InvalidUserException;
 
-  void removeUser(Long id) throws InvalidUserException;
+  void removeUserById(Long id) throws InvalidUserException;
 
   Event addEvent(Event event);
 
-  Event getEvent(Long id);
+  Event getEventById(Long id) throws InvalidEventException;
 
   List<Event> getAllEvents();
 
   void updateEvent(Event event) throws InvalidEventException;
 
-  void deleteEvent(Long id);
+  void deleteEventById(Long id);
 
   Ticket addTicket(Ticket ticket);
 
   List<Ticket> getAllTickets();
 
-  void deleteTicket(Long id) throws InvalidTicketException;
-
-  void setInitialStorageFilePath(String initialStorageFilePath);
-
-  void initStorage();
+  void deleteTicketById(Long id) throws InvalidTicketException;
 }

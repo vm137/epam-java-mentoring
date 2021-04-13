@@ -83,7 +83,7 @@ public class BookingFacadeImpl implements BookingFacade {
   // Events
 
   @Override
-  public Event getEventById(Long eventId) {
+  public Event getEventById(Long eventId) throws InvalidEventException {
     return eventDao.getEventById(eventId);
   }
 
@@ -110,6 +110,11 @@ public class BookingFacadeImpl implements BookingFacade {
   @Override
   public void deleteEventById(Long eventId) {
     eventDao.deleteEventById(eventId);
+  }
+
+  @Override
+  public List<Event> getAllEvents() {
+    return eventService.getAllEvents();
   }
 
   // Tickets

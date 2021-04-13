@@ -17,7 +17,7 @@ public interface BookingFacade {
    *
    * @return Event.
    */
-  Event getEventById(Long eventId);
+  Event getEventById(Long eventId) throws InvalidEventException;
 
   /**
    * Get list of events by matching title. Title is matched using 'contains' approach. In case
@@ -149,4 +149,10 @@ public interface BookingFacade {
    * @param ticketId Ticket id.
    */
   void cancelTicket(Long ticketId) throws InvalidTicketException;
+
+  /**
+   * Get all available events
+   * @return List of events
+   */
+  List<Event> getAllEvents();
 }

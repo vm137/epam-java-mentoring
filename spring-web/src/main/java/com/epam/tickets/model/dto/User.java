@@ -1,19 +1,54 @@
 package com.epam.tickets.model.dto;
 
-public interface User {
+public class User {
 
-  Long getId();
+  private Long id;
+  private String name;
+  private String email;
 
-  void setId(Long id);
+  public User() {
+  }
 
-  String getName();
+  public User(String name, String email) {
+    this.name = name;
+    this.email = email;
+  }
 
-  void setName(String name);
+  public User(Long id, String name, String email) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+  }
 
-  String getEmail();
+  public Long getId() {
+    return id;
+  }
 
-  void setEmail(String email);
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
   @Override
-  String toString();
+  public String toString() {
+    return "User: { " +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", email='" + email + '\'' + " }";
+  }
 }

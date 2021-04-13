@@ -6,25 +6,40 @@ import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.model.dto.Event;
 import com.epam.tickets.model.dto.Ticket;
 import com.epam.tickets.model.dto.User;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CommonStorageImpl implements CommonStorage {
 
-  private final static long START_INDEX = 100;
   private static final Logger logger = LogManager.getLogger(CommonStorageImpl.class);
-  private final AtomicLong userCounter = new AtomicLong(START_INDEX - 1);
-  private final AtomicLong eventCounter = new AtomicLong(START_INDEX - 1);
-  private final AtomicLong ticketCounter = new AtomicLong(START_INDEX - 1);
-  private String initialStorageFilePath;
-  private Map<String, Object> storage = new HashMap<>();
 
-  // User
+  private static final long START_INDEX = 99;
+  private final AtomicLong userCounter = new AtomicLong(START_INDEX);
+  private final AtomicLong eventCounter = new AtomicLong(START_INDEX);
+  private final AtomicLong ticketCounter = new AtomicLong(START_INDEX);
+
+  private Map<Long, User> userStorage = new HashMap<>();
+  private Map<Long, Event> eventStorage = new HashMap<>();
+  private Map<Long, Ticket> ticketStorage = new HashMap<>();
+
+  public void setUserStorage(Map<Long, User> userStorage) {
+    this.userStorage = userStorage;
+  }
+
+  public void setEventStorage(Map<Long, Event> eventStorage) {
+    this.eventStorage = eventStorage;
+  }
+
+  public void setTicketStorage(Map<Long, Ticket> ticketStorage) {
+    this.ticketStorage = ticketStorage;
+  }
+
+// User
 
   @Override
   public User addUser(User user) throws InvalidUserException {
@@ -32,61 +47,51 @@ public class CommonStorageImpl implements CommonStorage {
     String email = user.getEmail();
     user.setId(id);
 
-    boolean emailExists = storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(USER_KEY))
-        .anyMatch(entry -> (email.equalsIgnoreCase(((User) entry.getValue()).getEmail())));
-
+    boolean emailExists = userStorage.entrySet().stream()
+        .anyMatch(entry -> (email.equalsIgnoreCase((entry.getValue()).getEmail())));
     if (emailExists) {
-      String msg = "User with the same email already exists.";
+      String msg = String.format("User with email: %s already exists.", email);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
-
-    String key = getKey(USER_KEY, id);
-    storage.put(key, user);
-    return (User) storage.get(key);
+    userStorage.put(id, user);
+    return userStorage.get(id);
   }
 
   @Override
   public User getUserById(Long id) throws InvalidUserException {
-    String key = getKey(USER_KEY, id);
-    if (!storage.containsKey(key)) {
-      String msg = String.format("Cannot retrieve the  user with id: %d, user doesn't exist.", id);
+    if (!userStorage.containsKey(id)) {
+      String msg = String.format("Cannot find user with id: %d.", id);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
-    return (User) storage.get(USER_KEY + id);
+    return userStorage.get(id);
   }
 
   @Override
   public List<User> getAllUsers() {
-    return storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(USER_KEY))
-        .map(entry -> (User) entry.getValue())
-        .collect(Collectors.toList());
+    return new ArrayList<>(userStorage.values());
   }
 
   @Override
   public void update(User user) throws InvalidUserException {
     Long id = user.getId();
-    String key = getKey(USER_KEY, id);
-    if (!storage.containsKey(key)) {
+    if (!userStorage.containsKey(id)) {
       String msg = String.format("Cannot update user with id: %d, user doesn't exist.", id);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
-    storage.put(USER_KEY + id, user);
+    userStorage.put(id, user);
   }
 
   @Override
-  public void removeUser(Long id) throws InvalidUserException {
-    String key = getKey(USER_KEY, id);
-    if (!storage.containsKey(key)) {
+  public void removeUserById(Long id) throws InvalidUserException {
+    if (!userStorage.containsKey(id)) {
       String msg = String.format("Cannot delete user with id: %d, user doesn't exist.", id);
       logger.error(msg);
       throw new InvalidUserException(msg);
     }
-    storage.remove(USER_KEY + id);
+    userStorage.remove(id);
   }
 
   // Event
@@ -95,42 +100,40 @@ public class CommonStorageImpl implements CommonStorage {
   public Event addEvent(Event event) {
     Long id = eventCounter.incrementAndGet();
     event.setId(id);
-    String key = getKey(EVENT_KEY, id);
-    storage.put(key, event);
-    return (Event) storage.get(key);
+    eventStorage.put(id, event);
+    return eventStorage.get(id);
   }
 
   @Override
-  public Event getEvent(Long id) {
-    String key = getKey(EVENT_KEY, id);
-    return (Event) storage.get(key);
+  public Event getEventById(Long id) throws InvalidEventException {
+    if (!eventStorage.containsKey(id)) {
+      String msg = String.format("Cannot find the Event with id: %d.", id);
+      logger.error(msg);
+      throw new InvalidEventException(msg);
+    }
+    return eventStorage.get(id);
   }
 
   @Override
   public List<Event> getAllEvents() {
-    return storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(EVENT_KEY))
-        .map(entry -> (Event) entry.getValue())
-        .collect(Collectors.toList());
+    return new ArrayList<>(eventStorage.values());
   }
 
   @Override
   public void updateEvent(Event event) throws InvalidEventException {
     Long id = event.getId();
-    String key = getKey(EVENT_KEY, id);
-    if (!storage.containsKey(key)) {
+    if (!eventStorage.containsKey(id)) {
       String msg = String.format("Cannot update event with id:%d because it doesn't exist.", id);
       logger.error(msg);
       throw new InvalidEventException(msg);
     }
-    storage.put(key, event);
+    eventStorage.put(id, event);
   }
 
   @Override
-  public void deleteEvent(Long id) {
-    String key = getKey(EVENT_KEY, id);
-    if (storage.containsKey(key)) {
-      storage.remove(key);
+  public void deleteEventById(Long id) {
+    if (eventStorage.containsKey(id)) {
+      eventStorage.remove(id);
     } else {
       String msg = String.format("Can't remove event with id:%d because it doesn't exist.", id);
       logger.error(msg);
@@ -143,43 +146,22 @@ public class CommonStorageImpl implements CommonStorage {
   public Ticket addTicket(Ticket ticket) {
     Long id = ticketCounter.incrementAndGet();
     ticket.setId(id);
-    String key = getKey(EVENT_KEY, id);
-    storage.put(key, ticket);
-    return (Ticket) storage.get(key);
+    ticketStorage.put(id, ticket);
+    return ticketStorage.get(id);
   }
 
   @Override
   public List<Ticket> getAllTickets() {
-    return storage.entrySet().stream()
-        .filter(entry -> entry.getKey().startsWith(TICKET_KEY))
-        .map(entry -> (Ticket) entry.getValue())
-        .collect(Collectors.toList());
+    return new ArrayList<>(ticketStorage.values());
   }
 
   @Override
-  public void deleteTicket(Long id) throws InvalidTicketException {
-    String key = getKey(EVENT_KEY, id);
-    if (!storage.containsKey(key)) {
+  public void deleteTicketById(Long id) throws InvalidTicketException {
+    if (!ticketStorage.containsKey(id)) {
       String msg = String.format("Can not delete ticket with id:%d because it doesn't exist", id);
       logger.error(msg);
       throw new InvalidTicketException(msg);
     }
-    storage.remove(key);
-  }
-
-  // Service methods
-
-  private String getKey(String prefix, Long id) {
-    return prefix + id;
-  }
-
-  @Override
-  public void setInitialStorageFilePath(String initialStorageFilePath) {
-    this.initialStorageFilePath = initialStorageFilePath;
-  }
-
-  @Override
-  public void initStorage() {
-    storage = StorageHelper.readInitialStorage(initialStorageFilePath);
+    ticketStorage.remove(id);
   }
 }

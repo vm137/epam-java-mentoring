@@ -9,10 +9,10 @@
    implement simple thymeleaf templates for displaying results. No sophisticated markup required,
    just the fact that you know how to implement the chain:
    ModelAndView à Resolver à ThymeleafTemplate à Html page in the browser. (1 point)
-   4. For the following facade method:
-      List<Ticket> getBookedTickets(User user, int pageSize, int pageNum); Implement alternative
-      controller, which will be mapped on header value "accept=application/pdf" and return PDF
-      version of booked tickets list. (0.5 point)
+4. For the following facade method:
+   List<Ticket> getBookedTickets(User user, int pageSize, int pageNum); Implement alternative
+   controller, which will be mapped on header value "accept=application/pdf" and return PDF version
+   of booked tickets list. (0.5 point)
 5. Implement batch creation of ticket bookings from XML file. Source file example:
    <tickets>
    <ticket user="..." event="..." category="..." place="..."/>
@@ -34,5 +34,7 @@ Extra mile(optional, should be done when previous items are complete) (2 points)
 • Update your application using spring boot instead of the current implementation.  
 • Modify the method implemented in the point 5. Make facade method accept some input stream, MVC
 controller for this method should handle multipart file upload and pass the file byte stream to the
-facade method. 
- 
+facade method.
+
+links:
+https://memorynotfound.com/spring-mvc-xml-configuration-example/
