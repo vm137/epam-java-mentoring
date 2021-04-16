@@ -1,4 +1,5 @@
 create database cdp;
+# \c cdp -- use db
 
 drop table if exists students;
 create table students
@@ -10,7 +11,7 @@ create table students
     last          varchar                                not null,
     date_of_birth date,
     email         varchar,
-    phone         varchar,
+    phone         integer,
     primary_skill varchar,
     created       timestamp with time zone default now() not null,
     updated       timestamp with time zone default now() not null
@@ -39,6 +40,8 @@ create table exam_results
             references subjects (code),
     mark         integer not null
 );
+
+# \dt -- show tables
 
 -- index
 create index name on students using hash (last);

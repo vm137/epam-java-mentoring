@@ -9,7 +9,8 @@
 4. Try different kind of indexes (B-tree, Hash, GIN, GIST) for your fields. Analyze performance for
    each of the indexes (use ANALYZE and EXPLAIN). Check the size of the index. Try to set index
    before inserting test data and after. What was the time? Test data:
-   a. 100K of users b. 1K of subjects c. 1 million of marks Test queries:
+   a. 100K of users b. 1K of subjects c. 1 million of marks 
+   Test queries:
    a. Find user by name (exact match)
    b. Find user by surname (partial match)
    c. Find user by phone number (partial match)
