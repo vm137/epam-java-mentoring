@@ -18,6 +18,7 @@
   <modules>
     <module>spring-intro</module>
     <module>spring-web</module>
+    <module>spring-data</module>
   </modules>
 
   <dependencies>
