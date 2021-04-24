@@ -1,0 +1,19 @@
+### add event
+POST http://localhost:8080/events/add/
+Content-Type: application/x-www-form-urlencoded
+
+title=Fashion Week&date=16/05/2021 12:00
+
+### get all events
+GET http://localhost:8080/events/all
+
+### delete event
+DELETE http://localhost:8080/events/1
+
+### update event
+PATCH http://localhost:8080/events/23
+Content-Type: application/x-www-form-urlencoded
+
+title=Poetry Show&date=23/01/2021 10:00
+
+###
