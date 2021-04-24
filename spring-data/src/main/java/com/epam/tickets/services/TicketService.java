@@ -10,9 +10,11 @@ public interface TicketService {
 
   Ticket bookTicket(Long userId, Long eventId, int place, Category category);
 
-  List<Ticket> getBookedTickets(User user, int pageSize, int pageNum);
+  Ticket getTicketById(Long id);
 
-  List<Ticket> getBookedTickets(Event event, int pageSize, int pageNum);
+  List<Ticket> getBookedTickets(User user);
+
+  List<Ticket> getBookedTickets(Event event);
 
   List<Ticket> getAllTickets();
 
