@@ -19,6 +19,7 @@ public class Ticket {
   private Long userId;
   private int place;
   private Category category;
+  private int price;
 
   public Ticket() {
   }
