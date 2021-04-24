@@ -35,8 +35,9 @@ public class TicketsController {
       @RequestParam Long eventId,
       @RequestParam Long userId,
       @RequestParam int place,
-      @RequestParam Category category) {
-    Ticket ticket = ticketService.bookTicket(eventId, userId, place, category);
+      @RequestParam Category category,
+      @RequestParam int price) {
+    Ticket ticket = ticketService.bookTicket(eventId, userId, place, category, price);
     model.addAttribute("message", "Ticket is created");
     model.addAttribute("ticket", ticket);
     return "tickets/show-ticket";

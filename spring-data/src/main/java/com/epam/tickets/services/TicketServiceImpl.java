@@ -18,9 +18,13 @@ public class TicketServiceImpl implements TicketService {
   @Autowired
   TicketsRepository ticketsRepository;
 
+  @Autowired
+  UserAccountService userAccountService;
+
   @Override
-  public Ticket bookTicket(Long eventId, Long userId, int place, Category category) {
+  public Ticket bookTicket(Long eventId, Long userId, int place, Category category, int price) {
     Ticket ticket = new Ticket(eventId, userId, place, category);
+    userAccountService.withdraw(userId, price);
     return ticketsRepository.save(ticket);
   }
 

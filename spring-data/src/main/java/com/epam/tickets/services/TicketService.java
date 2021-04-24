@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TicketService {
 
-  Ticket bookTicket(Long userId, Long eventId, int place, Category category);
+  Ticket bookTicket(Long userId, Long eventId, int place, Category category, int price);
 
   Ticket getTicketById(Long id);
 
