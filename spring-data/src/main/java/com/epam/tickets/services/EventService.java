@@ -10,9 +10,9 @@ public interface EventService {
 
   Event getEventById(Long id);
 
-  List<Event> getEventsByTitle(String title, int pageSize, int pageNum);
+  List<Event> getEventsByTitle(String title);
 
-  List<Event> getEventsForDay(LocalDateTime day, int pageSize, int pageNum);
+  List<Event> getEventsForDay(LocalDateTime day);
 
   List<Event> getAllEvents();
 
