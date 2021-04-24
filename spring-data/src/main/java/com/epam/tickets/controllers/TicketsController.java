@@ -32,11 +32,11 @@ public class TicketsController {
 
   @PostMapping("/add")
   public String addTicket(ModelMap model,
-      @RequestParam Long userId,
       @RequestParam Long eventId,
+      @RequestParam Long userId,
       @RequestParam int place,
       @RequestParam Category category) {
-    Ticket ticket = ticketService.bookTicket(userId, eventId, place, category);
+    Ticket ticket = ticketService.bookTicket(eventId, userId, place, category);
     model.addAttribute("message", "Ticket is created");
     model.addAttribute("ticket", ticket);
     return "tickets/show-ticket";

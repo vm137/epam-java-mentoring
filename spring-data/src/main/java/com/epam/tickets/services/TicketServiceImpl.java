@@ -6,6 +6,9 @@ import com.epam.tickets.model.dto.Ticket.Category;
 import com.epam.tickets.model.dto.User;
 import com.epam.tickets.repositories.TicketsRepository;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +19,35 @@ public class TicketServiceImpl implements TicketService {
   TicketsRepository ticketsRepository;
 
   @Override
-  public Ticket bookTicket(Long userId, Long eventId, int place, Category category) {
-    return null;
+  public Ticket bookTicket(Long eventId, Long userId, int place, Category category) {
+    Ticket ticket = new Ticket(eventId, userId, place, category);
+    return ticketsRepository.save(ticket);
   }
 
   @Override
   public Ticket getTicketById(Long id) {
-    return null;
+    Optional<Ticket> ticket = ticketsRepository.findById(id);
+    return ticket.orElse(null);
   }
 
   @Override
   public List<Ticket> getBookedTickets(User user) {
-    return null;
+    return ticketsRepository.findByUserId(user.getId());
   }
 
   @Override  public List<Ticket> getBookedTickets(Event event) {
-    return null;
+    return ticketsRepository.findByEventId(event.getId());
   }
 
   @Override
   public List<Ticket> getAllTickets() {
-    return null;
+    Iterable<Ticket> allTickets = ticketsRepository.findAll();
+    return StreamSupport.stream(allTickets.spliterator(), false)
+        .collect(Collectors.toList());
   }
 
   @Override
   public void cancelTicket(Long ticketId) {
-
+    ticketsRepository.findById(ticketId).ifPresent(ticket -> ticketsRepository.delete(ticket));
   }
 }
