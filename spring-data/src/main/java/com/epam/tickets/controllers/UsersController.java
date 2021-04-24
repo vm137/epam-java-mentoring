@@ -1,6 +1,7 @@
 package com.epam.tickets.controllers;
 
 import com.epam.tickets.model.dto.User;
+import com.epam.tickets.services.UserAccountService;
 import com.epam.tickets.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +20,9 @@ public class UsersController {
 
   @Autowired
   UserService userService;
+
+  @Autowired
+  UserAccountService userAccountService;
 
   @GetMapping("/")
   public String usersHomePage() {
@@ -40,6 +45,15 @@ public class UsersController {
     model.addAttribute("message", "User found by id: " + id);
     model.addAttribute("user", user);
     return "users/show-user";
+  }
+
+  @PostMapping("/{id}")
+  public String refillAccount(ModelMap model,
+      @PathVariable Long id,
+      @RequestParam Integer amount) {
+    userAccountService.refill(id, amount);
+    model.addAttribute("message", "User account refilled. id: " + id);
+    return "info/show-info";
   }
 
   @PatchMapping("/{id}")
