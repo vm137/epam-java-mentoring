@@ -28,7 +28,7 @@ public class Messenger {
      * @param template the template
      */
     public void sendMessage(Client client, Template template) {
-        String messageContent = templateEngine.generateMessage(template, client);
+        String messageContent = templateEngine.generateMessage(client, template);
         mailServer.send(client.getAddresses(), messageContent);
     }
 }

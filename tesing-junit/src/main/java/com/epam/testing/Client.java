@@ -1,26 +1,24 @@
 package com.epam.testing;
 
-/**
- * The type Client.
- */
+import java.util.HashMap;
+
 public class Client {
     private String addresses;
+    private HashMap<String, String> variables;
 
-    /**
-     * Gets addresses.
-     *
-     * @return the addresses
-     */
     public String getAddresses() {
         return addresses;
     }
 
-    /**
-     * Sets addresses.
-     *
-     * @param addresses the addresses
-     */
     public void setAddresses(String addresses) {
         this.addresses = addresses;
+    }
+
+    public HashMap<String, String> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(HashMap<String, String> variables) {
+        this.variables = variables;
     }
 }

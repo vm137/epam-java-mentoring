@@ -4,13 +4,19 @@ package com.epam.testing;
  * Mail server class.
  */
 public class MailServer {
+    private String addressSent;
+    private String messageSent;
 
-    /**
-     * Send notification.
-     *
-     * @param addresses  the addresses
-     * @param messageContent the message content
-     */
+    public String getAddressSent() {
+        return addressSent;
+    }
+
+    public String getMessageSent() {
+        return messageSent;
+    }
+
     public void send(String addresses, String messageContent) {
+        this.addressSent = addresses;
+        this.messageSent = messageContent;
     }
 }
