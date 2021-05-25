@@ -32,6 +32,14 @@ public class TicketsController {
   @Autowired
   TicketService ticketService;
 
+  @GetMapping("/")
+  public String getAllTickets(ModelMap model) {
+    model.addAttribute("message", "All Tickets");
+    List<Ticket> tickets = ticketService.getAllTickets();
+    model.addAttribute("ticket", tickets);
+    return "tickets/show-tickets";
+  }
+
   @PostMapping("/add")
   public String addTicket(ModelMap model,
       @RequestParam Long eventId,
@@ -51,14 +59,6 @@ public class TicketsController {
     Ticket ticket = ticketService.getTicketById(id);
     model.addAttribute("ticket", ticket);
     return "tickets/show-ticket";
-  }
-
-  @GetMapping("/all")
-  public String getAllTickets(ModelMap model) {
-    model.addAttribute("message", "All Tickets");
-    List<Ticket> tickets = ticketService.getAllTickets();
-    model.addAttribute("ticket", tickets);
-    return "tickets/show-tickets";
   }
 
   @GetMapping("/getBooked")
