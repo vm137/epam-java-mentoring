@@ -1,6 +1,6 @@
 package com.epam.tickets.repositories;
 
-import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.User;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

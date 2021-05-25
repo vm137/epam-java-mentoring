@@ -3,8 +3,8 @@ package com.epam.tickets.integration;
 import static org.junit.Assert.assertEquals;
 
 import com.epam.tickets.facade.BookingFacadeImpl;
-import com.epam.tickets.model.dto.Event;
-import com.epam.tickets.model.dto.EventImpl;
+import com.epam.tickets.model.Event;
+import com.epam.tickets.model.EventImpl;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

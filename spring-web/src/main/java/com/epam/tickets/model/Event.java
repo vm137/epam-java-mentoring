@@ -1,26 +1,13 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "events")
 public class Event {
 
-  @Id
-  @GeneratedValue
   private Long id;
-
   private String title;
-  private Integer ticketPrice;
   private LocalDateTime date;
-
-  public Event() {
-  }
 
   public Event(String title, LocalDateTime date) {
     this.title = title;
@@ -47,14 +34,6 @@ public class Event {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Integer getTicketPrice() {
-    return ticketPrice;
-  }
-
-  public void setTicketPrice(Integer ticketPrice) {
-    this.ticketPrice = ticketPrice;
   }
 
   public String getTitle() {

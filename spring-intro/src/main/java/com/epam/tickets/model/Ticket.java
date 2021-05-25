@@ -1,4 +1,4 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
 public interface Ticket {
   enum Category { STANDARD, PREMIUM, BAR }

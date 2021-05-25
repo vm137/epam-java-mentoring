@@ -1,7 +1,7 @@
 package com.epam.tickets.services;
 
 import com.epam.tickets.exceptions.InvalidEventException;
-import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.Event;
 import java.time.LocalDateTime;
 import java.util.List;
 

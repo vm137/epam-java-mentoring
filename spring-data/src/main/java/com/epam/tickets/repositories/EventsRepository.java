@@ -1,6 +1,6 @@
 package com.epam.tickets.repositories;
 
-import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.Event;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;

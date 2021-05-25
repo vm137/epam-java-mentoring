@@ -1,24 +1,37 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
-public class TicketImpl implements Ticket {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "tickets")
+public class Ticket {
+
+  public enum Category {STANDARD, PREMIUM, BAR}
+
+  @Id
+  @GeneratedValue
   private Long id;
+
   private Long eventId;
   private Long userId;
   private int place;
   private Category category;
+  private int price;
 
-  public TicketImpl() {
+  public Ticket() {
   }
 
-  public TicketImpl(Long eventId, Long userId, int place, Category category) {
+  public Ticket(Long eventId, Long userId, int place, Category category) {
     this.eventId = eventId;
     this.userId = userId;
     this.place = place;
     this.category = category;
   }
 
-  public TicketImpl(Long id, Long eventId, Long userId, int place, Category category) {
+  public Ticket(Long id, Long eventId, Long userId, int place, Category category) {
     this.id = id;
     this.eventId = eventId;
     this.userId = userId;
@@ -26,52 +39,42 @@ public class TicketImpl implements Ticket {
     this.category = category;
   }
 
-  @Override
   public Long getId() {
     return id;
   }
 
-  @Override
   public void setId(Long id) {
     this.id = id;
   }
 
-  @Override
   public Long getEventId() {
     return eventId;
   }
 
-  @Override
   public void setEventId(Long eventId) {
     this.eventId = eventId;
   }
 
-  @Override
   public Long getUserId() {
     return userId;
   }
 
-  @Override
   public void setUserId(Long userId) {
     this.userId = userId;
   }
 
-  @Override
   public Category getCategory() {
     return category;
   }
 
-  @Override
   public void setCategory(Category category) {
     this.category = category;
   }
 
-  @Override
   public int getPlace() {
     return place;
   }
 
-  @Override
   public void setPlace(int place) {
     this.place = place;
   }

@@ -1,7 +1,7 @@
 package com.epam.tickets.services;
 
 import com.epam.tickets.exceptions.InvalidUserException;
-import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.User;
 import com.epam.tickets.repositories.UserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

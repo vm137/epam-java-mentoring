@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacadeImpl;
-import com.epam.tickets.model.dto.User;
-import com.epam.tickets.model.dto.UserImpl;
+import com.epam.tickets.model.User;
+import com.epam.tickets.model.UserImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

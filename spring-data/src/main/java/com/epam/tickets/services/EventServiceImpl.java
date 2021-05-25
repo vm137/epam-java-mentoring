@@ -1,6 +1,6 @@
 package com.epam.tickets.services;
 
-import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.Event;
 import com.epam.tickets.repositories.EventsRepository;
 import java.time.LocalDateTime;
 import java.util.List;

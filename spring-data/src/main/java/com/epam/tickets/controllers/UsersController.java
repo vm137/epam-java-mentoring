@@ -1,6 +1,6 @@
 package com.epam.tickets.controllers;
 
-import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.User;
 import com.epam.tickets.services.UserAccountService;
 import com.epam.tickets.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

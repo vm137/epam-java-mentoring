@@ -1,9 +1,9 @@
 package com.epam.tickets.services;
 
 import com.epam.tickets.exceptions.InvalidUserException;
+import com.epam.tickets.model.User;
+import com.epam.tickets.model.UserImpl;
 import com.epam.tickets.model.dao.UserDao;
-import com.epam.tickets.model.dto.User;
-import com.epam.tickets.model.dto.UserImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 

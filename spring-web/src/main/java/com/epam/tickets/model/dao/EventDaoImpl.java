@@ -1,7 +1,7 @@
 package com.epam.tickets.model.dao;
 
 import com.epam.tickets.exceptions.InvalidEventException;
-import com.epam.tickets.model.dto.Event;
+import com.epam.tickets.model.Event;
 import com.epam.tickets.storage.CommonStorage;
 import java.util.List;
 

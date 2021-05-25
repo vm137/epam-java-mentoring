@@ -1,8 +1,18 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+  @Id
+  @GeneratedValue
   private Long id;
+
   private String name;
   private String email;
 

@@ -1,7 +1,7 @@
 package com.epam.tickets.services;
 
 import com.epam.tickets.exceptions.UserAccountException;
-import com.epam.tickets.model.dto.UserAccount;
+import com.epam.tickets.model.UserAccount;
 import com.epam.tickets.repositories.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
