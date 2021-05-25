@@ -25,8 +25,10 @@ public class TicketsController {
 
   @Autowired
   UserService userService;
+
   @Autowired
   EventService eventService;
+
   @Autowired
   TicketService ticketService;
 
