@@ -3,9 +3,9 @@ package com.epam.tickets.storage;
 import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.exceptions.InvalidTicketException;
 import com.epam.tickets.exceptions.InvalidUserException;
-import com.epam.tickets.model.dto.Event;
-import com.epam.tickets.model.dto.Ticket;
-import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.Event;
+import com.epam.tickets.model.Ticket;
+import com.epam.tickets.model.User;
 import java.util.List;
 
 public interface CommonStorage {

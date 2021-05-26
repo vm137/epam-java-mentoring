@@ -1,14 +1,25 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tickets")
 public class Ticket {
 
   public enum Category {STANDARD, PREMIUM, BAR}
 
+  @Id
+  @GeneratedValue
   private Long id;
+
   private Long eventId;
   private Long userId;
   private int place;
   private Category category;
+  private int price;
 
   public Ticket() {
   }

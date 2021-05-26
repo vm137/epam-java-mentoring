@@ -2,7 +2,7 @@ package com.epam.tickets.services.pdf;
 
 import com.epam.tickets.exceptions.InvalidEventException;
 import com.epam.tickets.exceptions.InvalidUserException;
-import com.epam.tickets.model.dto.Ticket;
+import com.epam.tickets.model.Ticket;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;

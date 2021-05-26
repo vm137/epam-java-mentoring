@@ -1,4 +1,4 @@
-package com.epam.tickets.model.dto;
+package com.epam.tickets.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
