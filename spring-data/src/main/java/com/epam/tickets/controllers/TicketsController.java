@@ -1,9 +1,9 @@
 package com.epam.tickets.controllers;
 
-import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
 import com.epam.tickets.model.User;
 import com.epam.tickets.model.dto.EventDto;
+import com.epam.tickets.model.dto.TicketDto;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;
@@ -35,7 +35,7 @@ public class TicketsController {
   @GetMapping("/")
   public String getAllTickets(ModelMap model) {
     model.addAttribute("message", "All Tickets");
-    List<Ticket> tickets = ticketService.getAllTickets();
+    List<TicketDto> tickets = ticketService.getAllTickets();
     model.addAttribute("ticket", tickets);
     return "tickets/show-tickets";
   }
@@ -47,17 +47,17 @@ public class TicketsController {
       @RequestParam int place,
       @RequestParam Category category,
       @RequestParam int price) {
-    Ticket ticket = ticketService.bookTicket(eventId, userId, place, category, price);
+    TicketDto ticketDto = ticketService.bookTicket(eventId, userId, place, category, price);
     model.addAttribute("message", "Ticket is created");
-    model.addAttribute("ticket", ticket);
+    model.addAttribute("ticket", ticketDto);
     return "tickets/show-ticket";
   }
 
   @GetMapping("/{id}")
   public String getTicket(ModelMap model, @PathVariable Long id) {
     model.addAttribute("message", "Ticket Information");
-    Ticket ticket = ticketService.getTicketById(id);
-    model.addAttribute("ticket", ticket);
+    TicketDto ticketDto = ticketService.getTicketById(id);
+    model.addAttribute("ticket", ticketDto);
     return "tickets/show-ticket";
   }
 
@@ -65,7 +65,7 @@ public class TicketsController {
   public String getBookedTickets(ModelMap model,
       @RequestParam(required = false) Long userId,
       @RequestParam(required = false) Long eventId) {
-    List<Ticket> tickets = new ArrayList<>();
+    List<TicketDto> tickets = new ArrayList<>();
     if (userId != null) {
       User user = userService.getUserById(userId);
       tickets.addAll(ticketService.getBookedTickets(user));

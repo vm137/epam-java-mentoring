@@ -4,9 +4,10 @@ import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
 import com.epam.tickets.model.User;
 import com.epam.tickets.model.dto.EventDto;
+import com.epam.tickets.model.dto.TicketDto;
+import com.epam.tickets.model.mappers.TicketMapper;
 import com.epam.tickets.repositories.TicketsRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,32 +23,37 @@ public class TicketServiceImpl implements TicketService {
   UserAccountService userAccountService;
 
   @Override
-  public Ticket bookTicket(Long eventId, Long userId, int place, Category category, int price) {
-    Ticket ticket = new Ticket(eventId, userId, place, category);
+  public TicketDto bookTicket(Long eventId, Long userId, int place, Category category, int price) {
+    TicketDto ticketDto = new TicketDto(eventId, userId, place, category);
     userAccountService.withdraw(userId, price);
-    return ticketsRepository.save(ticket);
+    Ticket ticket = TicketMapper.INSTANCE.ticketDtoToTicket(ticketDto);
+    Ticket savedTicket = ticketsRepository.save(ticket);
+    return TicketMapper.INSTANCE.ticketToTicketDto(savedTicket);
   }
 
   @Override
-  public Ticket getTicketById(Long id) {
-    Optional<Ticket> ticket = ticketsRepository.findById(id);
-    return ticket.orElse(null);
+  public TicketDto getTicketById(Long id) {
+    Ticket ticket = ticketsRepository.findById(id).orElse(null);
+    return TicketMapper.INSTANCE.ticketToTicketDto(ticket);
   }
 
   @Override
-  public List<Ticket> getBookedTickets(User user) {
-    return ticketsRepository.findByUserId(user.getId());
+  public List<TicketDto> getBookedTickets(User user) {
+    List<Ticket> ticketList = ticketsRepository.findByUserId(user.getId());
+    return TicketMapper.INSTANCE.ticketListToTicketDtoList(ticketList);
   }
 
-  @Override  public List<Ticket> getBookedTickets(EventDto eventDto) {
-    return ticketsRepository.findByEventId(eventDto.getId());
+  @Override  public List<TicketDto> getBookedTickets(EventDto eventDto) {
+    List<Ticket> ticketList = ticketsRepository.findByEventId(eventDto.getId());
+    return TicketMapper.INSTANCE.ticketListToTicketDtoList(ticketList);
   }
 
   @Override
-  public List<Ticket> getAllTickets() {
+  public List<TicketDto> getAllTickets() {
     Iterable<Ticket> allTickets = ticketsRepository.findAll();
-    return StreamSupport.stream(allTickets.spliterator(), false)
+    List<Ticket> ticketList = StreamSupport.stream(allTickets.spliterator(), false)
         .collect(Collectors.toList());
+    return TicketMapper.INSTANCE.ticketListToTicketDtoList(ticketList);
   }
 
   @Override
