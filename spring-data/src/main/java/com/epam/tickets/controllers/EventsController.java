@@ -1,6 +1,6 @@
 package com.epam.tickets.controllers;
 
-import com.epam.tickets.model.Event;
+import com.epam.tickets.model.dto.EventDto;
 import com.epam.tickets.services.EventService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +26,7 @@ public class EventsController {
 
   @GetMapping("/")
   public String getAllEvents(ModelMap model) {
-    List<Event> events = eventService.getAllEvents();
+    List<EventDto> events = eventService.getAllEvents();
     model.addAttribute("message", "All Events");
     model.addAttribute("events", events);
     return "events/show-events";
@@ -36,19 +36,19 @@ public class EventsController {
   public String createEvent(ModelMap model,
       @RequestParam String title,
       @RequestParam String date) {
-    Event event = eventService.createEvent(title, parseDate(date));
+    EventDto eventDto = eventService.createEvent(title, parseDate(date));
     String msg = String.format("Event with id:%d, title: '%s', date: %s is created.",
-        event.getId(), event.getTitle(), event.getDate().toString());
+        eventDto.getId(), eventDto.getTitle(), eventDto.getDate().toString());
     model.addAttribute("message", msg);
-    model.addAttribute("event", event);
+    model.addAttribute("event", eventDto);
     return "events/show-event";
   }
 
   @GetMapping("/{id}")
   public String getEvent(ModelMap model, @PathVariable Long id) {
     model.addAttribute("message", "Event Information");
-    Event event = eventService.getEventById(id);
-    model.addAttribute("event", event);
+    EventDto eventDto = eventService.getEventById(id);
+    model.addAttribute("event", eventDto);
     return "events/show-event";
   }
 
@@ -57,24 +57,24 @@ public class EventsController {
       @PathVariable Long id,
       @RequestParam String title,
       @RequestParam String date) {
-    Event event = eventService.getEventById(id);
+    EventDto eventDto = eventService.getEventById(id);
     if (StringUtils.isNotBlank(title)) {
-      event.setTitle(title);
+      eventDto.setTitle(title);
     }
     if (StringUtils.isNotBlank(date)) {
-      event.setDate(parseDate(date));
+      eventDto.setDate(parseDate(date));
     }
-    eventService.updateEvent(event);
+    eventService.updateEvent(eventDto);
     String msg = String.format("Event with id:%d is updated.", id);
     model.addAttribute("message", msg);
-    model.addAttribute("event", event);
+    model.addAttribute("event", eventDto);
     return "events/show-event";
   }
 
   @DeleteMapping("/{id}")
   public String deleteEvent(ModelMap model, @PathVariable Long id) {
-    Event event = eventService.getEventById(id);
-    eventService.delete(event);
+    EventDto eventDto = eventService.getEventById(id);
+    eventService.delete(eventDto);
     model.addAttribute("message", "Event deleted");
     return "info/show-info";
   }

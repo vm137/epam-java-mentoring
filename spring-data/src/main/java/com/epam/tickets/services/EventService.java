@@ -1,22 +1,22 @@
 package com.epam.tickets.services;
 
-import com.epam.tickets.model.Event;
+import com.epam.tickets.model.dto.EventDto;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EventService {
 
-  Event createEvent(String title, LocalDateTime date);
+  EventDto createEvent(String title, LocalDateTime date);
 
-  Event getEventById(Long id);
+  EventDto getEventById(Long id);
 
-  List<Event> getEventsByTitle(String title);
+  List<EventDto> getEventsByTitle(String title);
 
-  List<Event> getEventsForDay(LocalDateTime day);
+  List<EventDto> getEventsForDay(LocalDateTime day);
 
-  List<Event> getAllEvents();
+  List<EventDto> getAllEvents();
 
-  void updateEvent(Event event);
+  void updateEvent(EventDto eventDto);
 
-  void delete(Event event);
+  void delete(EventDto eventDto);
 }

@@ -1,9 +1,9 @@
 package com.epam.tickets.controllers;
 
-import com.epam.tickets.model.Event;
 import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
 import com.epam.tickets.model.User;
+import com.epam.tickets.model.dto.EventDto;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;
@@ -71,8 +71,8 @@ public class TicketsController {
       tickets.addAll(ticketService.getBookedTickets(user));
     }
     if (eventId != null) {
-      Event event = eventService.getEventById(eventId);
-      tickets.addAll(ticketService.getBookedTickets(event));
+      EventDto eventDto = eventService.getEventById(eventId);
+      tickets.addAll(ticketService.getBookedTickets(eventDto));
     }
     model.addAttribute("message", "Booked Tickets");
     model.addAttribute("tickets", tickets);

@@ -1,9 +1,9 @@
 package com.epam.tickets.services;
 
-import com.epam.tickets.model.Event;
 import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
 import com.epam.tickets.model.User;
+import com.epam.tickets.model.dto.EventDto;
 import java.util.List;
 
 public interface TicketService {
@@ -14,7 +14,7 @@ public interface TicketService {
 
   List<Ticket> getBookedTickets(User user);
 
-  List<Ticket> getBookedTickets(Event event);
+  List<Ticket> getBookedTickets(EventDto eventDto);
 
   List<Ticket> getAllTickets();
 

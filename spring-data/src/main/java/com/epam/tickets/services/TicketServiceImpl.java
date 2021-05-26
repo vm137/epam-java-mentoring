@@ -1,9 +1,9 @@
 package com.epam.tickets.services;
 
-import com.epam.tickets.model.Event;
 import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
 import com.epam.tickets.model.User;
+import com.epam.tickets.model.dto.EventDto;
 import com.epam.tickets.repositories.TicketsRepository;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +39,8 @@ public class TicketServiceImpl implements TicketService {
     return ticketsRepository.findByUserId(user.getId());
   }
 
-  @Override  public List<Ticket> getBookedTickets(Event event) {
-    return ticketsRepository.findByEventId(event.getId());
+  @Override  public List<Ticket> getBookedTickets(EventDto eventDto) {
+    return ticketsRepository.findByEventId(eventDto.getId());
   }
 
   @Override
