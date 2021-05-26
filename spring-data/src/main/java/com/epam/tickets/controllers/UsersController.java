@@ -1,6 +1,6 @@
 package com.epam.tickets.controllers;
 
-import com.epam.tickets.model.User;
+import com.epam.tickets.model.dto.UserDto;
 import com.epam.tickets.services.UserAccountService;
 import com.epam.tickets.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +33,17 @@ public class UsersController {
   public String addUser(ModelMap model,
       @RequestParam String name,
       @RequestParam String email) {
-    User user = userService.createUser(name, email);
+    UserDto userDto = userService.createUser(name, email);
     model.addAttribute("message", "User created.");
-    model.addAttribute("user", user);
+    model.addAttribute("user", userDto);
     return "users/show-user";
   }
 
   @GetMapping("/{id}")
   public String getUserById(ModelMap model, @PathVariable Long id) {
-    User user = userService.getUserById(id);
+    UserDto userDto = userService.getUserById(id);
     model.addAttribute("message", "User found by id: " + id);
-    model.addAttribute("user", user);
+    model.addAttribute("user", userDto);
     return "users/show-user";
   }
 

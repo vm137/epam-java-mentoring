@@ -1,9 +1,9 @@
 package com.epam.tickets.controllers;
 
 import com.epam.tickets.model.Ticket.Category;
-import com.epam.tickets.model.User;
 import com.epam.tickets.model.dto.EventDto;
 import com.epam.tickets.model.dto.TicketDto;
+import com.epam.tickets.model.dto.UserDto;
 import com.epam.tickets.services.EventService;
 import com.epam.tickets.services.TicketService;
 import com.epam.tickets.services.UserService;
@@ -67,8 +67,8 @@ public class TicketsController {
       @RequestParam(required = false) Long eventId) {
     List<TicketDto> tickets = new ArrayList<>();
     if (userId != null) {
-      User user = userService.getUserById(userId);
-      tickets.addAll(ticketService.getBookedTickets(user));
+      UserDto userDto = userService.getUserById(userId);
+      tickets.addAll(ticketService.getBookedTickets(userDto));
     }
     if (eventId != null) {
       EventDto eventDto = eventService.getEventById(eventId);

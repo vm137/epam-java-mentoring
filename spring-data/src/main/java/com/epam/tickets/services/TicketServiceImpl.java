@@ -2,9 +2,9 @@ package com.epam.tickets.services;
 
 import com.epam.tickets.model.Ticket;
 import com.epam.tickets.model.Ticket.Category;
-import com.epam.tickets.model.User;
 import com.epam.tickets.model.dto.EventDto;
 import com.epam.tickets.model.dto.TicketDto;
+import com.epam.tickets.model.dto.UserDto;
 import com.epam.tickets.model.mappers.TicketMapper;
 import com.epam.tickets.repositories.TicketsRepository;
 import java.util.List;
@@ -38,8 +38,8 @@ public class TicketServiceImpl implements TicketService {
   }
 
   @Override
-  public List<TicketDto> getBookedTickets(User user) {
-    List<Ticket> ticketList = ticketsRepository.findByUserId(user.getId());
+  public List<TicketDto> getBookedTickets(UserDto userDto) {
+    List<Ticket> ticketList = ticketsRepository.findByUserId(userDto.getId());
     return TicketMapper.INSTANCE.ticketListToTicketDtoList(ticketList);
   }
 
