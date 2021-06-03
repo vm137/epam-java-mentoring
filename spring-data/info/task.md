@@ -11,7 +11,7 @@ Based on the codebase created during Spring Web module
    Provide SQL script with schema creation DDL for DBMS of your choice. (0.5 points)
 4. Update DAO objects so that they inherit from one of the Spring Data interfaces, 
    for example – CrudRepository. They would store and retrieve application entities from database. 
-   Use transaction management to perform actions in a transaction where it necessary 
+   Use transaction management to perform actions in a transaction where it is necessary 
    (define the approach to implementing transactions with a mentor).
    Configure Hibernate for work with DBMS that you choose. (1.5 point)
 5. Update ticket booking methods to check and withdraw money from user account according to 
