@@ -10,6 +10,8 @@ import com.epam.tickets.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,28 +43,24 @@ public class TicketsController {
   }
 
   @PostMapping("/add")
-  public String addTicket(ModelMap model,
+  public ResponseEntity<TicketDto> addTicket(
       @RequestParam Long eventId,
       @RequestParam Long userId,
       @RequestParam int place,
       @RequestParam Category category,
       @RequestParam int price) {
     TicketDto ticketDto = ticketService.bookTicket(eventId, userId, place, category, price);
-    model.addAttribute("message", "Ticket is created");
-    model.addAttribute("ticket", ticketDto);
-    return "tickets/show-ticket";
+    return new ResponseEntity<>(ticketDto, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
-  public String getTicket(ModelMap model, @PathVariable Long id) {
-    model.addAttribute("message", "Ticket Information");
+  public ResponseEntity<TicketDto> getTicket(@PathVariable Long id) {
     TicketDto ticketDto = ticketService.getTicketById(id);
-    model.addAttribute("ticket", ticketDto);
-    return "tickets/show-ticket";
+    return new ResponseEntity<>(ticketDto, HttpStatus.OK);
   }
 
   @GetMapping("/getBooked")
-  public String getBookedTickets(ModelMap model,
+  public ResponseEntity<List<TicketDto>> getBookedTickets(
       @RequestParam(required = false) Long userId,
       @RequestParam(required = false) Long eventId) {
     List<TicketDto> tickets = new ArrayList<>();
@@ -74,9 +72,7 @@ public class TicketsController {
       EventDto eventDto = eventService.getEventById(eventId);
       tickets.addAll(ticketService.getBookedTickets(eventDto));
     }
-    model.addAttribute("message", "Booked Tickets");
-    model.addAttribute("tickets", tickets);
-    return "tickets/show-tickets";
+    return  new ResponseEntity<>(tickets, HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")
