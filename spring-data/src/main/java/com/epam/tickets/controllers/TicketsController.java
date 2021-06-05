@@ -35,11 +35,9 @@ public class TicketsController {
   TicketService ticketService;
 
   @GetMapping("/")
-  public String getAllTickets(ModelMap model) {
-    model.addAttribute("message", "All Tickets");
+  public ResponseEntity<List<TicketDto>> getAllTickets(ModelMap model) {
     List<TicketDto> tickets = ticketService.getAllTickets();
-    model.addAttribute("ticket", tickets);
-    return "tickets/show-tickets";
+    return new ResponseEntity<>(tickets, HttpStatus.OK);
   }
 
   @PostMapping("/add")
