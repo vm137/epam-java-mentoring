@@ -1,6 +1,7 @@
 package com.epam.tickets.model.dto;
 
 import com.epam.tickets.model.Ticket.Category;
+import java.util.Objects;
 
 public class TicketDto {
 
@@ -75,6 +76,25 @@ public class TicketDto {
 
   public void setPrice(int price) {
     this.price = price;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TicketDto ticketDto = (TicketDto) o;
+    return place == ticketDto.place && price == ticketDto.price && Objects
+        .equals(id, ticketDto.id) && Objects.equals(eventId, ticketDto.eventId)
+        && Objects.equals(userId, ticketDto.userId) && category == ticketDto.category;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, eventId, userId, place, category, price);
   }
 
   @Override
