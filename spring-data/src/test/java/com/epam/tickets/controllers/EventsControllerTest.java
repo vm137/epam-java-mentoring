@@ -2,6 +2,7 @@ package com.epam.tickets.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -43,5 +44,10 @@ public class EventsControllerTest {
 
     this.mockMvc.perform(post("/events/add?title=Event1&date=" + testDate))
         .andDo(print()).andExpect(status().isOk());
+  }
+
+  @Test
+  public void deleteEvent() throws Exception {
+    this.mockMvc.perform(delete("/events/1")).andDo(print()).andExpect(status().isOk());
   }
 }
