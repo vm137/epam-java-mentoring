@@ -64,4 +64,9 @@ public class TicketServiceImplTest {
     List<TicketDto> ticketDtos = ticketService.getBookedTickets(userDto);
     assertEquals(TicketMapper.INSTANCE.ticketListToTicketDtoList(ticketList), ticketDtos);
   }
+
+  @Test
+  public void cancelTicketTest() {
+    ticketService.cancelTicket(1L);
+  }
 }
