@@ -2,6 +2,7 @@ package com.epam.tickets.model.dto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class EventDto {
 
@@ -10,8 +11,7 @@ public class EventDto {
   private Integer ticketPrice;
   private LocalDateTime date;
 
-  public EventDto() {
-  }
+  public EventDto() {}
 
   public EventDto(String title, LocalDateTime date) {
     this.title = title;
@@ -62,6 +62,24 @@ public class EventDto {
 
   public void setDate(LocalDateTime date) {
     this.date = date;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(title, ticketPrice, date);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EventDto eventDto = (EventDto) o;
+    return Objects.equals(title, eventDto.title) && Objects
+        .equals(ticketPrice, eventDto.ticketPrice) && Objects.equals(date, eventDto.date);
   }
 
   @Override
