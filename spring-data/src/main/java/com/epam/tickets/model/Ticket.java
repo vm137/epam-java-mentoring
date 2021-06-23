@@ -79,6 +79,14 @@ public class Ticket {
     this.place = place;
   }
 
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
   @Override
   public String toString() {
     return "Ticket: { " +
@@ -87,6 +95,7 @@ public class Ticket {
         ", userId='" + userId + '\'' +
         ", place='" + place + '\'' +
         ", category='" + category + '\'' +
+        ", price='" + price + '\'' +
         " }";
   }
 }

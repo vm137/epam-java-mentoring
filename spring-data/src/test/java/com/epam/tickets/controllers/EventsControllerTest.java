@@ -29,25 +29,37 @@ public class EventsControllerTest {
   @MockBean
   EventService eventService;
 
-
   @Test
-  public void getAllEvents() throws Exception {
-    this.mockMvc.perform(get("/events/")).andDo(print()).andExpect(status().isOk());
+  public void whenQueryAllEvents_doCheckEndpoint() throws Exception {
+    this.mockMvc
+        .perform(get("/events/"))
+        .andDo(print())
+        .andExpect(status()
+            .isOk());
   }
 
   @Test
-  public void createEvent() throws Exception {
+  public void givenEvent_whenCreateEvent_doCheckCreateEventEndpoint() throws Exception {
     String testDate = "01/03/2020 12:00";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     LocalDateTime date = LocalDateTime.parse(testDate, formatter);
-    when(eventService.createEvent(any(String.class), any(LocalDateTime.class))).thenReturn(new EventDto("Event1", date));
 
-    this.mockMvc.perform(post("/events/add?title=Event1&date=" + testDate))
-        .andDo(print()).andExpect(status().isOk());
+    when(eventService.createEvent(any(String.class), any(LocalDateTime.class)))
+        .thenReturn(new EventDto("Event1", date));
+
+    this.mockMvc
+        .perform(post("/events/add?title=Event1&date=" + testDate))
+        .andDo(print())
+        .andExpect(status()
+            .isOk());
   }
 
   @Test
-  public void deleteEvent() throws Exception {
-    this.mockMvc.perform(delete("/events/1")).andDo(print()).andExpect(status().isOk());
+  public void whenQueryDeleteEvent_doCheckEndpoint() throws Exception {
+    this.mockMvc
+        .perform(delete("/events/1"))
+        .andDo(print())
+        .andExpect(status()
+            .isOk());
   }
 }

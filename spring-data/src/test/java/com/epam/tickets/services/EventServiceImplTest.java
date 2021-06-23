@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 
 import com.epam.tickets.model.Event;
 import com.epam.tickets.model.dto.EventDto;
-import com.epam.tickets.model.mappers.EventMapper;
 import com.epam.tickets.repositories.EventsRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +27,7 @@ public class EventServiceImplTest {
   EventsRepository eventsRepository;
 
   Event mockEvent;
+  EventDto mockEventDto;
   LocalDateTime mockDate;
 
   @BeforeEach
@@ -36,6 +36,7 @@ public class EventServiceImplTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     mockDate = LocalDateTime.parse(testDate, formatter);
     mockEvent = new Event("Title1", mockDate);
+    mockEventDto = new EventDto("Title1", mockDate);
   }
 
   @Test
@@ -43,7 +44,7 @@ public class EventServiceImplTest {
     when(eventsRepository.save(any(Event.class))).thenReturn(mockEvent);
 
     EventDto event = eventService.createEvent("Title1", mockDate);
-    assertEquals(event, EventMapper.INSTANCE.eventToEventDto(mockEvent));
+    assertEquals(event, mockEventDto);
   }
 
   @Test
@@ -51,15 +52,16 @@ public class EventServiceImplTest {
     when(eventsRepository.findById(any(Long.class))).thenReturn(java.util.Optional.ofNullable(mockEvent));
 
     EventDto event = eventService.getEventById(1L);
-    assertEquals(event, EventMapper.INSTANCE.eventToEventDto(mockEvent));
+    assertEquals(event, mockEventDto);
   }
 
   @Test
   public void getEventByTitle() {
     List<Event> eventList = new ArrayList<>();
+    List<EventDto> eventDtoList = new ArrayList<>();
     when(eventsRepository.getEventsByTitle(any(String.class))).thenReturn(eventList);
 
     List<EventDto> events = eventService.getEventsByTitle("Title");
-    assertEquals(events, EventMapper.INSTANCE.eventListToEventDtoList(eventList));
+    assertEquals(events, eventDtoList);
   }
 }
