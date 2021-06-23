@@ -24,7 +24,7 @@ class MessengerTest {
   }
 
   @Test
-  public void sendMessageTest() {
+  public void givenMessage_whenDoSendMessage_thenCheckExpectedMessage() {
     client.setAddresses("address-1");
     HashMap<String, String> variables = new HashMap<>();
     variables.put("name", "Victor");
@@ -32,12 +32,11 @@ class MessengerTest {
     client.setVariables(variables);
 
     Template template = new Template();
-    template.setTemplate("Dear #{name}, we'd like to invite you to #{event}.");
+    template.setTemplate("Dear #{name}, we'd like to invite You to #{event}.");
 
     messenger.sendMessage(client, template);
     String messageSent = mailServer.getMessageSent();
-
-    String expected = "Dear Victor, we'd like to invite you to Fashion Show.";
+    String expected = "Dear Victor, we'd like to invite You to Fashion Show.";
 
     assertEquals(messageSent, expected);
   }
