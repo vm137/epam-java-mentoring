@@ -35,40 +35,53 @@ public class TicketsControllerTest {
   @MockBean
   private UserAccountService userAccountService;
 
-
   @Test
-  public void getAllTickets() throws Exception {
-    this.mockMvc.perform(get("/tickets/")).andDo(print()).andExpect(status().isOk())
-    .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  public void whenDoQueryAllTickets_thenCheckOkResponseAndContentType() throws Exception {
+    this.mockMvc
+        .perform(get("/tickets/"))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  public void addTicket() throws Exception {
+  public void givenTicket_whenDoAddTicket_thenCheckExpectedJson () throws Exception {
     TicketDto ticketDto = new TicketDto(1L, 1L, 1, Category.STANDARD);
     when(ticketService.bookTicket(1L, 1L, 1, Category.STANDARD, 100)).thenReturn(ticketDto);
     String expectedJson = "{\"id\":null,\"eventId\":1,\"userId\":1,\"place\":1,\"category\":\"STANDARD\",\"price\":0}";
 
     MvcResult result = this.mockMvc
         .perform(post("/tickets/add?eventId=1&userId=1&place=1&category=STANDARD&price=100"))
-        .andDo(print()).andExpect(status().isOk()).andReturn();
-    String content = result.getResponse().getContentAsString();
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andReturn();
 
+    String content = result.getResponse().getContentAsString();
     assertEquals(content, expectedJson);
   }
 
   @Test
-  public void getTicket() throws Exception {
-    this.mockMvc.perform(get("/tickets/1")).andDo(print()).andExpect(status().isOk());
+  public void whenDoGetTicket_thenCheckOkResponse() throws Exception {
+    this.mockMvc
+        .perform(get("/tickets/1"))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void getBookedTickets() throws Exception {
-    this.mockMvc.perform(get("/tickets/getBooked")).andDo(print()).andExpect(status().isOk())
+  public void whenDoGetBookedTickets_thenCheckOkResponseAndContentType() throws Exception {
+    this.mockMvc
+        .perform(get("/tickets/getBooked"))
+        .andDo(print())
+        .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  public void deleteTicket() throws Exception {
-    this.mockMvc.perform(delete("/tickets/1")).andDo(print()).andExpect(status().isOk());
+  public void whenDoDeleteTicket_thenCheckOkResponse() throws Exception {
+    this.mockMvc
+        .perform(delete("/tickets/1"))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 }

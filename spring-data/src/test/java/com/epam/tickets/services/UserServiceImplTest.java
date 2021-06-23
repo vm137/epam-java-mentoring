@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 
 import com.epam.tickets.model.User;
 import com.epam.tickets.model.dto.UserDto;
-import com.epam.tickets.model.mappers.UserMapper;
 import com.epam.tickets.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,30 +27,32 @@ public class UserServiceImplTest {
   UserRepository userRepository;
 
   User mockUser;
+  UserDto mockUserDto;
 
   @BeforeEach
   void init() {
     mockUser = new User(USER_ID, USER_NAME, USER_EMAIL);
+    mockUserDto = new UserDto(USER_ID, USER_NAME, USER_EMAIL);
   }
 
   @Test
-  public void createUser() {
+  public void whenDoCreateUser_thenCheckExpectedUser() {
     when(userRepository.save(any(User.class))).thenReturn(mockUser);
 
     UserDto createdUser = userService.createUser(USER_NAME, USER_EMAIL);
-    assertEquals(createdUser, UserMapper.INSTANCE.userToUserDto(mockUser));
+    assertEquals(createdUser, mockUserDto);
   }
 
   @Test
-  public void getUserById() {
+  public void whenDoGetUserById_thenCheckExpectedUser() {
     when(userRepository.findById(any(Long.class))).thenReturn(java.util.Optional.ofNullable(mockUser));
 
     UserDto userById = userService.getUserById(USER_ID);
-    assertEquals(userById, UserMapper.INSTANCE.userToUserDto(mockUser));
+    assertEquals(userById, mockUserDto);
   }
 
   @Test
-  public void deleteUserById() {
+  public void whenDoDeleteUserById_thenCheckCallPasses() {
     when(userRepository.findById(any(Long.class))).thenReturn(java.util.Optional.ofNullable(mockUser));
 
     userService.deleteUserById(USER_ID);

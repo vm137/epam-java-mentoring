@@ -40,7 +40,7 @@ public class EventServiceImplTest {
   }
 
   @Test
-  public void createEvent() {
+  public void whenDoCreateEvent_thenCheckExpectedEventDto() {
     when(eventsRepository.save(any(Event.class))).thenReturn(mockEvent);
 
     EventDto event = eventService.createEvent("Title1", mockDate);
@@ -48,7 +48,7 @@ public class EventServiceImplTest {
   }
 
   @Test
-  public void getEventById() {
+  public void whenDoGetEventById_thenCheckExpectedEventDto() {
     when(eventsRepository.findById(any(Long.class))).thenReturn(java.util.Optional.ofNullable(mockEvent));
 
     EventDto event = eventService.getEventById(1L);
@@ -56,7 +56,7 @@ public class EventServiceImplTest {
   }
 
   @Test
-  public void getEventByTitle() {
+  public void whenDoGetEventByTitle_thenCheckExpectedResult() {
     List<Event> eventList = new ArrayList<>();
     List<EventDto> eventDtoList = new ArrayList<>();
     when(eventsRepository.getEventsByTitle(any(String.class))).thenReturn(eventList);

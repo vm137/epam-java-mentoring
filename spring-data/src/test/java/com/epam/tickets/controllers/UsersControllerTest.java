@@ -28,28 +28,40 @@ public class UsersControllerTest {
   UserService usersService;
 
   @Test
-  public void getAllUsers() throws Exception {
-    this.mockMvc.perform(get("/users/")).andDo(print()).andExpect(status().isOk());
+  public void whenDoGetAllUsers_thenCheckOkResponse() throws Exception {
+    this.mockMvc
+        .perform(get("/users/"))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void createUser() throws Exception {
+  public void givenUser_whenDoCreateUser_thenCheckOkResponse() throws Exception {
     String name = "John Dow";
     String email = "email@m.com";
     when(usersService.createUser(any(String.class), any(String.class))).thenReturn(new UserDto());
 
-    this.mockMvc.perform(get("/users/add?name=" + name + "&email=" + email)).andDo(print()).andExpect(status().isOk());
+    this.mockMvc
+        .perform(get("/users/add?name=" + name + "&email=" + email))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void updateUser() throws Exception {
+  public void givenUser_whenDoUpdateUser_thenCheckOkResponse() throws Exception {
     String name = "John Dow";
     String email = "email@m.com";
-    this.mockMvc.perform(patch("/users/1?userName=" + name + "&userEmail=" + email)).andDo(print()).andExpect(status().isOk());
+    this.mockMvc
+        .perform(patch("/users/1?userName=" + name + "&userEmail=" + email))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void deleteUser() throws Exception {
-    this.mockMvc.perform(delete("/users/1")).andDo(print()).andExpect(status().isOk());
+  public void givenUserId_whenDoDeleteUser_thenCheckOkResponse() throws Exception {
+    this.mockMvc
+        .perform(delete("/users/1"))
+        .andDo(print())
+        .andExpect(status().isOk());
   }
 }

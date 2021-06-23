@@ -30,16 +30,15 @@ public class EventsControllerTest {
   EventService eventService;
 
   @Test
-  public void whenQueryAllEvents_doCheckEndpoint() throws Exception {
+  public void whenDoQueryAllEvents_thenCheckOkResponse() throws Exception {
     this.mockMvc
         .perform(get("/events/"))
         .andDo(print())
-        .andExpect(status()
-            .isOk());
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void givenEvent_whenCreateEvent_doCheckCreateEventEndpoint() throws Exception {
+  public void givenEvent_whenDoQueryCreateEvent_thenCheckOkResponse() throws Exception {
     String testDate = "01/03/2020 12:00";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     LocalDateTime date = LocalDateTime.parse(testDate, formatter);
@@ -50,16 +49,14 @@ public class EventsControllerTest {
     this.mockMvc
         .perform(post("/events/add?title=Event1&date=" + testDate))
         .andDo(print())
-        .andExpect(status()
-            .isOk());
+        .andExpect(status().isOk());
   }
 
   @Test
-  public void whenQueryDeleteEvent_doCheckEndpoint() throws Exception {
+  public void whenDoQueryDeleteEvent_thenCheckOkResponse() throws Exception {
     this.mockMvc
         .perform(delete("/events/1"))
         .andDo(print())
-        .andExpect(status()
-            .isOk());
+        .andExpect(status().isOk());
   }
 }

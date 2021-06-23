@@ -38,7 +38,7 @@ public class TicketServiceImplTest {
   }
 
   @Test
-  public void bookTicket() {
+  public void whenDoBookTicket_thenCheckExpectedTicket() {
     when(ticketsRepository.save(any(Ticket.class))).thenReturn(mockTicket);
 
     TicketDto bookedTicket = ticketService.bookTicket(1L, 1L, 1, Category.STANDARD, 100);
@@ -46,7 +46,7 @@ public class TicketServiceImplTest {
   }
 
   @Test
-  public void getTicketById() {
+  public void whenDoGetTicketById_thenCheckExpectedTicket() {
     when(ticketsRepository.findById(any(Long.class))).thenReturn(java.util.Optional.ofNullable(mockTicket));
 
     TicketDto ticket = ticketService.getTicketById(1L);
@@ -54,7 +54,7 @@ public class TicketServiceImplTest {
   }
 
   @Test
-  public void getBookedTickets() {
+  public void whenDoGetBookedTickets_thenCheckTicketList() {
     List<Ticket> ticketList = new ArrayList<>();
     ticketList.add(new Ticket(1L, 1L, 1, Category.STANDARD));
     ticketList.add(new Ticket(2L, 2L, 2, Category.PREMIUM));
@@ -66,7 +66,7 @@ public class TicketServiceImplTest {
   }
 
   @Test
-  public void cancelTicketTest() {
+  public void whenDoCancelTicket_thenCheckCallPasses() {
     ticketService.cancelTicket(1L);
   }
 }
