@@ -6,7 +6,6 @@ import com.epam.testing.Client;
 import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
 class TemplateEngineTest {
   Client client;
@@ -21,7 +20,7 @@ class TemplateEngineTest {
   }
 
   @Test
-  void generateSimpleMessageTest() {
+  void generateMessageTest() {
     TemplateEngine engine = new TemplateEngine();
     variables.put("one", "fox");
     variables.put("two", "dog");
@@ -31,11 +30,5 @@ class TemplateEngineTest {
 
     String generated = engine.generateMessage(client, template);
     assertEquals(expected, generated);
-  }
-
-
-  @TestFactory
-  void generateMessageTest() {
-
   }
 }
