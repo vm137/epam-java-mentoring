@@ -6,6 +6,12 @@ package com.epam.testing.template;
 public class Template {
   String template;
 
+  public Template() {}
+
+  public Template(String template) {
+    this.template = template;
+  }
+
   public String getTemplate() {
     return template;
   }
