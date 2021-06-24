@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class MessengerTest {
@@ -17,20 +18,21 @@ class MessengerTest {
   Template template;
   Messenger messenger;
   Client client;
+  HashMap<String, String> variables;
 
   @BeforeEach
-  private void init() {
+  public void init() {
     mailServer = new MailServer();
     templateEngine = new TemplateEngine();
     template = new Template();
     messenger = new Messenger(mailServer, templateEngine);
     client = new Client();
     client.setAddresses("address-1");
+    variables = new HashMap<>();
   }
 
   @Test
   public void givenMessage_whenDoSendMessage_thenCheckExpectedMessage() {
-    HashMap<String, String> variables = new HashMap<>();
     variables.put("name", "Victor");
     variables.put("event", "Fashion Show");
     client.setVariables(variables);
@@ -50,7 +52,19 @@ class MessengerTest {
       "Alice Cooper, Rave party, 'Dear Alice Cooper, welcome to Rave party.'"
   })
   void parametrizedMessengerTest(String name, String event, String expected) {
-    HashMap<String, String> variables = new HashMap<>();
+    variables.put("name", name);
+    variables.put("event", event);
+    client.setVariables(variables);
+    template.setTemplate("Dear #{name}, welcome to #{event}.");
+
+    messenger.sendMessage(client, template);
+    String messageSent = mailServer.getMessageSent();
+    assertEquals(expected, messageSent);
+  }
+
+  @ParameterizedTest
+  @CsvFileSource(resources="data.csv")
+  void parametrizedFileMessengerTest(String name, String event, String expected) {
     variables.put("name", name);
     variables.put("event", event);
     client.setVariables(variables);
