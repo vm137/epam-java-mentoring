@@ -6,11 +6,19 @@ import com.epam.testing.template.Template;
 import com.epam.testing.template.TemplateEngine;
 import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
+@EnabledOnOs({OS.WINDOWS, OS.MAC})
+@EnabledForJreRange(min = JRE.JAVA_8)
+@Tag("IntegrationTest")
 class MessengerTest {
 
   MailServer mailServer;
