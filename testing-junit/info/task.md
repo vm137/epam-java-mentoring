@@ -14,7 +14,7 @@ Set of requirements for the mail template generator, you should create a list of
 - If at least one placeholder value is not provided at runtime – template generator should throw an exception.
 - Template generator ignores values for variables provided at runtime that arn’t found from the template.
 - System should support values passed in runtime with #{…}. 
-  E.g. template is  “Some text: #{value}” and  at runtime #{value} passed as  #{tag}. 
+  E.g., template is “Some text: #{value}” and at runtime #{value} passed as #{tag}. 
   Output should be “Some text: #{tag}”.
 - The system supports the full Latin-1 character set in templates and in variables.
 - Messenger should work in two modes: console and file mode.

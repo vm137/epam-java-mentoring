@@ -1,7 +1,11 @@
 package com.epam.testing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.condition.JRE.JAVA_11;
 
+import com.epam.testing.engine.Client;
+import com.epam.testing.engine.MailServer;
+import com.epam.testing.engine.Messenger;
 import com.epam.testing.template.Template;
 import com.epam.testing.template.TemplateEngine;
 import java.util.HashMap;
@@ -10,14 +14,13 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @EnabledOnOs({OS.WINDOWS, OS.MAC})
-@EnabledForJreRange(min = JRE.JAVA_8)
+@EnabledForJreRange(max = JAVA_11)
 @Tag("IntegrationTest")
 class MessengerTest {
 

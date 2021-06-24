@@ -1,4 +1,4 @@
-package com.epam.testing;
+package com.epam.testing.engine;
 
 import com.epam.testing.template.Template;
 import com.epam.testing.template.TemplateEngine;
