@@ -1,7 +1,7 @@
 package com.epam.tickets.model.dao;
 
 import com.epam.tickets.exceptions.InvalidTicketException;
-import com.epam.tickets.model.dto.Ticket;
+import com.epam.tickets.model.Ticket;
 import java.util.List;
 
 public interface TicketDao {

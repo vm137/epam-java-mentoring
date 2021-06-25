@@ -2,7 +2,7 @@ package com.epam.tickets.controllers;
 
 import com.epam.tickets.exceptions.InvalidUserException;
 import com.epam.tickets.facade.BookingFacade;
-import com.epam.tickets.model.dto.User;
+import com.epam.tickets.model.User;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
