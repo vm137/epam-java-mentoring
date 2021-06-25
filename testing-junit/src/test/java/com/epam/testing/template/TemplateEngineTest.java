@@ -41,7 +41,7 @@ class TemplateEngineTest {
   void generateMessageWithExceptionTest() {
     TemplateEngine engine = new TemplateEngine();
     variables.put("one", "fox");
-//    variables.put("two", "dog");
+    // variables.put("two", "dog"); - this variable we don't set and get an exception
     client.setVariables(variables);
     template.setTemplate("one: #{one}, two: #{two}");
 

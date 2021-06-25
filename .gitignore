@@ -4,3 +4,6 @@ target/
 logs/
 .gradle/
 build/
+
+# testing-junit
+testing-junit/output.txt
