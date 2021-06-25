@@ -2,7 +2,7 @@ package com.epam.testing.template;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.epam.testing.engine.Client;
+import com.epam.testing.service.Client;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;

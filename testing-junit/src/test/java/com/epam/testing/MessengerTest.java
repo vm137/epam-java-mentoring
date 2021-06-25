@@ -3,9 +3,9 @@ package com.epam.testing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.condition.JRE.JAVA_11;
 
-import com.epam.testing.engine.Client;
-import com.epam.testing.engine.MailServer;
-import com.epam.testing.engine.Messenger;
+import com.epam.testing.service.Client;
+import com.epam.testing.service.MailServer;
+import com.epam.testing.service.Messenger;
 import com.epam.testing.template.Template;
 import com.epam.testing.template.TemplateEngine;
 import java.util.HashMap;

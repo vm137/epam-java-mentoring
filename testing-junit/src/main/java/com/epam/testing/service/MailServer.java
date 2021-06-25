@@ -1,4 +1,4 @@
-package com.epam.testing.engine;
+package com.epam.testing.service;
 
 /**
  * Mail server class.

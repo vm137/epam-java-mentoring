@@ -1,7 +1,7 @@
 package com.epam.testing.template;
 
-import com.epam.testing.engine.Client;
 import com.epam.testing.exceptions.TemplateEngineException;
+import com.epam.testing.service.Client;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
