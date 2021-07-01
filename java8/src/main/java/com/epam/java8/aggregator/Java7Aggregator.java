@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -54,12 +55,52 @@ public class Java7Aggregator implements Aggregator {
             }
         };
         resultList.sort(comp);
-
         return resultList;
     }
 
     @Override
     public List<String> getDuplicates(List<String> words, long limit) {
-        throw new UnsupportedOperationException();
+        List<String> resultList = new ArrayList<>();
+
+        Map<String, Integer> dupMap = new LinkedHashMap<>();
+        for (String word : words) {
+            word = word.toUpperCase();
+            if (!dupMap.containsKey(word)) {
+                int count = 0;
+                for (String w : words) {
+                    if (w.equalsIgnoreCase(word)) {
+                        ++count;
+                    }
+                }
+                dupMap.put(word, count);
+            }
+        }
+
+        List<String> list = new ArrayList<>();
+        for (Entry<String, Integer> entry : dupMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                list.add(entry.getKey());
+            }
+        }
+
+        Comparator<String> comp = new Comparator<String>() {
+            @Override
+            public int compare(String a, String b) {
+                if (a.length() > b.length()) {
+                    return 1;
+                } else if (a.length() < b.length()) {
+                    return -1;
+                } else {
+                    return (a.compareTo(b));
+                }
+            }
+        };
+        list.sort(comp);
+
+        for (int i = 0; i < list.size() && i < limit; i++) {
+            resultList.add(list.get(i));
+        }
+
+        return resultList;
     }
 }
