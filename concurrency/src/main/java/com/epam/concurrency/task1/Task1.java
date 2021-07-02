@@ -58,7 +58,7 @@ public class Task1 {
   }
 
   public static void main(String[] args) throws InterruptedException {
-    Task1 task1 = new Task1();
-    task1.sumRace();
+    Task1 task = new Task1();
+    task.sumRace();
   }
 }
