@@ -23,7 +23,7 @@ public class MyBlockingQueue<E> {
     try {
       if (queue.size() >= max) {
         try {
-          notFull.wait();
+          notFull.await();
         } catch (InterruptedException ex) {
           ex.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class MyBlockingQueue<E> {
     try {
       while (queue.size() == 0) {
         try {
-          notEmpty.wait();
+          notEmpty.await();
         } catch (InterruptedException ex) {
           ex.printStackTrace();
         }
