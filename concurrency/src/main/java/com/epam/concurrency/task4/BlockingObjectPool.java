@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class BlockingObjectPool {
 
-  private BlockingQueue<Item> pool;
+  private final BlockingQueue<Item> pool;
   private final int max;
   private final Object notEmpty = new Object();
   private final Object notFull = new Object();
