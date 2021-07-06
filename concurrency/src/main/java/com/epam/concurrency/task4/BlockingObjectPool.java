@@ -3,6 +3,16 @@ package com.epam.concurrency.task4;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Task 4
+ * Cost: 20 points.
+ *
+ * Create simple object pool with support for multithreading environment. No extra inheritance,
+ * polymorphism or generics needed here, just implementation of simple class.
+ *
+ * Please look for details in task/descr.md
+ */
+
 public class BlockingObjectPool {
 
   private final BlockingQueue<Item> pool;

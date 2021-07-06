@@ -9,6 +9,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Task 1 - Das Experiment
+ *
+ * Create HashMap<Integer, Integer>. The first thread adds elements into the map, the other go along
+ * the given map and sum the values. Threads should work before catching ConcurrentModificationException.
+ * Try to fix the problem with ConcurrentHashMap and Collections.synchronizedMap().
+ * What has happened after simple Map implementation exchanging? How it can be fixed in code?
+ */
+
 public class Task1 {
 
   // Map<Integer, Integer> map = new ConcurrentHashMap<>();

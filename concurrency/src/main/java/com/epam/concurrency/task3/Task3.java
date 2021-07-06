@@ -1,5 +1,16 @@
 package com.epam.concurrency.task3;
 
+/**
+ * Task 3 - Where’s Your Bus, Dude?
+ *
+ * Implement message bus using Producer-Consumer pattern.
+ *
+ * Implement asynchronous message bus. Do not use queue implementations from java.util.concurrent.
+ * Implement producer, which will generate and post randomly messages to the queue.
+ * Implement consumer, which will consume messages on specific topic and log to the console message payload.
+ * (Optional) Application should create several consumers and producers that run in parallel.
+ */
+
 public class Task3 {
 
   public static void main(String[] args) {
