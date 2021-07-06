@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class BlockingObjectPool {
 
-  private BlockingQueue<Object> pool;
+  private BlockingQueue<Item> pool;
   private final int max;
   private final Object notEmpty = new Object();
   private final Object notFull = new Object();
@@ -17,13 +17,16 @@ public class BlockingObjectPool {
   public BlockingObjectPool(int size) {
     this.max = size;
     pool = new ArrayBlockingQueue<>(max);
+    for (int i = 0; i < max; i++) {
+      pool.add(new Item(i));
+    }
   }
 
   /**
-   * Gets object from pool or blocks if pool is empty
-   * @return object from pool
+   * Gets item from pool or blocks if pool is empty
+   * @return item from pool
    */
-  public Object get() {
+  public Item get() {
     if (pool.size() == 0) {
       try {
         notEmpty.wait();
@@ -31,16 +34,16 @@ public class BlockingObjectPool {
         e.printStackTrace();
       }
     }
-    Object object = pool.remove();
+    Item item = pool.remove();
     notFull.notifyAll();
-    return object;
+    return item;
   }
 
   /**
-   * Puts object to pool or blocks if pool is full
-   * @param object to be taken back to pool
+   * Puts item to pool or blocks if pool is full
+   * @param item to be taken back to pool
    */
-  public synchronized void put(Object object) {
+  public synchronized void put(Item item) {
     while (pool.size() == max) {
       try {
         notFull.wait();
@@ -48,7 +51,7 @@ public class BlockingObjectPool {
         e.printStackTrace();
       }
     }
-    pool.add(object);
+    pool.add(item);
     notEmpty.notifyAll();
   }
 }
