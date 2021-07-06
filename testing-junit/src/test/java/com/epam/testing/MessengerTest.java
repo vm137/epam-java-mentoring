@@ -24,12 +24,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 @Tag("IntegrationTest")
 class MessengerTest {
 
-  MailServer mailServer;
-  TemplateEngine templateEngine;
-  Template template;
-  Messenger messenger;
-  Client client;
-  HashMap<String, String> variables;
+  private MailServer mailServer;
+  private TemplateEngine templateEngine;
+  private Template template;
+  private Messenger messenger;
+  private Client client;
+  private HashMap<String, String> variables;
 
   @BeforeEach
   public void init() {

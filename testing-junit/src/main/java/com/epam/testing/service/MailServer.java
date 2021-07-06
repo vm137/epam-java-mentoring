@@ -15,7 +15,7 @@ public class MailServer {
         return messageSent;
     }
 
-    public void send(String addresses, String messageContent) {
+    public void setSendingData(String addresses, String messageContent) {
         this.addressSent = addresses;
         this.messageSent = messageContent;
     }

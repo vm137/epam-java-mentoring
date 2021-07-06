@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 @Tag("UnitTest")
 class TemplateEngineTest {
-  Client client;
-  Template template;
-  HashMap<String, String> variables;
+  private Client client;
+  private Template template;
+  private HashMap<String, String> variables;
 
   @BeforeEach
   public void init() {

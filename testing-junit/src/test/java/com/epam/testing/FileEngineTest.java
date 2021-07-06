@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class FileEngineTest {
 
   @Test
-  public void fileEngineTest() {
+  public void givenTemplate_WhenSending_ThenCheckFileExists() {
     Template template = new Template();
     template.setTemplate("#{name} is good #{artist}.");
 

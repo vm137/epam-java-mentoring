@@ -26,13 +26,13 @@ public class FileEngine {
    * and writes generated messages to output file.
    *
    * @param template template string with #{placeholder}s
-   * @param inputFile filename
-   * @param outputFile filename
+   * @param inputFileName filename
+   * @param outputFileName filename
    */
-  public void processFile(Template template, String inputFile, String outputFile) {
-    URL inputUrl = FileEngine.class.getClassLoader().getResource(inputFile);
+  public void processFile(Template template, String inputFileName, String outputFileName) {
+    URL inputUrl = FileEngine.class.getClassLoader().getResource(inputFileName);
     if (Objects.isNull(inputUrl)) {
-      throw new TemplateEngineException("File " + inputFile + " is not found.");
+      throw new TemplateEngineException("File " + inputFileName + " is not found.");
     }
 
     Pattern pattern = Pattern.compile("#\\{(.[^}]*)}");
@@ -44,7 +44,7 @@ public class FileEngine {
     int numberOfPlaceholders = placeholders.size();
 
     try (BufferedReader br = new BufferedReader(new FileReader(inputUrl.getPath()));
-        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(outputFile))) {
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(outputFileName))) {
       String line;
       while ((line = br.readLine()) != null) {
         String[] split = line.split(",");
