@@ -42,7 +42,7 @@ public class Task3 {
   }
 
   private static void process(Item item) {
-    System.out.println("Log. Item from Queue: " + item);
+    System.out.println("Log. Item from Queue: " + item.getId());
   }
 
   public static int getRandomNumber(int min, int max) {

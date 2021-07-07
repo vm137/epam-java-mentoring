@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 
 /**
  * Task 4
- * Cost: 20 points.
  *
  * Create simple object pool with support for multithreading environment. No extra inheritance,
  * polymorphism or generics needed here, just implementation of simple class.
@@ -36,7 +35,7 @@ public class BlockingObjectPool {
    * Gets item from pool or blocks if pool is empty
    * @return item from pool
    */
-  public Item get() {
+  public synchronized Item get() {
     if (pool.size() == 0) {
       try {
         notEmpty.wait();
@@ -51,7 +50,7 @@ public class BlockingObjectPool {
 
   /**
    * Puts item to pool or blocks if pool is full
-   * @param item to be taken back to pool
+   * @param item to put back to pool
    */
   public synchronized void put(Item item) {
     while (pool.size() == max) {
