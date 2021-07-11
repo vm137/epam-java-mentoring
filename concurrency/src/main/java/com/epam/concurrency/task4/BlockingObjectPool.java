@@ -9,22 +9,18 @@ import java.util.concurrent.BlockingQueue;
  * Create simple object pool with support for multithreading environment. No extra inheritance,
  * polymorphism or generics needed here, just implementation of simple class.
  *
- * Please look for details in task/descr.md
+ * Please look for details in task/desc.md
  */
 
 public class BlockingObjectPool {
 
   private final BlockingQueue<Item> pool;
-  private final int max;
-  private final Object notEmpty = new Object();
-  private final Object notFull = new Object();
 
   /**
    * Creates filled pool of passed size
-   * @param size of pool
+   * @param max size of the pool
    */
-  public BlockingObjectPool(int size) {
-    this.max = size;
+  public BlockingObjectPool(int max) {
     pool = new ArrayBlockingQueue<>(max);
     for (int i = 0; i < max; i++) {
       pool.add(new Item(i));
@@ -38,13 +34,13 @@ public class BlockingObjectPool {
   public synchronized Item get() {
     if (pool.size() == 0) {
       try {
-        notEmpty.wait();
+        wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }
     Item item = pool.remove();
-    notFull.notifyAll();
+    notifyAll();
     return item;
   }
 
@@ -53,14 +49,7 @@ public class BlockingObjectPool {
    * @param item to put back to pool
    */
   public synchronized void put(Item item) {
-    while (pool.size() == max) {
-      try {
-        notFull.wait();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
     pool.add(item);
-    notEmpty.notifyAll();
+    notifyAll();
   }
 }
