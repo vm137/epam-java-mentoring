@@ -6,10 +6,10 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Task 4
  *
- * Create simple object pool with support for multithreading environment. No extra inheritance,
- * polymorphism or generics needed here, just implementation of simple class.
+ * Create simple object pool with support for multithreading environment.
+ * No extra inheritance, polymorphism or generics needed here, just implementation of simple class.
  *
- * Please look for details in task/desc.md
+ * More details in /docs/task-description.md
  */
 
 public class BlockingObjectPool {
@@ -28,8 +28,8 @@ public class BlockingObjectPool {
   }
 
   /**
-   * Gets item from pool or blocks if pool is empty
-   * @return item from pool
+   * Gets item from pool or blocks thread if pool is empty
+   * @return item from the pool
    */
   public synchronized Item get() {
     if (pool.size() == 0) {
@@ -37,6 +37,7 @@ public class BlockingObjectPool {
         wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
+        throw new RuntimeException("Error. Can't block the thread while pool is empty.");
       }
     }
     Item item = pool.remove();
@@ -45,8 +46,8 @@ public class BlockingObjectPool {
   }
 
   /**
-   * Puts item to pool or blocks if pool is full
-   * @param item to put back to pool
+   * Puts item to pool
+   * @param item to put back
    */
   public synchronized void put(Item item) {
     pool.add(item);
