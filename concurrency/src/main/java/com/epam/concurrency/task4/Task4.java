@@ -1,6 +1,7 @@
 package com.epam.concurrency.task4;
 
 public class Task4 {
+
   public static void main(String[] args) {
 
     BlockingObjectPool pool = new BlockingObjectPool(10);
@@ -9,6 +10,11 @@ public class Task4 {
       while (true) {
         Item item = pool.get();
         process(item);
+        try {
+          Thread.sleep(getRandomNumber(500, 3000));
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
         pool.put(item);
       }
     };
@@ -18,6 +24,10 @@ public class Task4 {
   }
 
   private static void process(Item item) {
-    System.out.println("Log: " + item.getId());
+    System.out.println("Log. id taken: " + item.getId());
+  }
+
+  public static int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
   }
 }
