@@ -2,8 +2,8 @@ package com.epam.concurrency.task3;
 
 public class Item {
 
-  Integer id;
-  String name;
+  private Integer id;
+  private String name;
 
   public Item(Integer id) {
     this.id = id;
