@@ -16,6 +16,7 @@ class TemplateEngineTest {
   private Client client;
   private Template template;
   private HashMap<String, String> variables;
+  private final TemplateEngine engine = new TemplateEngine();
 
   @BeforeEach
   public void init() {
@@ -26,7 +27,6 @@ class TemplateEngineTest {
 
   @Test
   void generateMessageTest() {
-    TemplateEngine engine = new TemplateEngine();
     variables.put("one", "fox");
     variables.put("two", "dog");
     client.setVariables(variables);
